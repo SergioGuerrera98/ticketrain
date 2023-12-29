@@ -11,7 +11,7 @@ public class TickeTrainMain {
         try {
             EntityManagerFactory factory = Persistence.createEntityManagerFactory("persistence");
             manager = factory.createEntityManager();
-
+            System.out.println("provaprovaprova");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
