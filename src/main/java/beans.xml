@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        
+           http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	
+	
+	<bean name="Locomotiva" class="com.corso.ticketrain.treno.Locomotiva">
+		<constructor-arg name="peso" value="30"></constructor-arg>
+		<constructor-arg name="lunghezza" value="10"></constructor-arg>
+		<constructor-arg name="carattere" value="H"></constructor-arg>
+		<constructor-arg name="velocita" value="400"></constructor-arg>
+		<constructor-arg name="pesoTrainabile" value="500"></constructor-arg>
+	</bean>
+	<bean name="Passeggeri" class="com.corso.ticketrain.treno.Passeggeri">
+		<constructor-arg name="peso" value="15"></constructor-arg>
+		<constructor-arg name="lunghezza" value="20"></constructor-arg>
+		<constructor-arg name="carattere" value="P"></constructor-arg>
+		<constructor-arg name="numeroPosti" value="40"></constructor-arg>
+		<constructor-arg name="classe" value="economy"></constructor-arg>
+	</bean>
+	<bean name="Ristorante" class="com.corso.ticketrain.treno.Ristorante">
+		<constructor-arg name="peso" value="20"></constructor-arg>
+		<constructor-arg name="lunghezza" value="30"></constructor-arg>
+		<constructor-arg name="carattere" value="R"></constructor-arg>
+		<constructor-arg name="numeroCoperti
+		" value="15"></constructor-arg>
+		<constructor-arg name="menu" value="mediterraneo"></constructor-arg>
+	</bean>
+
+	
+
+</beans>

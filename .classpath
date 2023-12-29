@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="test" value="true"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+		<attributes>
+			<attribute name="test" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-aop-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-aop-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-aop-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-aspects-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-aspects-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-aspects-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-beans-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-beans-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-beans-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-context-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-context-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-context-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-context-indexer-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-context-indexer-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-context-indexer-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-context-support-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-context-support-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-context-support-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-core-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-core-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-core-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-expression-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-expression-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-expression-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-instrument-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-instrument-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-instrument-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-jcl-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-jcl-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-jcl-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-jdbc-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-jdbc-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-jdbc-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-jms-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-jms-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-jms-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-messaging-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-messaging-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-messaging-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-orm-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-orm-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-orm-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-oxm-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-oxm-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-oxm-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-r2dbc-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-r2dbc-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-r2dbc-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-test-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-test-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-test-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-tx-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-tx-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-tx-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-web-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-web-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-web-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-webflux-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-webflux-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-webflux-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-webmvc-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-webmvc-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-webmvc-5.3.9-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-websocket-5.3.9.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-websocket-5.3.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Workspace/Esercizio1/lib/spring539_06.11.2023/spring-websocket-5.3.9-sources.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
