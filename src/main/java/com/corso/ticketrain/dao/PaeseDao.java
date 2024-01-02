@@ -3,17 +3,20 @@ package com.corso.ticketrain.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
 
 import com.corso.ticketrain.model.Paese;
 
+@Transactional
+@Repository
 public class PaeseDao implements DaoInterface<Paese>{
 	
+	@PersistenceContext
 	private EntityManager manager;
 
-	public PaeseDao(EntityManager manager) {
-		super();
-		this.manager = manager;
-	}
 
 	@Override
 	public void create(Paese ref) {

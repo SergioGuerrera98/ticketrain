@@ -3,23 +3,33 @@ package com.corso.ticketrain.service;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.corso.ticketrain.dao.CittaDao;
 import com.corso.ticketrain.model.Citta;
 
+@Transactional
+@Service
 public class CittaService {
+
+	CittaDao cittaDao;
+
+	public CittaService() {}
 	
-	private EntityManager manager;
-	private CittaDao cittaDao;
-	
-	public CittaService(EntityManager manager, CittaDao cittaDao) {
+	public CittaService(CittaDao cittaDao) {
 		super();
-		this.manager = manager;
 		this.cittaDao = cittaDao;
 	}
 	
 	public List<Citta> getCittaByPaeseId(int paeseId){
 		return cittaDao.retrieveByPaese(paeseId);
+	}
+	
+	public void insert(Citta citta) {
+		cittaDao.create(citta);
 	}
 
 }

@@ -2,17 +2,25 @@ package com.corso.ticketrain.dao;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 import com.corso.ticketrain.model.Citta;
 
+@Transactional
+@Repository
 public class CittaDao implements DaoInterface<Citta>{
-	
-	private EntityManager manager;
 
-	public CittaDao(EntityManager manager) {
-		super();
-		this.manager = manager;
-	}
-
+	@PersistenceContext
+	EntityManager manager;
+		
+	@Transactional
 	@Override
 	public void create(Citta ref) {
 		manager.persist(ref);

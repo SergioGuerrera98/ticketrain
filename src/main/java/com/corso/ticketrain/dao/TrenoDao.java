@@ -3,17 +3,23 @@ package com.corso.ticketrain.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
-import com.corso.ticketrain.model.Ticket;
+import org.springframework.stereotype.Repository;
+
 import com.corso.ticketrain.treno.model.Treno;
 
+@Transactional
+@Repository
 public class TrenoDao implements DaoInterface<Treno>{
 	
+	@PersistenceContext
 	private EntityManager manager;
 
-	public TrenoDao(EntityManager manager) {
-		super();
-		this.manager = manager;
+
+	
+	public TrenoDao() {
 	}
 
 

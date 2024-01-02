@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.springframework.stereotype.Service;
+
 import com.corso.ticketrain.dao.UserDao;
 import com.corso.ticketrain.model.Paese;
 import com.corso.ticketrain.model.User;
 
+@Service
 public class UserService {
 	
 	private EntityManager manager;

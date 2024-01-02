@@ -3,17 +3,16 @@ package com.corso.ticketrain.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import com.corso.ticketrain.model.Ticket;
 
+@Transactional
 public class TicketDao implements DaoInterface<Ticket>{
 	
+	@PersistenceContext
 	private EntityManager manager;
-
-	public TicketDao(EntityManager manager) {
-		super();
-		this.manager = manager;
-	}
 
 	@Override
 	public void create(Ticket ref) {

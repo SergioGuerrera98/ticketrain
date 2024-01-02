@@ -4,17 +4,17 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.springframework.stereotype.Service;
+
 import com.corso.ticketrain.dao.PaeseDao;
 import com.corso.ticketrain.model.Paese;
 
+@Service
 public class PaeseService {
 	
-	private EntityManager manager;
 	private PaeseDao paeseDao;
 	
-	public PaeseService(EntityManager manager, PaeseDao paeseDao) {
-		super();
-		this.manager = manager;
+	public PaeseService(PaeseDao paeseDao) {
 		this.paeseDao = paeseDao;
 	}
 	
@@ -22,5 +22,8 @@ public class PaeseService {
 		return paeseDao.retrieve();
 	}
 	
+	public void insertPaese(Paese paese) {
+		paeseDao.create(paese);
+	}
 
 }
