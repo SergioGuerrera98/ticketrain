@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.corso.ticketrain.dao.interfacce.TrenoDaoInterface;
 import com.corso.ticketrain.treno.model.Treno;
 
-@Transactional
+
 @Repository
 public class TrenoDao implements TrenoDaoInterface{
 	

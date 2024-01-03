@@ -17,25 +17,40 @@ import com.corso.ticketrain.dao.interfacce.TrenoDaoInterface;
 import com.corso.ticketrain.model.Citta;
 import com.corso.ticketrain.model.Paese;
 import com.corso.ticketrain.model.Ticket;
+import com.corso.ticketrain.model.User;
 import com.corso.ticketrain.service.IService;
+import com.corso.ticketrain.service.PaeseService;
 import com.corso.ticketrain.service.TicketService;
 import com.corso.ticketrain.service.TrenoService;
+import com.corso.ticketrain.service.UserService;
 import com.corso.ticketrain.treno.builder.TrenoBuilder;
 import com.corso.ticketrain.treno.exceptions.TrenoException;
 import com.corso.ticketrain.treno.factory.VagoneFactory;
 import com.corso.ticketrain.treno.model.Treno;
 import com.corso.ticketrain.treno.model.Vagone;
 
+
 @ComponentScan(basePackages = {"com.corso.ticketrain.model", "com.corso.ticketrain.treno.model", "com.corso.ticketrain.dao"})
 public class Test {
 
 	public static void main(String[] args) throws TrenoException {
 		AnnotationConfigApplicationContext factory = new AnnotationConfigApplicationContext(AppConfig.class);
-		testFilter(factory);
-		//test00(factory);
+		//testFilter(factory);
+		test2(factory);
 
 	}
-
+	
+	
+	
+	public static void test2(AnnotationConfigApplicationContext factory) {
+		UserService userService = factory.getBean(UserService.class);
+		PaeseService paeseService = factory.getBean(PaeseService.class);
+		Paese p = new Paese("Italia");
+		paeseService.insertPaese(p);
+		User user = userService.registrazione("prova", "1234", p);
+		System.out.println(user);
+	}
+	/*
 	public static void test00(AnnotationConfigApplicationContext factory) {
 
 		DaoInterface<Paese> paeseDao = (DaoInterface<Paese>) factory.getBean("paeseDao");
@@ -46,7 +61,7 @@ public class Test {
 		//Citta c = new Citta("Milano", p);
 		//cittaDao.create(c);
 	}
-
+	
 	public static void testFilter(AnnotationConfigApplicationContext factory) throws TrenoException {
 		TicketDaoInterface ticketDao = (TicketDaoInterface) factory.getBean("ticketDao");
 		DaoInterface<Paese> paeseDao = (DaoInterface<Paese>) factory.getBean("paeseDao");
@@ -56,13 +71,13 @@ public class Test {
 		//IService trenoService = (IService) factory.getBean("trenoService");
 		TicketService ticketService = new TicketService(ticketDao);
 		TrenoService trenoService = new TrenoService(trenoDao);
-		/*
+		
 		TicketDao ticketDao = (TicketDao)factory.getBean("ticketDao");
 		PaeseDao paeseDao = (PaeseDao)factory.getBean("paeseDao");
 		CittaDao cittaDao = (CittaDao)factory.getBean("cittaDao");
 		TrenoDao trenoDao = (TrenoDao)factory.getBean("trenoDao");
 		TicketService ticketService = new TicketService(ticketDao);
-		TrenoService trenoService = new TrenoService(trenoDao);*/
+		TrenoService trenoService = new TrenoService(trenoDao);
 
 		Paese i = new Paese("Italia");
 		Citta c = new Citta("Napoli", i);
@@ -92,5 +107,5 @@ public class Test {
 		System.out.println("Catania-torino-2022: " + listaFiltrata);
 		listaFiltrata = ((TicketService)ticketService).getTicketsFilter("Catania", null, null);//2007-12-03T10:15:30
 		System.out.println("Catania-?-?: " + listaFiltrata);
-	}
+	}*/
 }

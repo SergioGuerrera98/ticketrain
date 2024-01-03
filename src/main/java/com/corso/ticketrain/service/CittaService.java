@@ -14,7 +14,8 @@ import com.corso.ticketrain.model.Citta;
 @Transactional
 @Service
 public class CittaService implements IService{
-
+	
+	@Autowired
 	CittaDao cittaDao;
 
 	public CittaService() {}

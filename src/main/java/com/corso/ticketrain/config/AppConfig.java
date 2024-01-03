@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.corso.ticketrain.dao.*;
 
 @Configuration
-@ComponentScan(basePackages = {"com.corso.ticketrain.model", "com.corso.ticketrain.treno.model", "com.corso.ticketrain.dao"})
+@ComponentScan(basePackages = {"com.corso.ticketrain.model", "com.corso.ticketrain.treno.model", "com.corso.ticketrain.dao", "com.corso.ticketrain.service"})
 @EnableTransactionManagement
 public class AppConfig {
 

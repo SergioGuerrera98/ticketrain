@@ -2,6 +2,7 @@ package com.corso.ticketrain.service;
 
 import javax.persistence.EntityManager;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.corso.ticketrain.dao.PasseggeriDao;
@@ -9,14 +10,9 @@ import com.corso.ticketrain.dao.PasseggeriDao;
 @Service
 public class PasseggeriService {
 	
-	private EntityManager manager;
+	@Autowired
 	private PasseggeriDao passeggeriDao;
-	
-	public PasseggeriService(EntityManager manager, PasseggeriDao passeggeriDao) {
-		super();
-		this.manager = manager;
-		this.passeggeriDao = passeggeriDao;
-	}
+
 	
 	
 

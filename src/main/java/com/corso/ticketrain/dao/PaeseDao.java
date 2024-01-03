@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.corso.ticketrain.model.Paese;
 
-@Transactional
+
 @Repository
 public class PaeseDao implements DaoInterface<Paese>{
 	

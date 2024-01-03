@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import com.corso.ticketrain.treno.model.Ristorante;
 
-@Transactional
 @Repository
 public class RistoranteDao implements DaoInterface<Ristorante>{
 	
