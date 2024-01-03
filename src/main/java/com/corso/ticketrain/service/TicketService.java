@@ -32,6 +32,11 @@ public class TicketService  implements IService{
 
 		return list;
 	}
+
+	public void insert(Ticket t) {
+		ticketDao.create(t);
+		
+	}
 	
 
 }
