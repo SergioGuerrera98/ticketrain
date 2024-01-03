@@ -29,7 +29,7 @@ public class AppConfig {
         em.setPackagesToScan("com.corso.ticketrain.dao", "com.corso.ticketrain.model", "com.corso.ticketrain.treno.model"); 
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update"); 
+        properties.setProperty("hibernate.hbm2ddl.auto", "create"); 
         em.setJpaProperties(properties);
         return em;
     }

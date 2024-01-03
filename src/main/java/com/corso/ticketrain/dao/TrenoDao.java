@@ -5,14 +5,16 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import org.springframework.stereotype.Repository;
 
+import com.corso.ticketrain.dao.interfacce.TrenoDaoInterface;
 import com.corso.ticketrain.treno.model.Treno;
 
 @Transactional
 @Repository
-public class TrenoDao implements DaoInterface<Treno>{
+public class TrenoDao implements TrenoDaoInterface{
 	
 	@PersistenceContext
 	private EntityManager manager;
@@ -23,6 +25,7 @@ public class TrenoDao implements DaoInterface<Treno>{
 	}
 
 
+	@Transactional(value = TxType.REQUIRED)
 	@Override
 	public void create(Treno ref) {
 		manager.persist(ref);
@@ -32,6 +35,12 @@ public class TrenoDao implements DaoInterface<Treno>{
 	@Override
 	public List<Treno> retrieve() {
 		return manager.createQuery("select x from Treno x", Treno.class).getResultList();
+	}
+
+	public Treno retrieveById(int id) {
+		return manager.createQuery("SELECT t FROM Treno t WHERE t.id = :id", Treno.class)
+			.setParameter("id", id)
+			.getSingleResult();
 	}
 
 	@Override

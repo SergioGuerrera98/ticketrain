@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 
 import org.springframework.stereotype.Service;
 
+
 import com.corso.ticketrain.dao.UserDao;
 import com.corso.ticketrain.model.Paese;
 import com.corso.ticketrain.model.User;
@@ -26,6 +27,13 @@ public class UserService {
 		try {
 			manager.getTransaction().begin();
 			User user = new User(username, password, false, paese);
+			if (username == null || username.isBlank() || password == null || password.isBlank()) {
+				// throw new DatiNonValidiException("Completa tutti i campi obbligatori", null);
+			}
+			List<User> utenti = userDao.findByUsername(username);
+			if (utenti.size()>0) {
+				//throw new UtenteEsistenteException("Utente gia' registrato", null);
+			}
 			userDao.create(user);
 			manager.getTransaction().commit();
 			return user;
@@ -50,8 +58,8 @@ public class UserService {
 		} catch (Exception e) {
 			manager.getTransaction().rollback();
 			throw e;
-		}
-		
+		}	
 	}
+	
 
 }

@@ -12,27 +12,26 @@
 
 	
 	
-	<bean name="Locomotiva" class="com.corso.ticketrain.treno.Locomotiva">
+	<bean name="Locomotiva" class="com.corso.ticketrain.treno.model.Locomotiva" scope="prototype">
 		<constructor-arg name="peso" value="30"></constructor-arg>
 		<constructor-arg name="lunghezza" value="10"></constructor-arg>
 		<constructor-arg name="carattere" value="H"></constructor-arg>
 		<constructor-arg name="velocita" value="400"></constructor-arg>
 		<constructor-arg name="pesoTrainabile" value="500"></constructor-arg>
 	</bean>
-	<bean name="Passeggeri" class="com.corso.ticketrain.treno.Passeggeri">
+	<bean name="Passeggeri" class="com.corso.ticketrain.treno.model.Passeggeri" scope="prototype">
 		<constructor-arg name="peso" value="15"></constructor-arg>
 		<constructor-arg name="lunghezza" value="20"></constructor-arg>
 		<constructor-arg name="carattere" value="P"></constructor-arg>
 		<constructor-arg name="numeroPosti" value="40"></constructor-arg>
-		<constructor-arg name="classe" value="economy"></constructor-arg>
+		<constructor-arg name="classe" value="1"></constructor-arg>
 	</bean>
-	<bean name="Ristorante" class="com.corso.ticketrain.treno.Ristorante">
-		<constructor-arg name="peso" value="20"></constructor-arg>
-		<constructor-arg name="lunghezza" value="30"></constructor-arg>
-		<constructor-arg name="carattere" value="R"></constructor-arg>
-		<constructor-arg name="numeroCoperti
-		" value="15"></constructor-arg>
-		<constructor-arg name="menu" value="mediterraneo"></constructor-arg>
+	<bean name="Ristorante" class="com.corso.ticketrain.treno.model.Ristorante" scope="prototype">
+		<property name="peso" value="20"></property>
+		<property name="lunghezza" value="30"></property>
+		<property name="carattere" value="R"></property>
+		<property name="numeroCoperti" value="15"></property>
+		<property name="menu" value="mediterraneo"></property>
 	</bean>
 
 	

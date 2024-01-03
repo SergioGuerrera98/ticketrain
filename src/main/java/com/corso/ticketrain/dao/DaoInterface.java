@@ -2,6 +2,12 @@ package com.corso.ticketrain.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
+@Transactional
+@Repository
 public interface DaoInterface <T>{
 	
 	public void create(T ref);

@@ -13,7 +13,7 @@ import com.corso.ticketrain.model.Citta;
 
 @Transactional
 @Service
-public class CittaService {
+public class CittaService implements IService{
 
 	CittaDao cittaDao;
 

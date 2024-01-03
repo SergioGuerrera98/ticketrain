@@ -44,4 +44,9 @@ public class UserDao implements DaoInterface<User>{
 				.setParameter("parUsername", username).setParameter("parPassword", password).getResultList();
 	}
 
+	public List<User> findByUsername(String username) {
+		return manager.createQuery("select u from User u where u.username = :parUsername", User.class)
+				.setParameter("parUsername", username).getResultList();
+	}
+
 }

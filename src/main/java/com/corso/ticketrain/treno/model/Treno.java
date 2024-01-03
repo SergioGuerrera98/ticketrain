@@ -1,7 +1,10 @@
 package com.corso.ticketrain.treno.model;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.persistence.*;
 
 
@@ -15,7 +18,7 @@ public class Treno {
 	private String codice;
 	@Column(name = "compagnia", nullable=false, length=255)
 	private String compagnia;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "treno_vagone", 
 		joinColumns = @JoinColumn(name = "treno_id"),
 		inverseJoinColumns = @JoinColumn(name = "vagone_id"))
@@ -63,11 +66,33 @@ public class Treno {
 		this.vagoni = vagoni;
 	}
 
+	public Map<Integer, Integer> getClassePosti() {
+		Map<Integer, Integer> map = new HashMap<>();
+		for (Vagone v : vagoni) {
+			if (v instanceof Passeggeri p) {
+				if (!map.containsKey(p.getClasse()))
+					map.put(p.getClasse(), (int) p.getNumeroPosti());
+				else 
+					map.put(p.getClasse(), (int) (map.get(p.getClasse()) + p.getNumeroPosti()));
+			}
+		}
+
+		return map;
+	}
+
 	public StringBuilder getSiglaBuilder() {
 		StringBuilder stringBuilder = new StringBuilder();
         for (Vagone vagone : vagoni) {
         	stringBuilder.append(vagone.getCarattere());
         }
         return stringBuilder;
+	}
+
+	public void addVagone(Vagone vagone, int index) {
+		vagoni.add(index, vagone);		
+	}
+
+	public void removeVagone(int index) {
+		vagoni.remove(index);
 	}
 }

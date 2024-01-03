@@ -1,23 +1,48 @@
 package com.corso.ticketrain.service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.corso.ticketrain.dao.TicketDao;
+import com.corso.ticketrain.dao.interfacce.TicketDaoInterface;
+import com.corso.ticketrain.model.Ticket;
 
+@Transactional
 @Service
-public class TicketService {
+public class TicketService  implements IService{
 	
-	private EntityManager manager;
-	private TicketDao ticketDao;
+	private TicketDaoInterface ticketDao;
 	
-	public TicketService(EntityManager manager, TicketDao ticketDao) {
+	public TicketService() {
 		super();
-		this.manager = manager;
-		this.ticketDao = ticketDao;
 	}
 	
+	
+	
+	public TicketService(TicketDaoInterface ticketDao) {
+		super();
+		this.ticketDao = ticketDao;
+	}
+
+
+
+	public List<Ticket> getTicketsFilter(String luogoPartenza, String luogoArrivo, String dataPartenza) {
+		LocalDateTime dataPartenzaD = (dataPartenza != null) ? LocalDateTime.parse(dataPartenza) : null;
+		List<Ticket> list = new ArrayList<>();
+		try {
+			list = ticketDao.retrieveByFilter(luogoPartenza, luogoArrivo, dataPartenzaD);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+		return list;
+	}
 	
 
 }

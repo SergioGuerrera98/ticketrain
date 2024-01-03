@@ -1,6 +1,7 @@
 package com.corso.ticketrain.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -17,14 +18,6 @@ public class Ticket {
 	private int id;
 	@Column(name = "codice", unique = true)
 	private String codice;
-	@Column(name = "user_id")
-	private int user_id;
-	@Column(name = "nome")
-	private String nome;
-	@Column(name = "cognome")
-	private String cognome;
-	@Column(name = "posto")
-	private String posto;
 	@Column(name = "dataPartenza")
 	private LocalDateTime dataPartenza;
 	@Column(name = "dataArrivo")
@@ -46,13 +39,9 @@ public class Ticket {
 		super();
 	}
 	
-	public Ticket(String codice, int user_id, String nome, String cognome, String posto, LocalDateTime dataPartenza,
+	public Ticket(String codice, LocalDateTime dataPartenza,
 					LocalDateTime dataArrivo, String luogoPartenza, String luogoArrivo, Float prezzo, Treno treno_id, Vagone vagone_id){
 						this.codice = codice;
-						this.user_id = user_id;
-						this.nome = nome;
-						this.cognome = cognome;
-						this.posto = posto;
 						this.dataPartenza = dataPartenza;
 						this.dataArrivo = dataArrivo;
 						this.luogoArrivo = luogoArrivo;
@@ -76,38 +65,6 @@ public class Ticket {
 
 	public void setCodice(String codice) {
 		this.codice = codice;
-	}
-
-	public int getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getCognome() {
-		return cognome;
-	}
-
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
-
-	public String getPosto() {
-		return posto;
-	}
-
-	public void setPosto(String posto) {
-		this.posto = posto;
 	}
 
 	public LocalDateTime getDataPartenza() {
@@ -165,5 +122,34 @@ public class Ticket {
 	public void setPrezzo(Float prezzo) {
 		this.prezzo = prezzo;
 	}
+
+	@Override
+	public String toString() {
+		return "Ticket [codice=" + codice + ", dataPartenza=" + dataPartenza + ", dataArrivo=" + dataArrivo
+				+ ", luogoPartenza=" + luogoPartenza + ", luogoArrivo=" + luogoArrivo + ", prezzo=" + prezzo
+				+ ", treno_id=" + treno_id + ", vagone_id=" + vagone_id + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(codice, dataArrivo, dataPartenza, luogoArrivo, luogoPartenza, prezzo, treno_id, vagone_id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Ticket other = (Ticket) obj;
+		return Objects.equals(codice, other.codice) && Objects.equals(dataArrivo, other.dataArrivo)
+				&& Objects.equals(dataPartenza, other.dataPartenza) && Objects.equals(luogoArrivo, other.luogoArrivo)
+				&& Objects.equals(luogoPartenza, other.luogoPartenza) && Objects.equals(prezzo, other.prezzo)
+				&& Objects.equals(treno_id, other.treno_id) && Objects.equals(vagone_id, other.vagone_id);
+	}
+	
+	
 	
 }

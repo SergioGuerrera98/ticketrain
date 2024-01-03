@@ -21,6 +21,23 @@ import javax.persistence.*;
 		this.classe = classe;
 	}
 
+	public double getNumeroPosti() {
+		return numeroPosti;
+	}
 
+	public void setNumeroPosti(double numeroPosti) {
+		this.numeroPosti = numeroPosti;
+	}
+
+	public int getClasse() {
+		return classe;
+	}
+
+	public void setClasse(int classe) {
+		this.classe = classe;
+	}
+
+	
+	
 
 }
