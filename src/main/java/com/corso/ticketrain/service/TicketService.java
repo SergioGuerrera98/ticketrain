@@ -15,7 +15,7 @@ import com.corso.ticketrain.model.Ticket;
 
 @Transactional
 @Service
-public class TicketService  implements IService{
+public class TicketService implements IService{
 	
 	@Autowired
 	private TicketDaoInterface ticketDao;	
@@ -37,6 +37,13 @@ public class TicketService  implements IService{
 		ticketDao.create(t);
 		
 	}
-	
+
+	public List<Ticket> retrieve() {
+		return ticketDao.retrieve();
+	}
+
+	public void create(Ticket ticket) {
+		ticketDao.create(ticket);
+	}
 
 }

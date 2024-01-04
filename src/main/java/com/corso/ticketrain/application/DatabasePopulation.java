@@ -5,8 +5,12 @@ import com.corso.ticketrain.dao.DaoInterface;
 import com.corso.ticketrain.dao.interfacce.TicketDaoInterface;
 import com.corso.ticketrain.dao.interfacce.TrenoDaoInterface;
 import com.corso.ticketrain.model.*;
+import com.corso.ticketrain.service.CittaService;
+import com.corso.ticketrain.service.PaeseService;
 import com.corso.ticketrain.service.TicketService;
+import com.corso.ticketrain.service.TicketUserService;
 import com.corso.ticketrain.service.TrenoService;
+import com.corso.ticketrain.service.UserService;
 import com.corso.ticketrain.treno.builder.TrenoBuilder;
 import com.corso.ticketrain.treno.exceptions.TrenoException;
 import com.corso.ticketrain.treno.factory.VagoneFactory;
@@ -15,7 +19,6 @@ import com.corso.ticketrain.treno.model.Treno;
 import com.corso.ticketrain.treno.model.Vagone;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.hibernate.Hibernate;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.*;
@@ -51,57 +54,54 @@ public class DatabasePopulation {
     private static List<Citta> setCitta = null;
     private static List<Ticket> setTicket = null;
     private static List<User> setUsers = null;
-    private static List<Paese> paeseList;
+    private static List<Paese> paeseList = null;
 
     public static void main(String[] args) throws IOException, TrenoException {
         AnnotationConfigApplicationContext factory = new AnnotationConfigApplicationContext(AppConfig.class);
 
         TrenoDaoInterface trenoDao = (TrenoDaoInterface) factory.getBean("trenoDao");
-        Treno t = new TrenoBuilder(new VagoneFactory()).costruisciTreno("HP");
-        trenoDao.update(t);
-        t.getId();
-        t.getVagoni();
-        if (false)
+
+        if (true) //TRUE: legge da json e crea le città nel db; false: recupera da db
             createCities(factory);
         else {
-            DaoInterface<Paese> paeseDao = (DaoInterface<Paese>) factory.getBean("paeseDao");
-            DaoInterface<Citta> cittaDao = (DaoInterface<Citta>) factory.getBean("cittaDao");
+            PaeseService paeseDao = factory.getBean(PaeseService.class);
+            CittaService cittaDao = factory.getBean(CittaService.class);
 
             setCitta = cittaDao.retrieve();
         }
-        if (false)
+        if (true) //TRUE: crea nuovi treni nel db; false: recupera da db
             makeTrains(factory);
         else {
             //TrenoDaoInterface trenoDao = (TrenoDaoInterface) factory.getBean("trenoDao");
             setTreno = trenoDao.retrieve();
         }
-        if (false)
+        if (true)  //TRUE: crea nuovi ticket nel db; false: recupera da db
             makeTickets(factory);
         else {
-            TicketDaoInterface ticketDao = (TicketDaoInterface) factory.getBean("ticketDao");
+            TicketService ticketDao = factory.getBean(TicketService.class);
             setTicket = ticketDao.retrieve();
         }
-        if (false)
+        if (true)   //TRUE: crea nuovi user nel db; false: recupera da db
             makeUsers(factory);
         else {
-            DaoInterface<User> userDao = (DaoInterface<User>) factory.getBean("userDao");
+            UserService userDao = factory.getBean(UserService.class);
             setUsers = userDao.retrieve();
         }
-        if (false)
+        if (true)  //TRUE: creauser comprano nuovi ticket e sono aggiunti nel db; false: non fa niente
             makeUserTicket(factory);
     }
 
     public static void createCities(AnnotationConfigApplicationContext factory) throws IOException {
-        DaoInterface<Paese> paeseDao = (DaoInterface<Paese>) factory.getBean("paeseDao");
-        DaoInterface<Citta> cittaDao = (DaoInterface<Citta>) factory.getBean("cittaDao");
+        PaeseService paeseDao = factory.getBean(PaeseService.class);
+        CittaService cittaDao = factory.getBean(CittaService.class);
 
         Paese italia = new Paese("Italia");
         Paese germania = new Paese("Germania");
         Paese francia = new Paese("Francia");
 
-        paeseDao.create(italia);
-        paeseDao.create(germania);
-        paeseDao.create(francia);
+        paeseDao.insert(italia);
+        paeseDao.insert(germania);
+        paeseDao.insert(francia);
 
         //ita
         List<Citta> citta = getCittaJson("./ic.json", italia);
@@ -111,7 +111,7 @@ public class DatabasePopulation {
         citta.addAll(getCittaJson("./gc.json", germania));
 
         for (Citta c : citta) {
-            cittaDao.create(c);
+            cittaDao.insert(c);
             System.out.println("Added city: " + c.getNomeCitta() + " (" + c.getPaese_Id().getNomePaese() + ")");
         }
 
@@ -172,8 +172,7 @@ public class DatabasePopulation {
     }
 
     private static void makeTrains(AnnotationConfigApplicationContext factory) throws TrenoException {
-        TrenoDaoInterface trenoDao = (TrenoDaoInterface) factory.getBean("trenoDao");
-        TrenoService trenoService = new TrenoService(trenoDao);
+        TrenoService trenoService = factory.getBean(TrenoService.class);
 
         String[] treni = {"HPPP", "HPPH", "HPPRPP", "HPRP", "HPPPP", "HPPP", "HPPPH", "HP"};
         List<Treno> set = new ArrayList<>();
@@ -191,7 +190,7 @@ public class DatabasePopulation {
         LocalDateTime now = LocalDateTime.now();
         setTicket = new ArrayList<>();
         Random friend = new Random();
-        TicketDaoInterface ticketDao = (TicketDaoInterface) factory.getBean("ticketDao");
+        TicketService ticketDao = factory.getBean(TicketService.class);
 
         for (Treno treno : setTreno) {
             for (Vagone vagone : treno.getVagoni()) {
@@ -221,8 +220,8 @@ public class DatabasePopulation {
     }
 
     private static void makeUsers(AnnotationConfigApplicationContext factory) {
-        DaoInterface<User> userDao = (DaoInterface<User>) factory.getBean("userDao");
-        DaoInterface<Paese> paeseDao = (DaoInterface<Paese>) factory.getBean("paeseDao");
+        UserService userDao = factory.getBean(UserService.class);
+        PaeseService paeseDao = factory.getBean(PaeseService.class);
         paeseList = paeseDao.retrieve();
 
         int howManyUsers = 15;
@@ -246,7 +245,7 @@ public class DatabasePopulation {
     }
 
     private static void makeUserTicket(AnnotationConfigApplicationContext factory) {
-        DaoInterface<TicketUser> ticketUserDao = (DaoInterface<TicketUser>) factory.getBean("ticketUserDao");
+        TicketUserService ticketUserDao = factory.getBean(TicketUserService.class);
         Random friend = new Random();
         int howManyTicket = 50;
         int i = 0;

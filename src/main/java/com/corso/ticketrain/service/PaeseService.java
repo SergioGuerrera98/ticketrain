@@ -13,16 +13,31 @@ import com.corso.ticketrain.model.Paese;
 
 @Service
 @Transactional
-public class PaeseService {
+public class PaeseService implements IService{
 	
 	@Autowired
-	private PaeseDao paeseDao;	
+	private PaeseDao paeseDao;
+
+	public PaeseService() {}
+	
+	public PaeseService(PaeseDao paeseDao) {
+		super();
+		this.paeseDao = paeseDao;
+	}	
 	
 	public List<Paese> getListaPaesi(){
 		return paeseDao.retrieve();
 	}
 	
 	public void insertPaese(Paese paese) {
+		paeseDao.create(paese);
+	}
+
+		public List<Paese> retrieve() {
+		return paeseDao.retrieve();
+	}
+
+		public void insert(Paese paese) {
 		paeseDao.create(paese);
 	}
 

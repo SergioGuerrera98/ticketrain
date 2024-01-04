@@ -28,6 +28,10 @@ public class CittaService implements IService{
 	public List<Citta> getCittaByPaeseId(int paeseId){
 		return cittaDao.retrieveByPaese(paeseId);
 	}
+
+	public List<Citta> retrieve() {
+		return cittaDao.retrieve();
+	}
 	
 	public void insert(Citta citta) {
 		cittaDao.create(citta);
