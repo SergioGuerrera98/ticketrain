@@ -18,7 +18,7 @@ public class Treno {
 	private String codice;
 	@Column(name = "compagnia", nullable=false, length=255)
 	private String compagnia;
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "treno_vagone", 
 		joinColumns = @JoinColumn(name = "treno_id"),
 		inverseJoinColumns = @JoinColumn(name = "vagone_id"))
