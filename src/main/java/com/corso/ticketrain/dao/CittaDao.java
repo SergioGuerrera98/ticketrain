@@ -13,14 +13,14 @@ import org.springframework.stereotype.Repository;
 
 import com.corso.ticketrain.model.Citta;
 
-@Transactional
+
 @Repository
 public class CittaDao implements DaoInterface<Citta>{
 
 	@PersistenceContext
 	EntityManager manager;
 		
-	@Transactional
+
 	@Override
 	public void create(Citta ref) {
 		manager.persist(ref);

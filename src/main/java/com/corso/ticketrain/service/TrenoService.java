@@ -2,6 +2,7 @@ package com.corso.ticketrain.service;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.corso.ticketrain.dao.TrenoDao;
@@ -16,20 +17,8 @@ import com.corso.ticketrain.treno.model.*;
 @Service
 public class TrenoService {
 	
+	@Autowired
 	private TrenoDaoInterface trenoDao;
-	
-	public TrenoService() {
-		super();
-	}
-	
-	
-	
-	public TrenoService(TrenoDaoInterface trenoDao) {
-		super();
-		this.trenoDao = trenoDao;
-	}
-
-
 
 	/** nuovo treno da sigla */
 	public boolean addTrain(String sigla, VagoneFactory factory) {

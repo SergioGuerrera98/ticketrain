@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 import com.corso.ticketrain.dao.interfacce.TicketDaoInterface;
 import com.corso.ticketrain.model.Ticket;
 
-@Transactional
+
 @Repository
 public class TicketDao implements TicketDaoInterface{
 	

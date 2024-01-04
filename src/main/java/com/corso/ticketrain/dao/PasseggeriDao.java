@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.corso.ticketrain.treno.model.Passeggeri;
 
-@Transactional
+
 @Repository
 public class PasseggeriDao implements DaoInterface<Passeggeri>{
 	

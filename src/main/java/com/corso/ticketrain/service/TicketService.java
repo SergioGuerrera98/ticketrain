@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.corso.ticketrain.dao.interfacce.TicketDaoInterface;
@@ -16,20 +17,8 @@ import com.corso.ticketrain.model.Ticket;
 @Service
 public class TicketService  implements IService{
 	
-	private TicketDaoInterface ticketDao;
-	
-	public TicketService() {
-		super();
-	}
-	
-	
-	
-	public TicketService(TicketDaoInterface ticketDao) {
-		super();
-		this.ticketDao = ticketDao;
-	}
-
-
+	@Autowired
+	private TicketDaoInterface ticketDao;	
 
 	public List<Ticket> getTicketsFilter(String luogoPartenza, String luogoArrivo, String dataPartenza) {
 		LocalDateTime dataPartenzaD = (dataPartenza != null) ? LocalDateTime.parse(dataPartenza) : null;
@@ -42,6 +31,11 @@ public class TicketService  implements IService{
 		}
 
 		return list;
+	}
+
+	public void insert(Ticket t) {
+		ticketDao.create(t);
+		
 	}
 	
 
