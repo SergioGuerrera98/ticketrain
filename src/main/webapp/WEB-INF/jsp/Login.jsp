@@ -12,7 +12,21 @@ String webApp = request.getContextPath();
 String formAction = webApp + "/user/login";
 String errorLabel = (request.getAttribute("error") != null) ? (String) request.getAttribute("error") : ""; 
 %>
-<header><jsp:include page="/WEB-INF/jsp/Header.jsp"></jsp:include></header>
+<header>
+<div class="header">
+<form action="" method="post">
+<button class="btn">Home</button>
+</form>&nbsp;&nbsp;
+
+<form action="<%=webApp + "/signup" %>" method="get">
+<button class="btn">Registrati</button>
+</form>&nbsp;&nbsp;
+<form action="<%=webApp + "/login" %>" method="get">
+<button class="btn">Accedi</button>
+</form>&nbsp;&nbsp;
+
+</div>
+</header>
 <h1>Log-in</h1>
 	<form action="<%=formAction %>" method="GET">
 		<table style="with: 50%">
@@ -25,7 +39,7 @@ String errorLabel = (request.getAttribute("error") != null) ? (String) request.g
 					<td><input type="password" name="password" placeholder="Password"/></td>
 				</tr>
 		</table>
-		<p class="errorLabel"><%=errorLabel%></p>	
+		<p class="labelError"><%=errorLabel%></p>	
 		<input type="submit" value="Submit" /></form>
 </body>
 </html>

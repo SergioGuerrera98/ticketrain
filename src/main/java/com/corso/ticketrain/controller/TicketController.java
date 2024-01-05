@@ -2,6 +2,8 @@ package com.corso.ticketrain.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +31,16 @@ public class TicketController {
     public String getByFilter(String luogoPartenza, String luogoArrivo, String dataPartenza, Model model) {
         List<Ticket> filteredTickets = ticketService.getTicketsFilter(luogoPartenza, luogoArrivo, dataPartenza);
         model.addAttribute("filteredTickets", filteredTickets);
-        return "BuyTicket"; // Ritorna il nome della vista JSP (senza estensione)
+        return "Results"; // Ritorna il nome della vista JSP (senza estensione)
+    }
+
+    @GetMapping("/toDetails")
+    public String toDetails(HttpSession session, Ticket ticket) {
+        session.setAttribute("ticket", ticket);
+        if (session.getAttribute("UserLoggato") == null) {
+            session.setAttribute("previous", "/ticket/toDetails");
+            return "Login";
+        }
+        return "BuyTicket";
     }
 }

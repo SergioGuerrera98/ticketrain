@@ -1,3 +1,5 @@
+<%@page import="com.corso.ticketrain.model.Ticket"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -9,16 +11,18 @@
 <body>
 <%
 String webApp = request.getContextPath();
-String formAction = webApp + "/ticket//getByFilter";
+String formAction = webApp + "/ticket/getByFilter";
 String errorLabel = (request.getAttribute("error") != null) ? (String) request.getAttribute("error") : ""; 
+List<Ticket> listaFiltrata = (List<Ticket>) request.getAttribute("tickets");
+
 %>
-<header><jsp:include page="/WEB-INF/jsp/Header.jsp"></jsp:include></header>
     <div style="margin: 20px;">
 
         <h1>Risultati dei treni</h1>
-
-        <c:if test="${not empty trains}">
-            <table>
+		<%
+		if (!listaFiltrata.isEmpty()){
+			%>
+			           <table>
                 <thead>
                     <tr>
                         <th>Partenza</th>
@@ -30,21 +34,31 @@ String errorLabel = (request.getAttribute("error") != null) ? (String) request.g
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="ticket" items="${tickets}">
-                        <tr>
-                            <td>${ticket.dataArrivo}</td>
-                            <td>${ticket.dataPartenza}</td>
-                            <td>${ticket.luogoPartenza}</td>
-                            <td>${ticket.luogoArrivo}</td>
-                            <td>${ticket.prezzo}</td>
+                	<%
+                	for (Ticket ticket : listaFiltrata){
+                	%>
+                		<tr>
+                            <td><%=ticket.getDataArrivo() %></td>
+                            <td><%=ticket.getDataPartenza()%></td>
+                            <td><%=ticket.getLuogoPartenza() %></td>
+                            <td><%=ticket.getLuogoArrivo() %></td>
+                            <td><%=ticket.getPrezzo() %></td>
                             <td>
-                               <a href="<%=webApp %>/ticket/getByFilter">Compra Biglietto</a>
+                               <a href="<%=webApp %>/ticket/toDetails">Compra Biglietto</a>
                             </td>
                         </tr>
-                    </c:forEach>
+                	<%
+                	}
+                	%>
+        
                 </tbody>
             </table>
-        </c:if>
+			
+		<%	
+		}
+		%>
+		
+
 
         <p class="errorLabel"> <%=errorLabel%> </p>
     </div>

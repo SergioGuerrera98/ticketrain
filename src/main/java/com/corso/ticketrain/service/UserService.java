@@ -8,10 +8,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.corso.ticketrain.checkstring.ComparatoreString;
 import com.corso.ticketrain.dao.UserDao;
 import com.corso.ticketrain.model.Paese;
 import com.corso.ticketrain.model.User;
+import com.corso.ticketrain.treno.utils.UtilsCheckString;
 
 @Transactional
 @Service
@@ -21,10 +22,11 @@ public class UserService implements IService{
     private UserDao userDao;
 	
 	
-	public User registrazione(String username, String password, Paese paese) {
+	public User registrazione(String username, String password, String paese) {
 		try {
-
-			User user = new User(username, password, false, paese);
+			ComparatoreString comparatore = UtilsCheckString.Check();
+			Paese p = new Paese(paese);
+			User user = new User(username, password, false, p);
 			if (username == null || username.isBlank() || password == null || password.isBlank()) {
 				// throw new DatiNonValidiException("Completa tutti i campi obbligatori", null);
 			}

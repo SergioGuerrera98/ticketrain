@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.corso.ticketrain.checkstring.ComparatoreString;
 import com.corso.ticketrain.model.Paese;
 import com.corso.ticketrain.model.User;
 import com.corso.ticketrain.service.UserService;
+import com.corso.ticketrain.treno.utils.UtilsCheckString;
 
 
 
@@ -37,17 +39,26 @@ public class UserController {
 		System.out.println(username);
 		model.addAttribute("username", username);
 		System.out.println("Utente loggato in sessione");
-		return "HomePrivata";
+
+		if (session.getAttribute("previous") == null)
+			return "Home";
+		else {
+			String redirect = (String) session.getAttribute("previous");
+			session.removeAttribute("previous");
+			return redirect;
+		}
 	}
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("UserLoggato");
+		session.removeAttribute("ticket");
+		System.out.println("utente rimosso dalla sessione");
 		return "Home";
 	}
 
 	@PostMapping("/registrazione")
-	public String add(@RequestBody String username, String password, Paese paese) {
+	public String add(@RequestBody String username, String password, String paese) {
 		userService.registrazione(username, password, paese);
 		return "utente registrato";
 	}

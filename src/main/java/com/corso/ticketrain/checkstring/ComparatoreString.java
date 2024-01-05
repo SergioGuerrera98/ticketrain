@@ -14,18 +14,19 @@ public class ComparatoreString {
 		this.checkString = checkString;
 	}
 
-	public boolean check(String input, List<String> listaStandard) {
+	public String check(String input, List<String> listaStandard) {
 		for (String standard : listaStandard) {
 			CheckString currentAlgorithm = checkString;
 			while (currentAlgorithm != null) {
 				if (currentAlgorithm.check(input, standard)) {
 					System.out.println("Parola trovata");
-					return true;
+					
+					return standard;
 				}
 				currentAlgorithm = currentAlgorithm.getNext();
 			}
 		}
-		return false;
+		return null;
 
 	}
 }

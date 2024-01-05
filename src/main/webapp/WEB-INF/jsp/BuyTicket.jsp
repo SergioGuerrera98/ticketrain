@@ -1,3 +1,4 @@
+<%@page import="com.corso.ticketrain.model.User"%>
 <%@page import="com.corso.ticketrain.model.Ticket"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -8,13 +9,24 @@
 <title>Insert title here</title>
 </head>
 <body>
-<header><jsp:include page="/WEB-INF/jsp/Header.jsp"></jsp:include></header>
 <%
 String webApp = request.getContextPath();
-String formAction = webApp + "/Login";
+String formAction = webApp + "/login";
 String errorLabel = (request.getAttribute("error") != null) ? (String) request.getAttribute("error") : ""; 
 Ticket ticket = (Ticket) request.getAttribute("ticket");
+User user = (User) session.getAttribute("UserLoggato");
 %>
+<header>
+<div class="header">
+<h2>Benvenuto <%=user.getUsername() %></h2>
+<form action="<%=webApp%>/home" method="post">
+<button class="btn">Area Personale</button>
+</form>&nbsp;&nbsp;
+<form action="<%=webApp%>/user/logout" method="get">
+<button class="btn">Logout</button>
+</form>&nbsp;&nbsp;
+</div>
+</header>
 <h1>Procedi con l'acquisto</h1>
 
     <div id="dettagliTreno">

@@ -7,12 +7,26 @@
 <title>Insert title here</title>
 </head>
 <body>
-<header><jsp:include page="/WEB-INF/jsp/Header.jsp"></jsp:include></header>
 <%
 String webApp = request.getContextPath();
 String formAction = webApp + "/Login";
 String errorLabel = (request.getAttribute("error") != null) ? (String) request.getAttribute("error") : ""; 
 %>
+<header>
+<div class="header">
+<form action="" method="post">
+<button class="btn">Home</button>
+</form>&nbsp;&nbsp;
+
+<form action="<%=webApp + "/signup" %>" method="get">
+<button class="btn">Registrati</button>
+</form>&nbsp;&nbsp;
+<form action="<%=webApp + "/login" %>" method="get">
+<button class="btn">Accedi</button>
+</form>&nbsp;&nbsp;
+
+</div>
+</header>
 <h1>Registrati</h1>
 	<form action="<%=formAction %>" method="GET">
 		<table style="with: 50%">
@@ -29,7 +43,7 @@ String errorLabel = (request.getAttribute("error") != null) ? (String) request.g
 					<td><input type="text" name="paese" placeholder="Paese"/></td>
 				</tr>
 		</table>
-		<p><%=errorLabel %></p>	
+		<p class="labelError"><%=errorLabel %></p>	
 		<input type="submit" value="Submit" /></form>
 
 <footer><jsp:include page="/WEB-INF/jsp/Footer.jsp"></jsp:include></footer>
