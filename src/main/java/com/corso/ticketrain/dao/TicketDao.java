@@ -62,11 +62,11 @@ public class TicketDao implements TicketDaoInterface{
 
 		List<Predicate> predicates = new ArrayList<>();
 
-		if (luogoPartenza != null) {
+		if (luogoPartenza != null && !luogoPartenza.isBlank()) {
 			predicates.add(builder.equal(root.get("luogoPartenza"), luogoPartenza.toLowerCase()));
 		}
 
-		if (luogoArrivo != null) {
+		if (luogoArrivo != null && !luogoArrivo.isBlank()) {
 			predicates.add(builder.equal(root.get("luogoArrivo"), luogoArrivo.toLowerCase()));
 		}
 

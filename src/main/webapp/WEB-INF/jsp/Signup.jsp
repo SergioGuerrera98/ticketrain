@@ -28,7 +28,7 @@ String errorLabel = (request.getAttribute("error") != null) ? (String) request.g
 </div>
 </header>
 <h1>Registrati</h1>
-	<form action="<%=formAction %>" method="GET">
+	<form action="<%=webApp %>/user/registrazione" method="POST">
 		<table style="with: 50%">
 				<tr>
 					<td>UserName</td>

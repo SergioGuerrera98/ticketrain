@@ -21,7 +21,7 @@ public class TicketService implements IService{
 	private TicketDaoInterface ticketDao;	
 
 	public List<Ticket> getTicketsFilter(String luogoPartenza, String luogoArrivo, String dataPartenza) {
-		LocalDateTime dataPartenzaD = (dataPartenza != null) ? LocalDateTime.parse(dataPartenza) : null;
+		LocalDateTime dataPartenzaD = (dataPartenza != null && !dataPartenza.isBlank()) ? LocalDateTime.parse(dataPartenza) : null;
 		List<Ticket> list = new ArrayList<>();
 		try {
 			list = ticketDao.retrieveByFilter(luogoPartenza, luogoArrivo, dataPartenzaD);

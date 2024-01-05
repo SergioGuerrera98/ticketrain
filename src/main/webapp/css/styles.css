@@ -86,3 +86,22 @@ effect: dropshadow(gaussian, #56a8e7, 5, 0, 0, 0);
     background-insets : 2.0, 0.0, 0.0;
     background-radius : 2.0em;
 }
+
+#footerContainer {
+    background-color: #343a40; 
+    color: white; 
+    padding: 20px 0; 
+}
+
+#footerSection a {
+    color: white;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+#footerSection {
+    display: flex;
+    justify-content: space-around;
+}
+
+

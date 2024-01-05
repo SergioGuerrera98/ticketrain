@@ -15,6 +15,9 @@ public class ComparatoreString {
 	}
 
 	public String check(String input, List<String> listaStandard) {
+		if (listaStandard.contains(input)) {
+			return "PaeseTrovato";
+		}
 		for (String standard : listaStandard) {
 			CheckString currentAlgorithm = checkString;
 			while (currentAlgorithm != null) {
@@ -26,7 +29,7 @@ public class ComparatoreString {
 				currentAlgorithm = currentAlgorithm.getNext();
 			}
 		}
-		return null;
+		return "Paese non trovato";
 
 	}
 }

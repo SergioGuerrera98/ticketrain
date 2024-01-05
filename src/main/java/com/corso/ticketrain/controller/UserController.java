@@ -17,6 +17,9 @@ import com.corso.ticketrain.checkstring.ComparatoreString;
 import com.corso.ticketrain.model.Paese;
 import com.corso.ticketrain.model.User;
 import com.corso.ticketrain.service.UserService;
+import com.corso.ticketrain.service.exceptions.DatiNonValidiException;
+import com.corso.ticketrain.service.exceptions.PaeseNonTrovatoException;
+import com.corso.ticketrain.service.exceptions.UsernameEsisteException;
 import com.corso.ticketrain.treno.utils.UtilsCheckString;
 
 
@@ -58,9 +61,29 @@ public class UserController {
 	}
 
 	@PostMapping("/registrazione")
-	public String add(@RequestBody String username, String password, String paese) {
-		userService.registrazione(username, password, paese);
-		return "utente registrato";
+	public String add(@RequestParam String username, String password, String paese, HttpSession session, Model model) {
+		try {
+			User user = userService.registrazione(username, password, paese);
+			session.setAttribute("UserLoggato", user);
+			return "Home";
+		} catch (PaeseNonTrovatoException e) {
+			String error = e.getMessage();
+			model.addAttribute("error", error);
+			return "Signup";
+		} catch (DatiNonValidiException e) {
+			String error = e.getMessage();
+			model.addAttribute("error", error);
+			return "Signup";
+		}catch (UsernameEsisteException e) {
+			String error = e.getMessage();
+			model.addAttribute("error", error);
+			return "Signup";
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "Home";
 	}
 
 }

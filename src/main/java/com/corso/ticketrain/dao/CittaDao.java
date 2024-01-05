@@ -23,6 +23,7 @@ public class CittaDao implements DaoInterface<Citta>{
 
 	@Override
 	public void create(Citta ref) {
+		ref.setNomeCitta(ref.getNomeCitta().toLowerCase());
 		manager.persist(ref);
 		
 	}
@@ -34,6 +35,7 @@ public class CittaDao implements DaoInterface<Citta>{
 
 	@Override
 	public void update(Citta ref) {
+		ref.setNomeCitta(ref.getNomeCitta().toLowerCase());
 		manager.persist(ref);	
 		
 	}

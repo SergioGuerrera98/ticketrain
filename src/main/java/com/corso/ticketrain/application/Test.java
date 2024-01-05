@@ -38,8 +38,8 @@ public class Test {
 		PaeseService paeseService = factory.getBean(PaeseService.class);
 		Paese p = new Paese("Italia");
 		paeseService.insertPaese(p);
-		User user = userService.registrazione("prova", "1234", p);
-		System.out.println(user);
+		//User user = userService.registrazione("prova", "1234", "italia");
+		//System.out.println(user);
 	}
 	
 	public static void testFilter(AnnotationConfigApplicationContext factory) throws TrenoException {
