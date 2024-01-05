@@ -72,6 +72,73 @@
           <artifactId>gson</artifactId>
           <version>2.8.9</version>
       </dependency>
+    
+      <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-webmvc</artifactId>
+    <version>5.3.20</version>
+	</dependency>
+      
+	
+      
+      
+
+	
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>3.1.0</version>
+      </dependency>
 
   </dependencies>
+  
+ 
+  <profiles>
+  	<profile>
+  	<activation>
+  		<activeByDefault>true</activeByDefault>
+  	</activation>
+  		<id>sviluppo</id>
+  		<properties>
+  			<server>localhost</server>
+  			<ambiente>sviluppo</ambiente>
+  		</properties>
+  		<dependencies>
+  			<!-- qui le dipendenze tipiche solo per ambiente localhost -->
+  		</dependencies> 
+  	</profile>
+  	<profile>
+  		<id>produzione</id>
+  		<properties>
+  			<server>127.0.0.1</server>
+  			<ambiente>produzione</ambiente>
+  		</properties> 
+  	</profile>
+  </profiles> 
+ 
+  <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.3</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <url>http://localhost:8080/</url>
+                    <path>/ticketrain</path>
+                    <username>war-deployer</username>
+                    <password>maven-tomcat-plugin</password>
+                    <update>true</update>
+                
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

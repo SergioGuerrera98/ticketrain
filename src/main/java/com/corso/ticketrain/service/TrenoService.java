@@ -1,5 +1,7 @@
 package com.corso.ticketrain.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -178,6 +180,14 @@ public class TrenoService {
 		}
 
 		return found;
+	}
+	
+	public List<Treno> retrieveAll(){
+		try {
+			return trenoDao.retrieve();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 }

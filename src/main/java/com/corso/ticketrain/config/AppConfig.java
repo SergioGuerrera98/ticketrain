@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.corso.ticketrain.dao.*;
 
 @Configuration
-@ComponentScan(basePackages = {"com.corso.ticketrain.model", "com.corso.ticketrain.treno.model", "com.corso.ticketrain.dao", "com.corso.ticketrain.service"})
+@ComponentScan(basePackages = {"com.corso.ticketrain.model", "com.corso.ticketrain.treno.model", "com.corso.ticketrain.dao", "com.corso.ticketrain.service", "com.corso.ticketrain.controller"})
 @EnableTransactionManagement
 public class AppConfig {
 
@@ -29,7 +29,7 @@ public class AppConfig {
         em.setPackagesToScan("com.corso.ticketrain.dao", "com.corso.ticketrain.model", "com.corso.ticketrain.treno.model"); 
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create"); 
+        properties.setProperty("hibernate.hbm2ddl.auto", "update"); 
         em.setJpaProperties(properties);
         return em;
     }
