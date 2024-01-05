@@ -1,19 +1,25 @@
 package com.corso.ticketrain.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.corso.ticketrain.model.Paese;
-
+import com.corso.ticketrain.model.User;
 import com.corso.ticketrain.service.UserService;
 
-@RestController
+
+
+@Controller
 @RequestMapping("/user")
 @CrossOrigin
 public class UserController {
@@ -22,7 +28,21 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping("/login")
-	public String loginPage() {
+	public String loginPage(@RequestParam String username, String password, HttpSession session, Model model) {
+		User user = userService.login(username, password);
+
+		if (user != null) {
+			session.setAttribute("UserLoggato", user);
+		}
+		System.out.println(username);
+		model.addAttribute("username", username);
+		System.out.println("Utente loggato in sessione");
+		return "HomePrivata";
+	}
+
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("UserLoggato");
 		return "Home";
 	}
 

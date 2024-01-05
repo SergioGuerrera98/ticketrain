@@ -1,3 +1,4 @@
+<%@page import="com.corso.ticketrain.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -7,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%String nome = request.getParameter("username"); %>
-<h1>questa e' la tua home privata <%=nome %></h1>
+<%User user = (User) session.getAttribute("UserLoggato"); %>
+<h1>Benvenuto <%=user.getUsername() %></h1>
 </body>
 </html>

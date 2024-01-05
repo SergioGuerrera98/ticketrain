@@ -15,7 +15,7 @@ import com.corso.ticketrain.service.TrenoService;
 import com.corso.ticketrain.treno.factory.VagoneFactory;
 import com.corso.ticketrain.treno.model.Treno;
 
-@RestController
+@Controller
 @RequestMapping("/treno")
 @CrossOrigin
 public class TrenoController {

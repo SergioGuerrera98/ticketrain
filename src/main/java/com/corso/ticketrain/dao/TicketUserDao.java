@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import org.springframework.stereotype.Repository;
 
@@ -47,4 +48,10 @@ public class TicketUserDao implements DaoInterface<TicketUser>{
                 .setParameter("username", username)
                 .getResultList();
     }
+
+	public void createAll(List<TicketUser> list) {
+		for (TicketUser t : list)
+				manager.persist(t);
+		
+	}
 }

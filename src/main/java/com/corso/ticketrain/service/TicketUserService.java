@@ -3,7 +3,7 @@ package com.corso.ticketrain.service;
 import java.util.List;
 
 import javax.transaction.Transactional;
-
+import com.corso.ticketrain.treno.model.Passeggeri;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +11,8 @@ import com.corso.ticketrain.dao.TicketUserDao;
 import com.corso.ticketrain.model.Ticket;
 import com.corso.ticketrain.model.TicketUser;
 import com.corso.ticketrain.model.User;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 @Transactional
 @Service
@@ -41,8 +43,23 @@ public class TicketUserService implements IService{
 		return ticketUserDao.retrieve();
 	}
 
+	public List<TicketUser> retrieveByUsername(String username) {
+		return ticketUserDao.retrieveByUsername(username);
+	}
+
 	public void create(TicketUser ticket) {
 		ticketUserDao.create(ticket);
+	}
+
+	public void acquistaTicketMultipli(User user, Ticket ticket, String body) {
+		Gson gson = new Gson();
+		List<TicketUser> list = gson.fromJson(body, new TypeToken<List<TicketUser>>() {}.getType());
+		for (TicketUser tu : list) {
+			tu.setTicket(ticket);
+			tu.setUser(user);
+			tu.setClasse(""+((Passeggeri)ticket.getVagone_id()).getClasse());
+		}
+		ticketUserDao.createAll(list);
 	}
 
 }
