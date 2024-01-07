@@ -17,6 +17,10 @@
 
 
 <div id="copyright" class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    © 2024 Copyright: <a class="text-white" href="https://mdbootstrap.com/">Urlooooo</a>
+    <a class="text-black" href="https://mdbootstrap.com/">Assistenza</a>&nbsp;&nbsp;&nbsp;
+    <a class="text-black" href="https://mdbootstrap.com/">© 2024 Copyright</a>&nbsp;&nbsp;&nbsp;
+    <a class="text-black" href="https://mdbootstrap.com/">Contatti</a>&nbsp;&nbsp;&nbsp;
+    <a class="text-black" href="https://mdbootstrap.com/">Privacy</a>&nbsp;&nbsp;&nbsp;
+    <a class="text-black" href="https://mdbootstrap.com/">Condizioni</a>&nbsp;&nbsp;&nbsp;
 </div>
 

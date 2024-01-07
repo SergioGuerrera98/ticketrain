@@ -17,6 +17,8 @@ import com.corso.ticketrain.model.User;
 import com.corso.ticketrain.service.exceptions.DatiNonValidiException;
 import com.corso.ticketrain.service.exceptions.PaeseNonTrovatoException;
 import com.corso.ticketrain.service.exceptions.UsernameEsisteException;
+import com.corso.ticketrain.service.exceptions.UsernameInesistenteException;
+import com.corso.ticketrain.service.exceptions.UsernameOPasswordSbagliatiException;
 import com.corso.ticketrain.treno.utils.UtilsCheckString;
 
 @Transactional
@@ -48,7 +50,7 @@ public class UserService implements IService{
 			Paese p = paeseDao.findByNome(paese);
 			User user = new User(username, password, false, p);
 			if (username == null || username.isBlank() || password == null || password.isBlank()) {
-				 throw new DatiNonValidiException("Completa tutti i campi obbligatori", null);
+				 throw new DatiNonValidiException("Completa tutti i campi", null);
 			}
 			List<User> utenti = userDao.findByUsername(username);
 			if (utenti.size()>0) {
@@ -62,16 +64,20 @@ public class UserService implements IService{
 	}
 	
 
-	public User login (String username, String password) {
+	public User login (String username, String password) throws  UsernameInesistenteException, UsernameOPasswordSbagliatiException{
 		try {
-			List<User> utenti = userDao.findByUsernameAndPassword(username, password);
+			List<User> utenti = userDao.findByUsername(username);
 			if(utenti.size()<1) {
-				//utente non registrato exception
+				throw new UsernameInesistenteException("L'username inserito e' inesistente", null);
 			}
-			if(utenti.size()>1) {
+			List<User> utente = userDao.findByUsernameAndPassword(username, password);
+			if(utente.size()<1) {
+				throw new UsernameOPasswordSbagliatiException("Username o Password errati", null);
+			}
+			if(utente.size()>1) {
 				//utente duplicato, errore imprevisto
 			}
-			return utenti.get(0);
+			return utente.get(0);
 		} catch (Exception e) {
 			throw e;
 		}	

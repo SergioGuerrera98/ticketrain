@@ -20,6 +20,8 @@ import com.corso.ticketrain.service.UserService;
 import com.corso.ticketrain.service.exceptions.DatiNonValidiException;
 import com.corso.ticketrain.service.exceptions.PaeseNonTrovatoException;
 import com.corso.ticketrain.service.exceptions.UsernameEsisteException;
+import com.corso.ticketrain.service.exceptions.UsernameInesistenteException;
+import com.corso.ticketrain.service.exceptions.UsernameOPasswordSbagliatiException;
 import com.corso.ticketrain.treno.utils.UtilsCheckString;
 
 
@@ -33,22 +35,31 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping("/login")
-	public String loginPage(@RequestParam String username, String password, HttpSession session, Model model) {
-		User user = userService.login(username, password);
+	public String loginPage(@RequestParam String username, String password, HttpSession session, Model model) throws UsernameInesistenteException, UsernameOPasswordSbagliatiException {
+		try {
+			User user = userService.login(username, password);
+			if (user != null) {
+				session.setAttribute("UserLoggato", user);
+			}
+			System.out.println(username);
+			model.addAttribute("username", username);
+			System.out.println("Utente loggato in sessione");
 
-		if (user != null) {
-			session.setAttribute("UserLoggato", user);
-		}
-		System.out.println(username);
-		model.addAttribute("username", username);
-		System.out.println("Utente loggato in sessione");
-
-		if (session.getAttribute("previous") == null)
-			return "Home";
-		else {
-			String redirect = (String) session.getAttribute("previous");
-			session.removeAttribute("previous");
-			return redirect;
+			if (session.getAttribute("previous") == null)
+				return "Home";
+			else {
+				String redirect = (String) session.getAttribute("previous");
+				session.removeAttribute("previous");
+				return redirect;
+			}
+		} catch (UsernameInesistenteException e) {
+			String error = e.getMessage();
+			model.addAttribute("error", error);
+			return "Login";
+		} catch (UsernameOPasswordSbagliatiException e) {
+			String error = e.getMessage();
+			model.addAttribute("error", error);
+			return "Login";
 		}
 	}
 
@@ -80,10 +91,9 @@ public class UserController {
 			return "Signup";
 		}
 		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			return "Home";
 		}
-		return "Home";
 	}
 
 }
