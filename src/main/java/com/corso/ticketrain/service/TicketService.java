@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import com.corso.ticketrain.application.StringsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,8 @@ public class TicketService implements IService{
 		LocalDateTime dataPartenzaD = (dataPartenza != null && !dataPartenza.isBlank()) ? LocalDateTime.parse(dataPartenza) : null;
 		List<Ticket> list = new ArrayList<>();
 		try {
-			list = ticketDao.retrieveByFilter(luogoPartenza, luogoArrivo, dataPartenzaD);
+			list = ticketDao.retrieveByFilter(StringsUtils.upFirst(luogoPartenza),
+					StringsUtils.upFirst(luogoArrivo), dataPartenzaD);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -46,4 +48,7 @@ public class TicketService implements IService{
 		ticketDao.create(ticket);
 	}
 
+    public Ticket retrieveById(int id) {
+		return ticketDao.retrieveById(id);
+    }
 }

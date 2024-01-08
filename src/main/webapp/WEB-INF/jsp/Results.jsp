@@ -13,7 +13,7 @@
 String webApp = request.getContextPath();
 String formAction = webApp + "/ticket/getByFilter";
 String errorLabel = (request.getAttribute("error") != null) ? (String) request.getAttribute("error") : ""; 
-List<Ticket> listaFiltrata = (List<Ticket>) request.getAttribute("tickets");
+List<Ticket> listaFiltrata = (List<Ticket>) request.getAttribute("filteredTickets");
 
 %>
     <div style="margin: 20px;">
@@ -44,7 +44,8 @@ List<Ticket> listaFiltrata = (List<Ticket>) request.getAttribute("tickets");
                             <td><%=ticket.getLuogoArrivo() %></td>
                             <td><%=ticket.getPrezzo() %></td>
                             <td>
-                               <a href="<%=webApp %>/ticket/toDetails">Compra Biglietto</a>
+                                <button onclick="buyTicket(<%=ticket.getId()%>)">Procedi all'acquisto</button>
+
                             </td>
                         </tr>
                 	<%
@@ -55,13 +56,30 @@ List<Ticket> listaFiltrata = (List<Ticket>) request.getAttribute("tickets");
             </table>
 			
 		<%	
-		}
+		    }
 		%>
-		
-
-
         <p class="errorLabel"> <%=errorLabel%> </p>
     </div>
 <footer><jsp:include page="/WEB-INF/jsp/Footer.jsp"></jsp:include></footer>
+<script>
+    function buyTicket(id) {
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "<%=webApp %>/ticket/toDetails/" + id);
+        xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+
+
+        xhr.onload = () => {
+            if (xhr.status < 400) {
+                window.location.replace(xhr.responseText);
+            } else {
+                console.log(`Error: ${xhr.status}`);
+            }
+        };
+
+        xhr.send();
+
+    }
+</script>
 </body>
 </html>

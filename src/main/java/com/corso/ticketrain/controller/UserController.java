@@ -67,6 +67,7 @@ public class UserController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("UserLoggato");
 		session.removeAttribute("ticket");
+		session.removeAttribute("previous");
 		System.out.println("utente rimosso dalla sessione");
 		return "Home";
 	}

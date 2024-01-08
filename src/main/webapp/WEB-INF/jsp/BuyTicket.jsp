@@ -13,7 +13,7 @@
 String webApp = request.getContextPath();
 String formAction = webApp + "/login";
 String errorLabel = (request.getAttribute("error") != null) ? (String) request.getAttribute("error") : ""; 
-Ticket ticket = (Ticket) request.getAttribute("ticket");
+Ticket ticket = (Ticket) session.getAttribute("ticket");
 User user = (User) session.getAttribute("UserLoggato");
 %>
 <header>
@@ -51,11 +51,11 @@ User user = (User) session.getAttribute("UserLoggato");
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP1" placeholder="Nome passeggero"></input>
+                    <td><input type="text" name="nomeP1" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP1" placeholder="Cognome passeggero"></input>
+                    <td><input type="text" name="cognomeP1" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -64,11 +64,11 @@ User user = (User) session.getAttribute("UserLoggato");
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP2" placeholder="Nome passeggero"></input>
+                    <td><input type="text" name="nomeP2" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP2" placeholder="Cognome passeggero"></input>
+                    <td><input type="text" name="cognomeP2" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -77,11 +77,11 @@ User user = (User) session.getAttribute("UserLoggato");
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP3" placeholder="Nome passeggero"></input>
+                    <td><input type="text" name="nomeP3" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP3" placeholder="Cognome passeggero"></input>
+                    <td><input type="text" name="cognomeP3" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -90,11 +90,11 @@ User user = (User) session.getAttribute("UserLoggato");
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP4" placeholder="Nome passeggero"></input>
+                    <td><input type="text" name="nomeP4" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP4" placeholder="Cognome passeggero"></input>
+                    <td><input type="text" name="cognomeP4" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -103,11 +103,11 @@ User user = (User) session.getAttribute("UserLoggato");
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP5" placeholder="Nome passeggero"></input>
+                    <td><input type="text" name="nomeP5" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP5" placeholder="Cognome passeggero"></input>
+                    <td><input type="text" name="cognomeP5" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -116,11 +116,11 @@ User user = (User) session.getAttribute("UserLoggato");
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP6" placeholder="Nome passeggero"></input>
+                    <td><input type="text" name="nomeP6" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP6" placeholder="Cognome passeggero"></input>
+                    <td><input type="text" name="cognomeP6" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -129,11 +129,11 @@ User user = (User) session.getAttribute("UserLoggato");
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP7" placeholder="Nome passeggero"></input>
+                    <td><input type="text" name="nomeP7" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP7" placeholder="Cognome passeggero"></input>
+                    <td><input type="text" name="cognomeP7" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -142,11 +142,11 @@ User user = (User) session.getAttribute("UserLoggato");
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP8" placeholder="Nome passeggero"></input>
+                    <td><input type="text" name="nomeP8" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP8" placeholder="Cognome passeggero"></input>
+                    <td><input type="text" name="cognomeP8" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -180,14 +180,14 @@ User user = (User) session.getAttribute("UserLoggato");
         }
     })
 
-    fun visibilitaCarta(vis, index) {
+    function visibilitaCarta(vis, index) {
         if (vis == true)
             document.getElementById('p' + index).style.visibility = visibility;
         else
             document.getElementById('p' + index).style.visibility = hidden;
     }
 
-    fun procedi(webapp, partenza, arrivo, oraPartenza, oraArrivo) {
+    function procedi(webapp, partenza, arrivo, oraPartenza, oraArrivo) {
         var message = "Vuoi confermare l'acquisto di ";
         if (c > 1)
             message += c + " biglietti ";
