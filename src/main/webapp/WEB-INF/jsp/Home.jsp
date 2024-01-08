@@ -3,23 +3,21 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
-	 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() + "/css/Style.css"%>">
-</head>
-
-<body>
 <%
 User user = (User) session.getAttribute("UserLoggato"); 
 String errorLabel = (String) request.getAttribute("erroreLabel");
 String webApp = request.getContextPath();
 %>	
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
+	<link rel="stylesheet" type="text/css" href="<%=webApp%>/css">
+</head>
 
+<body>
 <header>
-
 </header>
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
@@ -38,9 +36,14 @@ String webApp = request.getContextPath();
                         <li class="nav-item"><a class="nav-link" href="<%=webApp%>/login">Accedi</a></li>
                         <li class="nav-item"><a class="nav-link" href="<%=webApp%>/signup">Registrati</a></li>
                         <%} if (user!=null){%>
-                        <li class="nav-item"><a class="nav-link" href="<%=webApp%>/account">Area Personale</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<%=webApp%>/user/logout">Logout</a></li>
-                        <%} %>
+                        <li class="nav-item"><a class="nav-link" href="<%=webApp%>/account">Area Personale (<%=user.getUsername() %>)</a></li>
+                       	<li class="nav-item"><a class="nav-link" href="<%=webApp%>/user/logout">Logout</a></li>
+                        <% if (user.isAmministratore()){%>
+                        	 <li class="nav-item"><a class="nav-link" href="<%=webApp%>/user/admin">Pagina Amministratore</a></li>
+                        	 
+                        	
+                        <%}} %>
+                         
                     </ul>
 		</div>
 	</nav>
@@ -49,21 +52,21 @@ String webApp = request.getContextPath();
         <div class="carousel-item active">
             <img
                 src="https://static.nexilia.it/vologratis/2015/03/sconto-italo-under-30-768x399.jpg"
-                class="d-block w-100" style="max-width: 50%; height: 500px; margin-left: 25%" alt="...">
+                class="d-block w-100" style="max-width: 50%; height: 25%; margin-left: 25%" alt="...">
                 <h5>Tratte aggiornate tutto l'anno</h5>
         		<p>Spostati dove vuoi, quando vuoi.</p>
         </div>
         <div class="carousel-item">
             <img
                 src="https://www.newsabruzzo.it/wp-content/uploads/2023/01/Treno-23012023-NewsAbruzzo.it_.jpg"
-                class="d-block w-100" style="max-width: 50%; height: 500px;" alt="...">
+                class="d-block w-100" style="max-width: 50%; height: 25%; margin-left: 25%" alt="...">
                 <h5>Visita l'Italia a basso costo</h5>
         		<p>Prezzi scontati nel weekend.</p>
         </div>
         <div class="carousel-item">
             <img
                 src="https://getwallpapers.com/wallpaper/full/9/1/d/364210.jpg"
-                class="d-block w-100" style="max-width: 50%; height: 500px;" alt="...">
+                class="d-block w-100" style="max-width: 50%; height: 25%; margin-left: 25% " alt="...">
                 <h5>Affidabilità e puntualità garantite</h5>
         		<p>Rimborso parziale in caso di ritardo.</p>
         </div>
@@ -79,7 +82,10 @@ String webApp = request.getContextPath();
             class="visually-hidden">Next</span>
     </button>
 </div>
-
+<img alt="" src="/img1.jpeg">
+<img alt="" src="/resources/img1.jpeg">
+<img alt="" src="img1.jpeg">
+<img alt="" src="resources/img1.jpeg">
 <div id="filtro">
 	<form action="<%=webApp %>/ticket/getByFilter" method="GET">
 		<table style="width: 50%">

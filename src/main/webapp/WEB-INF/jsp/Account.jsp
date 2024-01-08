@@ -35,7 +35,7 @@ List<TicketUser> listaTicket = (List<TicketUser>) request.getAttribute("listaTic
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="<%=webApp%>/home">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<%=webApp%>/account">Area Personale</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<%=webApp%>/account">Area Personale (<%=user.getUsername() %>)</a></li>
                         <li class="nav-item"><a class="nav-link" href="<%=webApp%>/user/logout">Logout</a></li>
                     </ul>
 		</div>

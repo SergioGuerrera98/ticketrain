@@ -26,10 +26,14 @@ public class WebConfig implements WebMvcConfigurer{
 		return resolver; 
 	}
     
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    	
         registry
           .addResourceHandler("/resources/**")
-          .addResourceLocations("/resources/");	
+          .addResourceLocations("/resources/");
+        registry.addResourceHandler("/css/**")
+        .addResourceLocations("/resources/static/css/**");
 	}
     
 }

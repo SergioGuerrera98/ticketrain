@@ -39,7 +39,9 @@ public class UserController {
 		try {
 			User user = userService.login(username, password);
 			if (user != null) {
+				//user.setAmministratore(true);
 				session.setAttribute("UserLoggato", user);
+				
 			}
 			System.out.println(username);
 			model.addAttribute("username", username);
@@ -69,6 +71,15 @@ public class UserController {
 		session.removeAttribute("ticket");
 		session.removeAttribute("previous");
 		System.out.println("utente rimosso dalla sessione");
+		return "Home";
+	}
+	
+	@GetMapping("/admin")
+	public String admin(HttpSession session) {
+		User user = (User) session.getAttribute("UserLoggato");
+		if (user.isAmministratore()) {
+			return "redirect:/admin/getTreni";
+		}
 		return "Home";
 	}
 

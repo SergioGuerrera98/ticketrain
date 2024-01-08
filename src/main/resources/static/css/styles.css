@@ -17,13 +17,19 @@
   padding: 8px;
 }
 
+.body {
+  background-color: red;
+  margin: 0; 
+  padding: 0; 
+}
 
+/*
 
 .button {
 background-color: linear-gradient(#4ca1fd 40%, #1693ff 45%, #2563f7 51%, #2563f7 100%);
-background-radius: 8px;
 
-text-fill: #ffffff;
+
+
 font-size: 20px;
 font-family: sans-serif;
 font-weight: 700;
@@ -34,59 +40,58 @@ border-width: 3px;
 border-style: solid;
 border-radius: 4px;
 
-effect: dropshadow(gaussian, #155445, 1, 0, 5, 5);
+
 }
 
 .button:hover {
 background-color: linear-gradient(#6cc1fd 40%, #36b3ff 45%, #4583f7 51%, #4583f7 100%);
-effect: dropshadow(gaussian, #155445, 1, 0, 5, 5);
+
 }
 .button:armed {
 background-color: linear-gradient(#6cc1fd 40%, #36b3ff 45%, #4583f7 51%, #4583f7 100%);
-effect: dropshadow(gaussian, #56a8e7, 5, 0, 0, 0);
+
 }
 
 
-/* this is for the custom scrollbars */
+/* this is for the custom scrollbars *//*
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
     background-color : #155445;
-    background-radius : 0.0em;
+
     border-radius :2.0em;
 }
 .scroll-bar:horizontal .increment-button ,
 .scroll-bar:horizontal .decrement-button {
-    background-radius : 0.0em;
+
     padding :0.0 0.0 10.0 0.0;
 }
 .scroll-bar:vertical .increment-button ,
 .scroll-bar:vertical .decrement-button {
-    background-radius : 0.0em;
+
     padding :0.0 10.0 0.0 0.0;
 }
  .scroll-bar .increment-arrow,
  .scroll-bar .decrement-arrow{
-    shape : " ";
+
     padding :0.15em 0.0;
 }
  .scroll-bar:vertical .increment-arrow,
  .scroll-bar:vertical .decrement-arrow{
-    shape : " ";
+
     padding :0.0 0.15em;
 }
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
     background-color : linear-gradient(#4ca1fd 40%, #1693ff 45%, #2563f7 51%, #2563f7 100%);
-    background-insets : 2.0, 0.0, 0.0;
-    background-radius : 2.0em;
+
 }
 .scroll-bar:horizontal .thumb:hover,
 .scroll-bar:vertical .thumb:hover {
     background-color : linear-gradient(#6cc1fd 40%, #36b3ff 45%, #4583f7 51%, #4583f7 100%);
-    background-insets : 2.0, 0.0, 0.0;
-    background-radius : 2.0em;
+
 }
 
+*/
 #footerContainer {
     background-color: #343a40; 
     color: white; 
@@ -103,5 +108,3 @@ effect: dropshadow(gaussian, #56a8e7, 5, 0, 0, 0);
     display: flex;
     justify-content: space-around;
 }
-
-
