@@ -1,3 +1,5 @@
+<%@page import="com.corso.ticketrain.model.Ticket"%>
+<%@page import="com.corso.ticketrain.model.Citta"%>
 <%@page import="com.corso.ticketrain.treno.model.Vagone"%>
 <%@page import="com.corso.ticketrain.treno.model.Treno"%>
 <%@page import="java.util.List"%>
@@ -11,6 +13,8 @@
 User user = (User) session.getAttribute("UserLoggato"); 
 String errorLabel = (String) request.getAttribute("erroreLabel");
 List<Treno> treni = (List<Treno>) request.getAttribute("listaTreni");
+List<Citta> citta = (List<Citta>) request.getAttribute("listaCitta");
+List<Ticket> tickets = (List<Ticket>) request.getAttribute("listaTickets");
 String webApp = request.getContextPath();
 %>	
 <meta charset="ISO-8859-1">
@@ -40,13 +44,13 @@ String webApp = request.getContextPath();
                     </ul>
 		</div>
 	</nav>
-	<form action="" method="post">
+	<form action="<%=webApp %>/admin/addTrain" method="post">
 		<label>Aggiungi un Treno:</label>
 		<input type="text" name="stringaTreno" placeholder="Treno">
 		<br>
 		<input type="submit" value="Aggiungi" />
 	</form>
-	<form action="" method="post">
+	<form action="<%=webApp %>/admin/deleteTrain" method="post">
     <label for="treno">Seleziona un treno:</label>
     <select name="treno" id="treno">
         <% 
@@ -57,9 +61,9 @@ String webApp = request.getContextPath();
         <% } %>
     </select>
     <br>
-    <input type="submit" value="Modifica">
+    <input type="submit" value="Rimuovi">
 </form>
-		<form action="" method="post">
+		<form action="<%=webApp %>/admin/addTicket" method="post">
 	<p>Crea un biglietto</p>	
 		    <label for="codice">Codice:</label>
     <input type="text" name="codice" required><br>
@@ -71,13 +75,29 @@ String webApp = request.getContextPath();
     <input type="datetime-local" name="dataArrivo" required><br>
 
     <label for="luogoPartenza">Luogo Partenza:</label>
-    <input type="text" name="luogoPartenza" required><br>
+    <select name="luogoPartenza">
+        <% 
+            
+            for (Citta c : citta) {
+        %>
+            <option value="<%= c.getNomeCitta() %>"><%= c.getNomeCitta() %></option>
+            
+        <% } %>
+    </select><br>
 
     <label for="luogoArrivo">Luogo Arrivo:</label>
-    <input type="text" name="luogoArrivo" required><br>
+    <select name="luogoArrivo">
+        <% 
+            
+            for (Citta c : citta) {
+        %>
+            <option value="<%= c.getNomeCitta() %>"><%= c.getNomeCitta() %></option>
+            
+        <% } %>
+    </select><br>
 
     <label for="prezzo">Prezzo:</label>
-    <input type="text" name="prezzo" required><br>
+    <input type="number" name="prezzo" required><br>
 
     <label for="treno_id">Treno:</label>
     <select name="treno_id">
@@ -95,6 +115,19 @@ String webApp = request.getContextPath();
     <br>
     <input type="submit" value="Inserisci Viaggio">
 	</form>
+	<form action="<%=webApp %>/admin/deleteTicket" method="post">
+    <label for="treno">Seleziona un ticket:</label>
+    <select name="ticket" id="ticket">
+        <% 
+         
+            for (Ticket ticket : tickets) {
+        %>
+            <option value="<%= ticket.getId() %>"><%= ticket.getCodice() %></option>
+        <% } %>
+    </select>
+    <br>
+    <input type="submit" value="Rimuovi">
+</form>
 
 </body>
 </html>

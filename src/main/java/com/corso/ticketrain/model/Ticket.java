@@ -39,6 +39,22 @@ public class Ticket {
 		super();
 	}
 	
+	
+	
+	public Ticket(String codice, LocalDateTime dataPartenza, LocalDateTime dataArrivo, String luogoPartenza,
+			String luogoArrivo, Float prezzo, Treno treno_id) {
+		super();
+		this.codice = codice;
+		this.dataPartenza = dataPartenza;
+		this.dataArrivo = dataArrivo;
+		this.luogoPartenza = luogoPartenza;
+		this.luogoArrivo = luogoArrivo;
+		this.prezzo = prezzo;
+		this.treno_id = treno_id;
+	}
+
+
+
 	public Ticket(String codice, LocalDateTime dataPartenza,
 					LocalDateTime dataArrivo, String luogoPartenza, String luogoArrivo, Float prezzo, Treno treno_id, Vagone vagone_id){
 						this.codice = codice;

@@ -55,6 +55,6 @@ public class HomeController {
 		session.removeAttribute("previous");
 		if (session.getAttribute("UserLoggato") == null)
 			return "Login";
-		return "Account";
+		return "redirect:/ticketUser/getByUsername";
 	}
 }

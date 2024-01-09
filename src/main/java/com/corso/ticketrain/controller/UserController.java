@@ -39,7 +39,6 @@ public class UserController {
 		try {
 			User user = userService.login(username, password);
 			if (user != null) {
-				//user.setAmministratore(true);
 				session.setAttribute("UserLoggato", user);
 				
 			}

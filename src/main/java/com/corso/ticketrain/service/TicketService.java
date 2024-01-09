@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.corso.ticketrain.dao.interfacce.TicketDaoInterface;
 import com.corso.ticketrain.model.Ticket;
+import com.corso.ticketrain.treno.model.Treno;
 
 @Transactional
 @Service
@@ -51,4 +52,20 @@ public class TicketService implements IService{
     public Ticket retrieveById(int id) {
 		return ticketDao.retrieveById(id);
     }
+    
+	public boolean removeTicket(int ticket_id) {
+		try {
+			Ticket found = ticketDao.retrieveById(ticket_id);
+			
+			if (found != null) {
+				ticketDao.delete(found);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return true;
+	}
 }

@@ -20,7 +20,7 @@ String webApp = request.getContextPath();
 </header>
 <%
 String formAction = webApp + "/AreaPersonale";
-List<TicketUser> listaTicket = (List<TicketUser>) request.getAttribute("listaTicketUser");
+List<TicketUser> listaTickets = (List<TicketUser>) request.getAttribute("listaTickets");
 %>
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
@@ -81,7 +81,7 @@ List<TicketUser> listaTicket = (List<TicketUser>) request.getAttribute("listaTic
 	<div class="card" style="width: 18rem;">
   		<img src="..." class="card-img-top" alt="...">
   		<div class="card-body">
-    		<h5 class="card-title">Card title</h5>
+    		<h5 class="card-title"></h5>
     		<p class="card-text">Qui puoi trovare i tuoi Ticket o acquistarne di nuovi.</p>
     		<a href="<%=request.getContextPath() + "/home"%>" class="btn btn-primary">
 				<i class="bi bi-cart-plus">
@@ -92,8 +92,8 @@ List<TicketUser> listaTicket = (List<TicketUser>) request.getAttribute("listaTic
 	</div>
 
 	<h3>Ticket Acquistati</h3>
-	<% if(listaTicket != null){
-			for (TicketUser ts : listaTicket){		
+	<% if(listaTickets != null){
+			for (TicketUser ts : listaTickets){		
 	%>
 		<ul class="list-group list-group-flush">
   			<li class="list-group-item"><%=ts%></li>
