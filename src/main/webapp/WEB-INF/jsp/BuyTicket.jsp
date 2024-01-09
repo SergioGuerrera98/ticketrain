@@ -1,7 +1,6 @@
 <%@page import="com.corso.ticketrain.model.User"%>
 <%@page import="com.corso.ticketrain.model.Ticket"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <%
@@ -14,7 +13,7 @@
     <head>
     <meta charset="ISO-8859-1">
     <title>Compra biglietti</title>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
 	<link rel="stylesheet" type="text/css" href="<%=webApp%>/css">
     </head>
@@ -39,6 +38,8 @@
                         <li class="nav-item"><a class="nav-link" href="<%=webApp%>/user/logout">Logout</a></li>
                        
                     </ul>
+                
+		</div>
 		</div>
 	</nav>
 <h1>Procedi con l'acquisto</h1>
@@ -57,14 +58,14 @@
     <div id="postiCounter">
         <p>Numero posti:</p>
         <div>
-            <button onclick="postiMinus()">-</button>
-            <p id="postiSelezionati"></p>
-            <button onclick="postiPlus()">+</button>
+            <button id="postiMin" onclick="postiMinus()" inert="true">-</button>
+            <p id="postiSelezionati">1</p>
+            <button id="postiPlu" onclick="postiPlus()">+</button>
         </div>
     </div>
 
     <div id="formPosti">
-        <div class="card" id="p1"  visibility="visible">
+        <div class="card" id="p1">
             <table>
                 <tr>
                     <td>Nome:</td>
@@ -77,7 +78,7 @@
             </table>
         </div>
 
-        <div class="card" id="p2" visibility="hidden">
+        <div class="card" id="p2" hidden = "true">
             <table>
                 <tr>
                     <td>Nome:</td>
@@ -90,7 +91,7 @@
             </table>
         </div>
 
-        <div class="card" id="p3"  visibility="hidden">
+        <div class="card" id="p3" hidden = "true">
             <table>
                 <tr>
                     <td>Nome:</td>
@@ -103,7 +104,7 @@
             </table>
         </div>
 
-        <div class="card" id="p4"  visibility="hidden">
+        <div class="card" id="p4" hidden = "true">
             <table>
                 <tr>
                     <td>Nome:</td>
@@ -116,7 +117,7 @@
             </table>
         </div>
 
-        <div class="card" id="p5"  visibility="hidden">
+        <div class="card" id="p5" hidden = "true">
             <table>
                 <tr>
                     <td>Nome:</td>
@@ -129,7 +130,7 @@
             </table>
         </div>
 
-        <div class="card" id="p6"  visibility="hidden">
+        <div class="card" id="p6" hidden = "true">
             <table>
                 <tr>
                     <td>Nome:</td>
@@ -142,7 +143,7 @@
             </table>
         </div>
 
-        <div class="card" id="p7"  visibility="hidden">
+        <div class="card" id="p7" hidden = "true">
             <table>
                 <tr>
                     <td>Nome:</td>
@@ -155,7 +156,7 @@
             </table>
         </div>
 
-        <div class="card" id="p8"  visibility="hidden">
+        <div class="card" id="p8" hidden = "true">
             <table>
                 <tr>
                     <td>Nome:</td>
@@ -168,39 +169,35 @@
             </table>
         </div>
     </div>
-
-        <button onclick="procedi(<%=webApp%>, <%=ticket.getLuogoPartenza()%>, <%=ticket.getLuogoArrivo()%>,
-                     <%=ticket.getDataPartenza() %>, <%=ticket.getDataArrivo()%>)">Paga</button>
-
-	<div id="carouselExampleAutoplaying" class="carousel slide"
-    data-bs-ride="carousel">
+		<button onclick="procedi('<%=ticket.getLuogoPartenza()%>', '<%=ticket.getLuogoArrivo()%>', '<%=ticket.getDataPartenza()%>', '<%=ticket.getDataArrivo()%>')">Paga</button>
+	
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img
                 src="https://static.nexilia.it/vologratis/2015/03/sconto-italo-under-30-768x399.jpg"
-                class="d-block w-100" style="max-width: 50%; height: 500px; margin-left: 25%" alt="...">
+                class="d-block w-100" style="max-width: 50%; height: 500px; margin-left: 25%" alt="..." />
                 <h5>Tratte aggiornate tutto l'anno</h5>
         		<p>Spostati dove vuoi, quando vuoi.</p>
         </div>
         <div class="carousel-item">
             <img
                 src="https://www.newsabruzzo.it/wp-content/uploads/2023/01/Treno-23012023-NewsAbruzzo.it_.jpg"
-                class="d-block w-100" style="max-width: 50%; height: 500px; margin-left: 25%" alt="...">
+                class="d-block w-100" style="max-width: 50%; height: 500px; margin-left: 25%" alt="..." />
                 <h5>Visita l'Italia a basso costo</h5>
         		<p>Prezzi scontati nel weekend.</p>
         </div>
         <div class="carousel-item">
             <img
                 src="https://getwallpapers.com/wallpaper/full/9/1/d/364210.jpg"
-                class="d-block w-100" style="max-width: 50%; height: 500px; margin-left: 25%" alt="...">
+                class="d-block w-100" style="max-width: 50%; height: 500px; margin-left: 25%" alt="..." />
                 <h5>Affidabilità e puntualità garantite</h5>
         		<p>Rimborso parziale in caso di ritardo.</p>
         </div>
     </div>
     <button class="carousel-control-prev" type="button"
         data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-            class="visually-hidden">Previous</span>
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
     </button>
     <button class="carousel-control-next" type="button"
         data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
@@ -209,38 +206,48 @@
     </button>
 </div>
         <footer><jsp:include page="/WEB-INF/jsp/Footer.jsp"></jsp:include></footer>
-        <script type="text/javascript">
-
-            let c = 1;
-            let postiMinus = document.getElementById('postiMinus');
-            let postiPlus = document.getElementById('postiPlus');
-            let postiSelezionati = document.getElementById('postiSelezionati');
-            let divPasseggeri = document.getElementById('postiSelezionati');
-
+        <script>
             function postiMinus() {
-                if (c > 1){
-                    visibilitaCarta(false, c);    
-                    c--; 
-                    postiSelezionati.innerText = `${c}`;
-                }
-            })
-            function postiPlus () {
-                if (c < 8){
-                    visibilitaCarta(true, c);    
-                    c++; 
-                    postiSelezionati.innerText = `${c}`;
-                }
-            })
+                if (Number(document.getElementById('postiSelezionati').innerText) > 1) {
+                    console.log('Clicked min');
+                    let c = Number(document.getElementById('postiSelezionati').innerText);
 
-            function visibilitaCarta(vis, index) {
-                if (vis == true)
-                    document.getElementById('p' + index).style.visibility = visibility;
-                else
-                    document.getElementById('p' + index).style.visibility = hidden;
+                    visibilitaCarta(false, c);
+                    document.getElementById('postiSelezionati').innerText = c - 1;
+
+                    if (c - 1 == 1)
+                        document.getElementById('postiMin').inert = true;
+                    else 
+                        document.getElementById('postiPlu').inert = false;
+                }
             }
 
-            function procedi(webapp, partenza, arrivo, oraPartenza, oraArrivo) {
-                var message = "Vuoi confermare l'acquisto di ";
+            function postiPlus () {
+                if (Number(document.getElementById('postiSelezionati').innerText) < 8){
+                    console.log('Clicked plus');
+                    let c = Number(document.getElementById('postiSelezionati').innerText);
+                    visibilitaCarta(true, c + 1);
+                    document.getElementById('postiSelezionati').innerText = c + 1;
+
+                    if (c + 1 == 8)
+                        document.getElementById('postiPlu').inert = true;
+                    else 
+                        document.getElementById('postiMin').inert = false;
+                }
+            }
+
+            function visibilitaCarta(vis, index) {
+                if (vis == false)
+                    document.getElementById('p' + index).hidden = true;
+                else
+                    document.getElementById('p' + index).hidden = false;
+            }
+            </script>
+            <script>
+            function procedi(partenza, arrivo, oraPartenza, oraArrivo) {
+                let c = Number(document.getElementById('postiSelezionati').innerText);
+
+                let message = "Vuoi confermare l\'acquisto di ";
                 if (c > 1)
                     message += c + " biglietti ";
                 else
@@ -253,26 +260,26 @@
                                 "Ora di Arrivo: " + oraArrivo;
                 
                 const xhr = new XMLHttpRequest();
-                xhr.open("POST", webapp+"/ticketUser/confirm");
-                xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+                xhr.open('POST', '<%=webApp%>/ticketUser/confirm');
+                xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
                 
-                String jsonBody = "{[";
+                let jsonBody = "[";
 
                 for (index = 1; index <= 8; ++index){
-                    if (document.getElementById('p' + index).style.visibility == "visible") {
-                        jsonBody += "{ \"ticket\" : \"" + ticket + "\"";
-                        jsonBody += "{ \"nome\" : \"" + document.getElementById("nomeP" + index) + "\"";
-                        jsonBody += "{ \"cognome\" : \"" + document.getElementById("cognomeP" + index) + "\"";
+                    if (document.getElementById('p' + index).hidden == false) {
+                        jsonBody += "{ \"ticket\" : \"" + ticket + "\",";
+                        jsonBody += " \"nome\" : \"" + document.getElementById('nomeP' + index).innerText + "\",";
+                        jsonBody += " \"cognome\" : \"" + document.getElementById('cognomeP' + index).innerText + "\"},";
                     }
                 }
 
-                jsonBody += "]}";
+                jsonBody = jsonBody.slice(0, -1) + "]";
 
                 xhr.onload = () => {
                     if (xhr.status < 400) {
-                        window.location.replace(xhr.responseURL;);
+                        window.location.replace(xhr.responseURL);
                     } else {
-                        console.log(`Error: ${xhr.status}`);
+                        console.log('Error: ${xhr.status}');
                     }
                 };
 

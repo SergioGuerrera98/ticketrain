@@ -42,6 +42,7 @@ User user = (User) session.getAttribute("UserLoggato");
                         <li class="nav-item"><a class="nav-link" href="<%=webApp%>/user/logout">Logout</a></li>
                         <%} %>
                     </ul>
+                    </div>
 		</div>
 	</nav>
 	<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">

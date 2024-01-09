@@ -39,8 +39,10 @@ public class TicketUserController {
 
 	@PostMapping("/confirm")
 	public HttpServletResponse confirmBuying(String body, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		ticketUserService.acquistaTicketMultipli(null, null, body);
 		response.setHeader("Location", request.getContextPath() + "/account");
+
+		ticketUserService.acquistaTicketMultipli(session.getAttribute("UserLoggato"), null, body)
+
 		session.removeAttribute("ticket");
 
 		return response;
