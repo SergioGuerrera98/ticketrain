@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.corso.ticketrain.model.TicketUser;
@@ -39,7 +40,7 @@ public class TicketUserController {
 	}
 
 	@PostMapping("/confirm")
-	public HttpServletResponse confirmBuying(String body, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+	public HttpServletResponse confirmBuying(@RequestBody String body, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		response.setHeader("Location", request.getContextPath() + "/account");
 
 		ticketUserService.acquistaTicketMultipli((User) session.getAttribute("UserLoggato"), (Ticket) session.getAttribute("ticket"), body);

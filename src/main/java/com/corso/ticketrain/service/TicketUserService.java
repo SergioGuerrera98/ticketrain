@@ -53,6 +53,7 @@ public class TicketUserService implements IService{
 
 	public void acquistaTicketMultipli(User user, Ticket ticket, String body) {
 		Gson gson = new Gson();
+		System.out.println(body);
 		List<TicketUser> list = gson.fromJson(body, new TypeToken<List<TicketUser>>() {}.getType());
 		for (TicketUser tu : list) {
 			tu.setTicket(ticket);

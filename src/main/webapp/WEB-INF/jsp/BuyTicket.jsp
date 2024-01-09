@@ -69,11 +69,11 @@
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP1" placeholder="Nome passeggero"/>
+                    <td><input type="text" id="nomeP1" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP1" placeholder="Cognome passeggero"/>
+                    <td><input type="text" id="cognomeP1" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -82,11 +82,11 @@
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP2" placeholder="Nome passeggero"/>
+                    <td><input type="text" id="nomeP2" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP2" placeholder="Cognome passeggero"/>
+                    <td><input type="text" id="cognomeP2" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -95,11 +95,11 @@
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP3" placeholder="Nome passeggero"/>
+                    <td><input type="text" id="nomeP3" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP3" placeholder="Cognome passeggero"/>
+                    <td><input type="text" id="cognomeP3" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -108,11 +108,11 @@
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP4" placeholder="Nome passeggero"/>
+                    <td><input type="text" id="nomeP4" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP4" placeholder="Cognome passeggero"/>
+                    <td><input type="text" id="cognomeP4" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -121,11 +121,11 @@
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP5" placeholder="Nome passeggero"/>
+                    <td><input type="text" id="nomeP5" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP5" placeholder="Cognome passeggero"/>
+                    <td><input type="text" id="cognomeP5" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -134,11 +134,11 @@
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP6" placeholder="Nome passeggero"/>
+                    <td><input type="text" id="nomeP6" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP6" placeholder="Cognome passeggero"/>
+                    <td><input type="text" id="cognomeP6" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -147,11 +147,11 @@
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP7" placeholder="Nome passeggero"/>
+                    <td><input type="text" id="nomeP7" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP7" placeholder="Cognome passeggero"/>
+                    <td><input type="text" id="cognomeP7" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -160,11 +160,11 @@
             <table>
                 <tr>
                     <td>Nome:</td>
-                    <td><input type="text" name="nomeP8" placeholder="Nome passeggero"/>
+                    <td><input type="text" id="nomeP8" placeholder="Nome passeggero"/>
                 </tr>
                 <tr>
                     <td>Cognome:</td>
-                    <td><input type="text" name="cognomeP8" placeholder="Cognome passeggero"/>
+                    <td><input type="text" id="cognomeP8" placeholder="Cognome passeggero"/>
                 </tr>
             </table>
         </div>
@@ -267,7 +267,9 @@
 
                 for (index = 1; index <= 8; ++index){
                     if (document.getElementById('p' + index).hidden == false) {
+                        console.log('nomeP' + index + ' : ' + document.getElementById('nomeP' + index));
                         jsonBody += '{ \"nome\" : \"' + document.getElementById('nomeP' + index).innerText + '\",';
+                        console.log('cognomeP' + index + ' : '  + document.getElementById('cognomeP' + index).innerText);
                         jsonBody += ' \"cognome\" : \"' + document.getElementById('cognomeP' + index).innerText + '\"},';
                     }
                 }
