@@ -191,7 +191,7 @@
             <img
                 src="https://getwallpapers.com/wallpaper/full/9/1/d/364210.jpg"
                 class="d-block w-100" style="max-width: 50%; height: 500px; margin-left: 25%" alt="..." />
-                <h5>Affidabilità e puntualità garantite</h5>
+                <h5>Affidabilitï¿½ e puntualitï¿½ garantite</h5>
         		<p>Rimborso parziale in caso di ritardo.</p>
         </div>
     </div>
@@ -267,9 +267,8 @@
 
                 for (index = 1; index <= 8; ++index){
                     if (document.getElementById('p' + index).hidden == false) {
-                        jsonBody += "{ \"ticket\" : \"" + ticket + "\",";
-                        jsonBody += " \"nome\" : \"" + document.getElementById('nomeP' + index).innerText + "\",";
-                        jsonBody += " \"cognome\" : \"" + document.getElementById('cognomeP' + index).innerText + "\"},";
+                        jsonBody += '{ \"nome\" : \"' + document.getElementById('nomeP' + index).innerText + '\",';
+                        jsonBody += ' \"cognome\" : \"' + document.getElementById('cognomeP' + index).innerText + '\"},';
                     }
                 }
 

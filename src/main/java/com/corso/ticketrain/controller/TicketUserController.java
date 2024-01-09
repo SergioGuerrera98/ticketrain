@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.corso.ticketrain.model.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +42,7 @@ public class TicketUserController {
 	public HttpServletResponse confirmBuying(String body, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		response.setHeader("Location", request.getContextPath() + "/account");
 
-		ticketUserService.acquistaTicketMultipli(session.getAttribute("UserLoggato"), null, body)
+		ticketUserService.acquistaTicketMultipli((User) session.getAttribute("UserLoggato"), (Ticket) session.getAttribute("ticket"), body);
 
 		session.removeAttribute("ticket");
 
