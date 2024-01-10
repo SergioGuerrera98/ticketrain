@@ -4,9 +4,12 @@ import com.corso.ticketrain.model.Ticket;
 import com.corso.ticketrain.model.User;
 import com.corso.ticketrain.service.TicketService;
 import com.corso.ticketrain.service.TicketUserService;
+import com.corso.ticketrain.service.exceptions.PaeseNonTrovatoException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,4 +44,20 @@ public class TicketRestController {
 
 		return "/account";
 	}
+
+
+	@GetMapping("/getByFilter")
+    public String getByFilter(String luogoPartenza, String luogoArrivo, String dataPartenza, HttpSession session, HttpServletResponse response) {
+        if (luogoPartenza == null && luogoArrivo == null & dataPartenza == null) {
+            return "Devi inserire almeno un campo";
+        }
+		try {
+			ticketService.areFieldsValidForFilter(luogoPartenza, luogoArrivo, dataPartenza);
+		    return "/ticket/getResults"; // Ritorna il nome della vista JSP (senza estensione)
+		} catch (PaeseNonTrovatoException e) {
+            response.setStatus(400);
+			return e.getMessage();
+		}
+       
+    }
 }

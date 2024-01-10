@@ -35,11 +35,14 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvasDark" aria-label="Close"></button>
             </div>
                 <div class="offcanvas-body">
-                    <p>Bentornato! Effettua il Login per acquistare dei Ticket</p>
-                    
-                    <jsp:include page="/WEB-INF/jsp/components/FormLogin.jsp"></jsp:include>
-                    <p>Non hai ancora un account? Registrati!</p>
-                    <jsp:include page="/WEB-INF/jsp/components/FormSignup.jsp"></jsp:include>
+                    <div style="margin : 10px">
+                        <p class="text-center">Effettua il login per acquistare dei Ticket:</p>
+                        <jsp:include page="/WEB-INF/jsp/components/FormLogin.jsp"></jsp:include>
+                    </div>
+                    <div style="margin : 10px">
+                        <p class="text-center">Non hai ancora un account? Registrati:</p>
+                        <jsp:include page="/WEB-INF/jsp/components/FormSignup.jsp"></jsp:include>
+                    </div>
                 </div>
             </div>
         <%} %>

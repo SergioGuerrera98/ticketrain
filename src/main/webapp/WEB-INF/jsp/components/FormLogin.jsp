@@ -6,20 +6,27 @@
     String errorLabel = (request.getAttribute("error") != null) ? (String) request.getAttribute("error") : ""; 
         String webApp = request.getContextPath();
     %>
-
-<form action="<%=webApp %>/user/login" method="POST">
-    <table style="with: 50%">
-            <tr>
-                <td>UserName</td>
-                <td><input type="text" name="username" placeholder="Username"/></td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><input type="password" name="password" placeholder="Password"/></td>
-            </tr>
-    </table>
-    <p class="labelError"><%=errorLabel%></p>
-    <div class="d-grid gap-2">	
-        <input class="btn btn-primary btn-lg" type="submit" value="Login" />
-    </div>
-</form>
+<div style="padding : 20px">
+        <form action="<%=webApp %>/user/login" method="POST">
+            <div class="row">
+                <div class="col">
+                    <p class="text-end align-middle">Username </p>
+                </div>
+                <div class="col">
+                    <input class="align-middle" type="text" name="username" placeholder="Username"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="text-end align-middle">Password</p>
+                </div>
+                <div class="col">
+                    <input class="align-middle" type="password" name="password" placeholder="Password"/>
+                </div>
+            </div>
+            <br>
+            <div class="d-grid gap-2">
+                <input class="btn btn-primary btn-lg" type="submit" value="Login" />
+            </div>
+        </form>
+</div>

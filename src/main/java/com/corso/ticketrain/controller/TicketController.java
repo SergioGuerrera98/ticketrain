@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 
 import com.corso.ticketrain.model.Ticket;
 import com.corso.ticketrain.service.TicketService;
+import com.corso.ticketrain.service.exceptions.PaeseNonTrovatoException;
 
 @Controller
 @RequestMapping("/ticket")
@@ -28,11 +29,23 @@ public class TicketController {
         return "ticketList"; // Ritorna il nome della vista JSP (senza estensione)
     }
 
-	@GetMapping("/getByFilter")
+	@GetMapping("/getResults")
     public String getByFilter(String luogoPartenza, String luogoArrivo, String dataPartenza, Model model) {
-        List<Ticket> filteredTickets = ticketService.getTicketsFilter(luogoPartenza, luogoArrivo, dataPartenza);
-        model.addAttribute("filteredTickets", filteredTickets);
-        return "Results"; // Ritorna il nome della vista JSP (senza estensione)
+        if (luogoPartenza == null && luogoArrivo == null & dataPartenza == null) {
+            model.addAttribute("Errore", "Devi inserire almeno un campo.");
+            return "Home";
+        }
+        List<Ticket> filteredTickets;
+		try {
+			filteredTickets = ticketService.getTicketsFilter(luogoPartenza, luogoArrivo, dataPartenza);
+			 model.addAttribute("filteredTickets", filteredTickets);
+		     return "Results"; // Ritorna il nome della vista JSP (senza estensione)
+		} catch (PaeseNonTrovatoException e) {
+			String error = e.getMessage();
+			model.addAttribute("error", error);
+			return "Home";
+		}
+       
     }
 
     @GetMapping("/buy")

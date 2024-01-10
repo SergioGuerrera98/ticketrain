@@ -20,8 +20,9 @@
 
         <!-- BANNER TODO -->
 
-        <h1>Registrati</h1>
+        
         <div class="position-absolute top-50 start-50 translate-middle">
+        <h1>Registrati</h1>
             <jsp:include page="/WEB-INF/jsp/components/FormSignup.jsp"></jsp:include>
         <p class="labelError"><%=errorLabel %></p>
    		 </div>

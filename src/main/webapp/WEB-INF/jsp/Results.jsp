@@ -24,13 +24,13 @@
         <header>
             <jsp:include page="/WEB-INF/jsp/components/Header.jsp"></jsp:include>
         </header>
-
             <!-- BANNER TODO -->
+            <br>
             <jsp:include page="/WEB-INF/jsp/components/Filter.jsp"></jsp:include>
-
+            <br>
             <div style="margin: 20px;">
 
-                <h1>Risultati dei treni</h1>
+                <h3>Risultati per : </h3>
                 <%
                 if (!listaFiltrata.isEmpty()){
                     %>

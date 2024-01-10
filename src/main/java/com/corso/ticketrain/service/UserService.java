@@ -41,10 +41,10 @@ public class UserService implements IService{
 				stringhe.add(p.getNomePaese());
 			}
 			String standard = comparatore.check(paese, stringhe);
-			if (standard.equals("Paese non trovato")) {
+			if (standard.equals("Parola non Trovata")) {
 				throw new PaeseNonTrovatoException("Il paese inserito non e' presente", null);
 			}
-			if (!standard.equals("PaeseTrovato") && !standard.equals("Paese non trovato")) {
+			if (!standard.equals("Parola Trovata") && !standard.equals("Parola non Trovata")) {
 				throw new PaeseNonTrovatoException("Forse intendevi "+standard+"?", null);
 			}
 			Paese p = paeseDao.findByNome(paese);

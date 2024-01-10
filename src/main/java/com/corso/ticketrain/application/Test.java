@@ -16,6 +16,7 @@ import com.corso.ticketrain.service.PaeseService;
 import com.corso.ticketrain.service.TicketService;
 import com.corso.ticketrain.service.TrenoService;
 import com.corso.ticketrain.service.UserService;
+import com.corso.ticketrain.service.exceptions.PaeseNonTrovatoException;
 import com.corso.ticketrain.treno.exceptions.TrenoException;
 import com.corso.ticketrain.treno.factory.VagoneFactory;
 import com.corso.ticketrain.treno.model.Treno;
@@ -73,10 +74,18 @@ public class Test {
 	
 
 
-		List<Ticket> listaFiltrata = ((TicketService)ticketService).getTicketsFilter("Catania", "Torino", "2020-01-22T00:00:00");//2007-12-03T10:15:30
-		System.out.println("Catania-torino-2022: " + listaFiltrata);
-		listaFiltrata = ((TicketService)ticketService).getTicketsFilter("Catania", null, null);//2007-12-03T10:15:30
-		System.out.println("Catania-?-?: " + listaFiltrata);
+		List<Ticket> listaFiltrata;
+		try {
+			listaFiltrata = ((TicketService)ticketService).getTicketsFilter("Catania", "Torino", "2020-01-22T00:00:00");
+			listaFiltrata = ((TicketService)ticketService).getTicketsFilter("Catania", null, null);//2007-12-03T10:15:30
+			System.out.println("Catania-torino-2022: " + listaFiltrata);
+			
+			System.out.println("Catania-?-?: " + listaFiltrata);
+		} catch (PaeseNonTrovatoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//2007-12-03T10:15:30
+
 	}
 	
 }
