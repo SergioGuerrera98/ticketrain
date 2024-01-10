@@ -34,7 +34,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/login")
+	@PostMapping("/login")
 	public String loginPage(@RequestParam String username, String password, HttpSession session, Model model) throws UsernameInesistenteException, UsernameOPasswordSbagliatiException {
 		try {
 			User user = userService.login(username, password);

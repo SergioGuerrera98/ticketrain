@@ -1,6 +1,7 @@
 package com.corso.ticketrain.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,20 +35,9 @@ public class TicketUserController {
 	@GetMapping("/getByUsername")
 	public String getByUsername(HttpSession session, Model model){
 		User user = (User)session.getAttribute("UserLoggato");
-		List<TicketUser> listaTickets= ticketUserService.retrieveByUsername(user.getUsername());
+		Map<Ticket, List<TicketUser>> listaTickets = ticketUserService.retrieveByUsernameFilteredByTicket(user.getUsername());
 		model.addAttribute("listaTickets", listaTickets);
 		return "Account";
-	}
-
-	@PostMapping("/confirm")
-	public HttpServletResponse confirmBuying(@RequestBody String body, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		response.setHeader("Location", request.getContextPath() + "/account");
-
-		ticketUserService.acquistaTicketMultipli((User) session.getAttribute("UserLoggato"), (Ticket) session.getAttribute("ticket"), body);
-
-		session.removeAttribute("ticket");
-
-		return response;
 	}
 
 }

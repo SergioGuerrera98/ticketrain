@@ -49,48 +49,59 @@ public class TicketUser {
 		return id;
 	}
 
-	public void setId(int id) {
+	public TicketUser setId(int id) {
 		this.id = id;
+		return this;
 	}
 
 	public User getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public TicketUser setUser(User user) {
 		this.user = user;
+		return this;
 	}
 
 	public Ticket getTicket() {
 		return ticket;
 	}
 
-	public void setTicket(Ticket ticket) {
+	public TicketUser setTicket(Ticket ticket) {
 		this.ticket = ticket;
+		return this;
 	}
 
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public TicketUser setNome(String nome) {
 		this.nome = nome;
+		return this;
 	}
 
 	public String getCognome() {
 		return cognome;
 	}
 
-	public void setCognome(String cognome) {
+	public TicketUser setCognome(String cognome) {
 		this.cognome = cognome;
+		return this;
 	}
 
 	public String getClasse() {
 		return classe;
 	}
 
-	public void setClasse(String classe) {
+	public TicketUser setClasse(String classe) {
 		this.classe = classe;
+		return this;
+	}
+
+	@Override
+	public String toString() {
+		return "Biglietto utente=" + user.getUsername() + ", codice=" + ticket.getCodice() + ", nome=" + nome + ", cognome=" + cognome;
 	}
 	
 	

@@ -71,72 +71,81 @@ public class Ticket {
 		return id;
 	}
 
-	public void setId(int id) {
+	public Ticket setId(int id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getCodice() {
 		return codice;
 	}
 
-	public void setCodice(String codice) {
+	public Ticket setCodice(String codice) {
 		this.codice = codice;
+		return this;
 	}
 
 	public LocalDateTime getDataPartenza() {
 		return dataPartenza;
 	}
 
-	public void setDataPartenza(LocalDateTime dataPartenza) {
+	public Ticket setDataPartenza(LocalDateTime dataPartenza) {
 		this.dataPartenza = dataPartenza;
+		return this;
 	}
 
 	public LocalDateTime getDataArrivo() {
 		return dataArrivo;
 	}
 
-	public void setDataArrivo(LocalDateTime dataArrivo) {
+	public Ticket setDataArrivo(LocalDateTime dataArrivo) {
 		this.dataArrivo = dataArrivo;
+		return this;
 	}
 
 	public String getLuogoPartenza() {
 		return luogoPartenza;
 	}
 
-	public void setLuogoPartenza(String luogoPartenza) {
+	public Ticket setLuogoPartenza(String luogoPartenza) {
 		this.luogoPartenza = luogoPartenza;
+		return this;
 	}
 
 	public String getLuogoArrivo() {
 		return luogoArrivo;
 	}
 
-	public void setLuogoArrivo(String luogoArrivo) {
+	public Ticket setLuogoArrivo(String luogoArrivo) {
 		this.luogoArrivo = luogoArrivo;
+		return this;
 	}
 
 	public Treno getTreno_id() {
 		return treno_id;
 	}
 
-	public void setTreno_id(Treno treno_id) {
+	public Ticket setTreno_id(Treno treno_id) {
 		this.treno_id = treno_id;
+		return this;
 	}
 
 	public Vagone getVagone_id() {
 		return vagone_id;
 	}
 
-	public void setVagone_id(Vagone vagone_id) {
+	public Ticket setVagone_id(Vagone vagone_id) {
 		this.vagone_id = vagone_id;
+		return this;
 	}
 
 	public Float getPrezzo() {
 		return prezzo;
 	}
 
-	public void setPrezzo(Float prezzo) {
+	public Ticket setPrezzo(Float prezzo) {
 		this.prezzo = prezzo;
+		return this;
 	}
 
 	@Override

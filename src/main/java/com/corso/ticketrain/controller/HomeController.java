@@ -20,7 +20,7 @@ public class HomeController {
 
 
 
-	@GetMapping("/home")
+	@GetMapping({"/home", "/"})
 	public String home(HttpSession session) {
 		logger.log(LOGGER, "HomeController.home : entering method");
 
