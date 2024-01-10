@@ -42,9 +42,7 @@ public class UserController {
 				session.setAttribute("UserLoggato", user);
 				
 			}
-			System.out.println(username);
 			model.addAttribute("username", username);
-			System.out.println("Utente loggato in sessione");
 
 			if (session.getAttribute("previous") == null)
 				return "Home";
@@ -69,7 +67,6 @@ public class UserController {
 		session.removeAttribute("UserLoggato");
 		session.removeAttribute("ticket");
 		session.removeAttribute("previous");
-		System.out.println("utente rimosso dalla sessione");
 		return "Home";
 	}
 	

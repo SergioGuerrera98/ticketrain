@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
 <%
     String webApp = request.getContextPath();
     String formAction = webApp + "/ticket/getByFilter";
@@ -22,11 +22,11 @@
     </head>
     <body>
         <header>
-            <jsp:include page="/WEB-INF/jsp/Header.jsp"></jsp:include>
+            <jsp:include page="/WEB-INF/jsp/components/Header.jsp"></jsp:include>
         </header>
 
             <!-- BANNER TODO -->
-            <jsp:include page="/WEB-INF/jsp/Filter.jsp"></jsp:include>
+            <jsp:include page="/WEB-INF/jsp/components/Filter.jsp"></jsp:include>
 
             <div style="margin: 20px;">
 
@@ -73,7 +73,7 @@
                 <p class="errorLabel"> <%=errorLabel%> </p>
             </div>
 
-        <footer><jsp:include page="/WEB-INF/jsp/Footer.jsp"></jsp:include></footer>
+        <footer><jsp:include page="/WEB-INF/jsp/components/Footer.jsp"></jsp:include></footer>
 
         <script>
             function buyTicket(id) {

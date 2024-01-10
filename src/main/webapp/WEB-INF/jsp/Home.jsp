@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
     <%
         //Variabili java
         User user = (User) session.getAttribute("UserLoggato"); 
@@ -13,8 +13,7 @@
         <meta charset="ISO-8859-1">
         <title>Home</title>
        
-
-        <!-- sbootstrap -->
+        <!-- bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
         
@@ -25,33 +24,33 @@
 
     <body>
         <header>
-            <jsp:include page="/WEB-INF/jsp/Header.jsp"></jsp:include>
+            <jsp:include page="/WEB-INF/jsp/components/Header.jsp"></jsp:include>
         </header> 
 
 
-<%if (user==null) {%>
-        <div class="offcanvas offcanvas-end show text-bg-dark" tabindex="-1" id="offcanvasDark" aria-labelledby="offcanvasDarkLabel">
-            <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasDarkLabel">Accedi</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvasDark" aria-label="Close"></button>
-        </div>
-            <div class="offcanvas-body">
-                <p>Bentornato! Effettua il Login per acquistare dei Ticket</p>
-                
-                <jsp:include page="/WEB-INF/jsp/FormLogin.jsp"></jsp:include>
-                <p>Non hai ancora un account? Registrati!</p>
-                <jsp:include page="/WEB-INF/jsp/FormSignup.jsp"></jsp:include>
+        <%if (user==null) {%>
+            <div class="offcanvas offcanvas-end show text-bg-dark" tabindex="-1" id="offcanvasDark" aria-labelledby="offcanvasDarkLabel">
+                <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasDarkLabel">Accedi</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvasDark" aria-label="Close"></button>
             </div>
-        </div>
-<%} %>
+                <div class="offcanvas-body">
+                    <p>Bentornato! Effettua il Login per acquistare dei Ticket</p>
+                    
+                    <jsp:include page="/WEB-INF/jsp/components/FormLogin.jsp"></jsp:include>
+                    <p>Non hai ancora un account? Registrati!</p>
+                    <jsp:include page="/WEB-INF/jsp/components/FormSignup.jsp"></jsp:include>
+                </div>
+            </div>
+        <%} %>
         <!-- Carosello -->
-        <jsp:include page="/WEB-INF/jsp/Carousel.jsp"></jsp:include>
+        <jsp:include page="/WEB-INF/jsp/components/Carousel.jsp"></jsp:include>
 
         <!-- FILTRO -->
-        <jsp:include page="/WEB-INF/jsp/Filter.jsp"></jsp:include>
+        <jsp:include page="/WEB-INF/jsp/components/Filter.jsp"></jsp:include>
 
         <footer>
-            <jsp:include page="/WEB-INF/jsp/Footer.jsp"></jsp:include>
+            <jsp:include page="/WEB-INF/jsp/components/Footer.jsp"></jsp:include>
         </footer>    
     </body>
 </html>

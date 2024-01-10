@@ -14,11 +14,11 @@
                         TicketTrain :) LogOut PaginaAmminstratore   #se admin-->
 
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="padding: 10px">
     <div class="container-fluid">
         <!-- TicketTrain -->
         <a class="navbar-brand" href="<%=webApp%>/home">
-            <img src="https://raw.githubusercontent.com/IlanZdd/resources/main/nameSite.png" style="width: ; height: 40px">
+            <img src="https://raw.githubusercontent.com/IlanZdd/resources/main/nameSiteDark.png" style="width: ; height: 40px">
         </a>
         <button class="navbar-toggler" type="button"
             data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

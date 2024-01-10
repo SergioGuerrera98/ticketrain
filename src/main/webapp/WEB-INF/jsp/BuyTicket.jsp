@@ -2,7 +2,7 @@
 <%@page import="com.corso.ticketrain.model.Ticket"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
     <%
         String webApp = request.getContextPath();
         String formAction = webApp + "/login";
@@ -20,7 +20,7 @@
     <body>
         
     <header>
-        <jsp:include page="/WEB-INF/jsp/Header.jsp"></jsp:include>
+        <jsp:include page="/WEB-INF/jsp/components/Header.jsp"></jsp:include>
     </header>
 
     <h1>Procedi con l'acquisto</h1>
@@ -153,7 +153,7 @@
         </div>
 		<button onclick="procedi('<%=ticket.getLuogoPartenza()%>', '<%=ticket.getLuogoArrivo()%>', '<%=ticket.getDataPartenza()%>', '<%=ticket.getDataArrivo()%>')">Paga</button>
 	
-        <footer><jsp:include page="/WEB-INF/jsp/Footer.jsp"></jsp:include></footer>
+        <footer><jsp:include page="/WEB-INF/jsp/components/Footer.jsp"></jsp:include></footer>
         
         <script>
             function postiMinus() {

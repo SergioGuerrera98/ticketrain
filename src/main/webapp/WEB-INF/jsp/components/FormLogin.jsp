@@ -18,6 +18,8 @@
                 <td><input type="password" name="password" placeholder="Password"/></td>
             </tr>
     </table>
-    <p class="labelError"><%=errorLabel%></p>	
-    <input type="submit" value="Login" />
+    <p class="labelError"><%=errorLabel%></p>
+    <div class="d-grid gap-2">	
+        <input class="btn btn-primary btn-lg" type="submit" value="Login" />
+    </div>
 </form>

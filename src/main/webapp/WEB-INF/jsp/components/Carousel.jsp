@@ -21,7 +21,7 @@
             </div>
             </div>
             <div class="carousel-item">
-            <img src="https://getwallpapers.com/wallpaper/full/9/1/d/364210.jpg" class="d-block w-100" alt="...">
+            <img src="https://getwallpapers.com/wallpaper/full/9/1/d/364210.jpg" style="height: 25%; width: 50%" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Affidabilità e puntualità garantite</h5 >
                 <p>Rimborso parziale in caso di ritardo.</p>

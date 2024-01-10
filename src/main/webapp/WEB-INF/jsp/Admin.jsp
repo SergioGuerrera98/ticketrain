@@ -7,68 +7,27 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
-<head>
-<%
-User user = (User) session.getAttribute("UserLoggato"); 
-String errorLabel = (String) request.getAttribute("erroreLabel");
-List<Treno> treni = (List<Treno>) request.getAttribute("listaTreni");
-List<Citta> citta = (List<Citta>) request.getAttribute("listaCitta");
-List<Ticket> tickets = (List<Ticket>) request.getAttribute("listaTickets");
-String webApp = request.getContextPath();
-%>	
-<meta charset="ISO-8859-1">
-<title>Pagina Admin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
-	<link rel="stylesheet" type="text/css" href="<%=webApp%>/css">
-</head>
-<body>
-<header>
- <!-- Header : 
-                TickeTrain Accedi SignUp                    #se non loggato
-                TicketTrain :) LogOut                       #se loggato
-                TicketTrain :) LogOut PaginaAmminstratore   #se admin-->
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">
-                    <!-- TicketTrain -->
-                    <a class="navbar-brand" href="<%=webApp%>/home">
-                        <img src="https://raw.githubusercontent.com/IlanZdd/resources/main/nameSite.png" style="width: ; height: 40px">
-                    </a>
-                    <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="alignment: right">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <!-- <li class="nav-item"> <a class="nav-link active" aria-current="page" href="<%=webApp%>/home">  Home  </a> </li> -->
-                            <% if (user == null) { %> <!-- UTENTE NON LOGGATO -->
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<%=webApp%>/login">Accedi</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<%=webApp%>/signup">Registrati</a>
-                                </li>
-                            <% } if (user != null) { %> <!-- UTENTE LOGGATO -->
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<%=webApp%>/account">
-                                        <label><%=user.getUsername() %></label>
-                                    <img src="https://raw.githubusercontent.com/IlanZdd/resources/main/areaPersonale.png" style="width: 30px;"><!-- Area Personale (<%=user.getUsername() %>) -->
-                                    </a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="<%=webApp%>/user/logout">Logout</a></li>
-                                <% if (user.isAmministratore()) { %>
-                                    <li class="nav-item"><a class="nav-link" href="<%=webApp%>/user/admin">Pagina Amministratore</a></li>
-                                <%}
-                            } %>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-</header>
-
+<html data-bs-theme="dark">
+    <head>
+    <%
+    User user = (User) session.getAttribute("UserLoggato"); 
+    String errorLabel = (String) request.getAttribute("erroreLabel");
+    List<Treno> treni = (List<Treno>) request.getAttribute("listaTreni");
+    List<Citta> citta = (List<Citta>) request.getAttribute("listaCitta");
+    List<Ticket> tickets = (List<Ticket>) request.getAttribute("listaTickets");
+    String webApp = request.getContextPath();
+    %>	
+    <meta charset="ISO-8859-1">
+    <title>Pagina Admin</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
+        <link rel="stylesheet" type="text/css" href="<%=webApp%>/css">
+    </head>
+    <body>
+    <header>
+        <jsp:include page="/WEB-INF/jsp/components/Header.jsp"></jsp:include>
+    </header>
+<div class="position-absolute top-50 start-50 translate-middle">
 	<form action="<%=webApp %>/admin/addTrain" method="post">
 		<label>Aggiungi un Treno:</label>
 		<input type="text" name="stringaTreno" placeholder="Treno">
@@ -153,6 +112,6 @@ String webApp = request.getContextPath();
     <br>
     <input type="submit" value="Rimuovi">
 </form>
-
+</div>
 </body>
 </html>

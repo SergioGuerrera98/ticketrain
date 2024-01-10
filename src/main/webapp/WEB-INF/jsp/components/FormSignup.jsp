@@ -27,7 +27,9 @@
                         <td><input type="text" name="paese" placeholder="Paese"/></td>
                     </tr>
             </table>
-            <input type="submit" value="Registrazione" />
+            <div class="d-grid gap-2">	
+                <input class="btn btn-primary btn-lg" type="submit" value="Registrazione" />
+            </div>
         </form>
 </body>
 </html>

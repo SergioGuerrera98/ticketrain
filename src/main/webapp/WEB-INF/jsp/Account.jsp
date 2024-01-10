@@ -6,7 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
     <%
         User user = (User) session.getAttribute("UserLoggato"); 
         String webApp = request.getContextPath();
@@ -22,16 +22,16 @@
     </head>
     <body>
         <header>
-            <jsp:include page="/WEB-INF/jsp/Header.jsp"></jsp:include>
+            <jsp:include page="/WEB-INF/jsp/components/Header.jsp"></jsp:include>
         </header>
 
 
         <!-- BANNER TODO -->
-        
+        <div class="" style="margin-left: auto; margin-right: auto; width: 50%">
             
-    <h1>Area Personale</h1>
+    
         <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
+             <!--<img src="..." class="card-img-top" alt="...">-->
             <div class="card-body">
                 <h5 class="card-title"></h5>
                 <p class="card-text">Qui puoi trovare i tuoi Ticket o acquistarne di nuovi.</p>
@@ -42,10 +42,10 @@
                 </a>
             </div>
         </div>
-
+        </div>
         <h3>Ticket Acquistati</h3>
-        <jsp:include page="/WEB-INF/jsp/BigliettiComprati.jsp"></jsp:include>
+        <jsp:include page="/WEB-INF/jsp/components/BigliettiComprati.jsp"></jsp:include>
         
-        <footer><jsp:include page="/WEB-INF/jsp/Footer.jsp"></jsp:include></footer>
+        <footer><jsp:include page="/WEB-INF/jsp/components/Footer.jsp"></jsp:include></footer>
     </body>
 </html>

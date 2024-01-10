@@ -7,7 +7,7 @@
         String errorLabel = (String) request.getAttribute("erroreLabel");
         String webApp = request.getContextPath();
     %>
-
+    
 <div id="filtro" class="card" style="max-width: 70%; height: 15%; margin-left: 15%; margin-right: 15%; padding: 20px">
     <form action="<%=webApp %>/ticket/getByFilter" method="GET">
         <div class="row">
