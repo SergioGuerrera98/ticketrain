@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 
 import com.corso.ticketrain.model.Ticket;
 import com.corso.ticketrain.service.TicketService;
+import com.corso.ticketrain.service.exceptions.DataPrecedenteException;
 import com.corso.ticketrain.service.exceptions.PaeseNonTrovatoException;
 
 @Controller
@@ -30,7 +31,7 @@ public class TicketController {
     }
 
 	@GetMapping("/getResults")
-    public String getByFilter(String luogoPartenza, String luogoArrivo, String dataPartenza, Model model) {
+    public String getByFilter(String luogoPartenza, String luogoArrivo, String dataPartenza, Model model) throws DataPrecedenteException {
         if (luogoPartenza == null && luogoArrivo == null & dataPartenza == null) {
             model.addAttribute("Errore", "Devi inserire almeno un campo.");
             return "Home";

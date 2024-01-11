@@ -4,6 +4,7 @@ import com.corso.ticketrain.model.Ticket;
 import com.corso.ticketrain.model.User;
 import com.corso.ticketrain.service.TicketService;
 import com.corso.ticketrain.service.TicketUserService;
+import com.corso.ticketrain.service.exceptions.DataPrecedenteException;
 import com.corso.ticketrain.service.exceptions.PaeseNonTrovatoException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class TicketRestController {
 
 
 	@GetMapping("/getByFilter")
-    public String getByFilter(String luogoPartenza, String luogoArrivo, String dataPartenza, HttpSession session, HttpServletResponse response) {
+    public String getByFilter(String luogoPartenza, String luogoArrivo, String dataPartenza, HttpSession session, HttpServletResponse response) throws DataPrecedenteException {
         if (luogoPartenza == null && luogoArrivo == null & dataPartenza == null) {
             return "Devi inserire almeno un campo";
         }
@@ -60,4 +61,18 @@ public class TicketRestController {
 		}
        
     }
+
+	@PostMapping("/tema")
+	public void tema(HttpSession session) {
+		String tema = (String) session.getAttribute("tema");
+		if (tema == null) {
+			session.setAttribute("tema", "light");
+		}
+		else if (tema.equals("light")) {
+			session.setAttribute("tema", "dark");
+		}
+		else if (tema.equals("dark")) {
+			session.setAttribute("tema", "light");
+		}
+	}
 }

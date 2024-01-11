@@ -16,6 +16,7 @@ import com.corso.ticketrain.service.PaeseService;
 import com.corso.ticketrain.service.TicketService;
 import com.corso.ticketrain.service.TrenoService;
 import com.corso.ticketrain.service.UserService;
+import com.corso.ticketrain.service.exceptions.DataPrecedenteException;
 import com.corso.ticketrain.service.exceptions.PaeseNonTrovatoException;
 import com.corso.ticketrain.treno.exceptions.TrenoException;
 import com.corso.ticketrain.treno.factory.VagoneFactory;
@@ -28,7 +29,12 @@ public class Test {
 
 	public static void main(String[] args) throws TrenoException {
 		AnnotationConfigApplicationContext factory = new AnnotationConfigApplicationContext(AppConfig.class);
-		testFilter(factory);
+		try {
+			testFilter(factory);
+		} catch (TrenoException | DataPrecedenteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//test2(factory);
 	}
 	
@@ -43,7 +49,7 @@ public class Test {
 		//System.out.println(user);
 	}
 	
-	public static void testFilter(AnnotationConfigApplicationContext factory) throws TrenoException {
+	public static void testFilter(AnnotationConfigApplicationContext factory) throws TrenoException, DataPrecedenteException {
 		PaeseService paeseService = factory.getBean(PaeseService.class);
 		TicketService ticketService = factory.getBean(TicketService.class);
 		CittaService cittaService = factory.getBean(CittaService.class);

@@ -1,10 +1,12 @@
 <%@page import="com.corso.ticketrain.model.User"%>
 <%@page import="com.corso.ticketrain.model.Ticket"%>
 <%@page import="java.util.List"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html data-bs-theme="dark">
+<%String tema = (session.getAttribute("tema") != null) ? (String) session.getAttribute("tema") : "dark";  %>
+<html id="htmlId" data-bs-theme="<%=tema%>">
 <%
     String webApp = request.getContextPath();
     String formAction = webApp + "/ticket/getByFilter";
@@ -32,44 +34,56 @@
 
                 <h3>Risultati per : </h3>
                 <%
-                if (!listaFiltrata.isEmpty()){
-                    %>
-                            <table>
-                        <thead>
-                            <tr>
-                                <th>Partenza</th>
-                                <th>Arrivo</th>
-                                <th>Ora di Partenza</th>
-                                <th>Ora di Arrivo</th>
-                                <th>Azione</th>
-                                <th>Prezzo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                            for (Ticket ticket : listaFiltrata){
-                            %>
-                                <tr>
-                                    <td><%=ticket.getLuogoPartenza() %></td>
-                                    <td><%=ticket.getLuogoArrivo() %></td>
-                                    <td><%=ticket.getDataArrivo() %></td>
-                                    <td><%=ticket.getDataPartenza()%></td>
-                                    <td><%=ticket.getPrezzo() %></td>
-                                    <td>
-                                        <button onclick="buyTicket(<%=ticket.getId()%>)">Procedi all'acquisto</button>
-
-                                    </td>
-                                </tr>
-                            <%
-                            }
-                            %>
-                
-                        </tbody>
-                    </table>
-                    
-                <%	
-                    }
-                %>
+if (!listaFiltrata.isEmpty()) {
+%>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Partenza</th>
+                <th>Arrivo</th>
+                <th>Ora di Partenza</th>
+                <th>Ora di Arrivo</th>
+                <th>Prezzo</th>
+                <th>Azione</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%
+            for (Ticket ticket : listaFiltrata) {
+            %>
+                <tr>
+                    <td><%=ticket.getLuogoPartenza() %></td>
+                    <td><%=ticket.getLuogoArrivo() %></td>
+                    <td><%
+                            LocalDateTime datePartenza = ticket.getDataPartenza();
+                            out.print(datePartenza.getDayOfMonth() + "/");
+                            out.print(datePartenza.getMonthValue() + "/");
+                            out.print(datePartenza.getYear() + " - ");
+                            
+                            out.print(datePartenza.getHour() + ":");
+                            out.print(datePartenza.getMinute()); %></td>
+                    <td><%
+                            LocalDateTime dateArrivo = ticket.getDataArrivo();
+                            out.print(dateArrivo.getDayOfMonth() + "/");
+                            out.print(dateArrivo.getMonthValue() + "/");
+                            out.print(dateArrivo.getYear() + " - ");
+                            
+                            out.print(dateArrivo.getHour() + ":");
+                            out.print(dateArrivo.getMinute()); %></td>
+                   
+                    <td><%=ticket.getPrezzo() %></td>
+                    <td>
+                        <button class="btn btn-primary" onclick="buyTicket(<%=ticket.getId()%>)">Procedi all'acquisto</button>
+                    </td>
+                </tr>
+            <%
+            }
+            %>
+        </tbody>
+    </table>
+<%
+}
+%>
                 <p class="errorLabel"> <%=errorLabel%> </p>
             </div>
 

@@ -6,25 +6,25 @@
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Treno2"></button>
         </div>
         <div class="carousel-inner">
-            <div class="carousel-item active">
-            <img src="https://live.staticflickr.com/3881/15268162131_e9c777bdb3_b.jpg" style="height: 25%; width: 50%" class="d-block w-100" alt="...">
+            <div class="carousel-item active"> 
+            <img src="https://www.strettoweb.com/wp-content/uploads/2023/12/alta-velocita-ferroviaria-treno-binari-mare.jpg" style="height: 600px; width: 50%" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Tratte aggiornate tutto l'anno</h5>
-                <p>Spostati dove vuoi, quando vuoi.</p>
+                <h5 class="text-white">Tratte aggiornate tutto l'anno</h5>
+                <p class="text-white">Spostati dove vuoi, quando vuoi.</p>
             </div>
             </div>
             <div class="carousel-item">
-            <img src="https://www.newsabruzzo.it/wp-content/uploads/2023/01/Treno-23012023-NewsAbruzzo.it_.jpg" style="height: 25%; width: 50%" class="d-block w-100" alt="...">
+            <img src="https://knowhow.distrelec.com/wp-content/uploads/2023/07/high-speed-train-1920x800.png" style="height: 600px; width: 50%" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Visita l'Italia a basso costo</h5>
-                <p>Prezzi scontati nel weekend.</p>
+                <h5 class="text-white">Visita l'Italia a basso costo</h5>
+                <p class="text-white">Prezzi scontati nel weekend.</p>
             </div>
             </div>
             <div class="carousel-item">
-            <img src="https://getwallpapers.com/wallpaper/full/9/1/d/364210.jpg" style="height: 25%; width: 50%" class="d-block w-100" alt="...">
+            <img src="https://cdn-goeuro.com/static_content/web/content/pics/alta%20velocita_italian_train.jpg" style="height: 600px; width: 50%" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Affidabilità e puntualità garantite</h5 >
-                <p>Rimborso parziale in caso di ritardo.</p>
+                <h5 class="text-black">Affidabilità e puntualità garantite</h5 >
+                <p class="text-black">Rimborso parziale in caso di ritardo.</p>
             </div>
             </div>
         </div>

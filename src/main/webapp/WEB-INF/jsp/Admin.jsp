@@ -7,7 +7,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html data-bs-theme="dark">
+<%String tema = (session.getAttribute("tema") != null) ? (String) session.getAttribute("tema") : "dark";  %>
+<html id="htmlId" data-bs-theme="<%=tema%>">
     <head>
     <%
     User user = (User) session.getAttribute("UserLoggato"); 
@@ -27,6 +28,7 @@
     <header>
         <jsp:include page="/WEB-INF/jsp/components/Header.jsp"></jsp:include>
     </header>
+    
 <div class="position-absolute top-50 start-50 translate-middle">
 	<form action="<%=webApp %>/admin/addTrain" method="post">
 		<label>Aggiungi un Treno:</label>

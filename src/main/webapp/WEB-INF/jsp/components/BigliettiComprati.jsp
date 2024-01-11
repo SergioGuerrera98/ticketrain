@@ -19,7 +19,7 @@
       <% for (Ticket t : mappaTicket.keySet()) {  %>
         <div class="accordion-item">
           <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=t.getCodice()%>" aria-expanded="false" aria-controls="collapse<%=t.getCodice()%>">
+            <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=t.getCodice()%>" aria-expanded="false" aria-controls="collapse<%=t.getCodice()%>">
               <div class="row">
                 <div class="col">
                   <p class="fw-lighter">Codice</p>

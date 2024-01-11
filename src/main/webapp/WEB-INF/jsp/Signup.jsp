@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html data-bs-theme="dark">
+<%String tema = (session.getAttribute("tema") != null) ? (String) session.getAttribute("tema") : "dark";  %>
+<html id="htmlId" data-bs-theme="<%=tema%>">
     <head>
         <title>Registrazione</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -21,10 +22,12 @@
         <!-- BANNER TODO -->
 
         
-        <div class="position-absolute top-50 start-50 translate-middle">
-        <h1>Registrati</h1>
+         <div class="position-absolute top-50 start-50 translate-middle border
+                        shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="padding : 10px">
+            <h3 >Registrati</h3>
+        <p>Effettua la registrazione per acquistare biglietti o visitare l'area personale:</p>
             <jsp:include page="/WEB-INF/jsp/components/FormSignup.jsp"></jsp:include>
-        <p class="labelError"><%=errorLabel %></p>
+            <p><a href="<%=webApp%>/login">Sei già registrato? Effettua il log-in</a></p>
    		 </div>
 		
         

@@ -1,8 +1,10 @@
 <%@page import="com.corso.ticketrain.model.User"%>
 <%@page import="com.corso.ticketrain.model.Ticket"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html data-bs-theme="dark">
+<%String tema = (session.getAttribute("tema") != null) ? (String) session.getAttribute("tema") : "dark";  %>
+<html id="htmlId" data-bs-theme="<%=tema%>">
     <%
         String webApp = request.getContextPath();
         String formAction = webApp + "/login";
@@ -23,136 +25,209 @@
         <jsp:include page="/WEB-INF/jsp/components/Header.jsp"></jsp:include>
     </header>
 
-    <h1>Procedi con l'acquisto</h1>
-        <div id="dettagliTreno">
-            <table>
-                <tr>
-                    <td>Partenza da <%=ticket.getLuogoPartenza()%></td><td><%=ticket.getDataPartenza()%></td>
-                </tr>
-                <tr>
-                    <td>Arrivo a <%=ticket.getLuogoArrivo()%></td><td><%=ticket.getDataPartenza()%></td>
-                </tr>
-            </table>
+    <div style="padding : 30px">
+
+        <h1>Procedi con l'acquisto</h1>
+        <br>
+            <div id="dettagliTreno">
+                <table>
+                    <tr>
+                        <td>Partenza da:&nbsp;&nbsp; <%=ticket.getLuogoPartenza()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td><% LocalDateTime datePartenza = ticket.getDataPartenza();
+                                out.print(datePartenza.getDayOfMonth() + "/");
+                                out.print(datePartenza.getMonthValue() + "/");
+                                out.print(datePartenza.getYear() + " - ");
+                                
+                                out.print(datePartenza.getHour() + ":");
+                                out.print(datePartenza.getMinute()); %></td>
+                    </tr>
+                    <tr>
+                        <td>Arrivo a:&nbsp;&nbsp; <%=ticket.getLuogoArrivo()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td><%
+                                LocalDateTime dateArrivo = ticket.getDataArrivo();
+                                out.print(dateArrivo.getDayOfMonth() + "/");
+                                out.print(dateArrivo.getMonthValue() + "/");
+                                out.print(dateArrivo.getYear() + " - ");
+                                
+                                out.print(dateArrivo.getHour() + ":");
+                                out.print(dateArrivo.getMinute()); %></td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <br>
+            <div id="postiCounter">
+                <div class="row">
+                    <div class="col col-md-auto">
+                        <p>Numero posti: </p>
+                    </div>
+                    <div class="col col-md-auto"><button id="postiMin" onclick="postiMinus()" inert="true">-</button>
+                    </div>
+                    <div class="col col-md-auto">
+                        <h4 id="postiSelezionati">1</h4>
+                    </div>
+                    <div class="col col-md-auto">
+                        <button id="postiPlu" onclick="postiPlus()">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="formPosti" style="padding : 50px">
+
+                <div class="row">
+
+                    <div class="col col-md-auto">
+
+                        <div class="card" id="p1" style="padding:10px">
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p class="text-end"> Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" id="nomeP1" placeholder="Nome passeggero"/>  </p> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p class="text-end">  Cognome:   <input type="text" id="cognomeP1" placeholder="Cognome passeggero"/>  </p> 
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col col-md-auto">
+
+                        <div class="card" id="p2" hidden = "true"  style="padding:10px">
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" id="nomeP2" placeholder="Nome passeggero"/>  </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p>  Cognome:   <input type="text" id="cognomeP2" placeholder="Cognome passeggero"/>  </p> 
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <br>
+                <div class="row">
+
+                    <div class="col col-md-auto">
+
+                        <div class="card" id="p3" hidden = "true" style="padding:10px">
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" id="nomeP3" placeholder="Nome passeggero"/>  </p> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p>  Cognome:   <input type="text" id="cognomeP3" placeholder="Cognome passeggero"/>  </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col col-md-auto">
+
+                        <div class="card" id="p4" hidden = "true" style="padding:10px">
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" id="nomeP4" placeholder="Nome passeggero"/>  </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p>  Cognome:   <input type="text" id="cognomeP4" placeholder="Cognome passeggero"/>  </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <br>
+                <div class="row">
+
+                    <div class="col col-md-auto">
+
+                        <div class="card" id="p5" hidden = "true" style="padding:10px">
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" id="nomeP5" placeholder="Nome passeggero"/>  </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p>  Cognome:   <input type="text" id="cognomeP5" placeholder="Cognome passeggero"/>  </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col col-md-auto">
+
+                        <div class="card" id="p6" hidden = "true" style="padding:10px">
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" id="nomeP6" placeholder="Nome passeggero"/>  </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p>  Cognome:   <input type="text" id="cognomeP6" placeholder="Cognome passeggero"/>  </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <br>
+                <div class="row">
+
+                    <div class="col col-md-auto">
+
+                        <div class="card" id="p7" hidden = "true" style="padding:10px">
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" id="nomeP7" placeholder="Nome passeggero"/>  </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p>  Cognome:   <input type="text" id="cognomeP7" placeholder="Cognome passeggero"/>  </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col col-md-auto">
+
+                        <div class="card" id="p8" hidden = "true" style="padding:10px">
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" id="nomeP8" placeholder="Nome passeggero"/>  </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-auto">
+                                    <p>  Cognome:   <input type="text" id="cognomeP8" placeholder="Cognome passeggero"/>  </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <br>
+
+            </div>
+            <button onclick="procedi('<%=ticket.getLuogoPartenza()%>', '<%=ticket.getLuogoArrivo()%>', '<%=ticket.getDataPartenza()%>', '<%=ticket.getDataArrivo()%>')">Paga</button>
+        
         </div>
-
-
-        <div id="postiCounter">
-            <p>Numero posti:</p>
-            <div>
-                <button id="postiMin" onclick="postiMinus()" inert="true">-</button>
-                <p id="postiSelezionati">1</p>
-                <button id="postiPlu" onclick="postiPlus()">+</button>
-            </div>
-        </div>
-
-
-        <div id="formPosti">
-            <div class="card" id="p1">
-                <table>
-                    <tr>
-                        <td>Nome:</td>
-                        <td><input type="text" id="nomeP1" placeholder="Nome passeggero"/>
-                    </tr>
-                    <tr>
-                        <td>Cognome:</td>
-                        <td><input type="text" id="cognomeP1" placeholder="Cognome passeggero"/>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="card" id="p2" hidden = "true">
-                <table>
-                    <tr>
-                        <td>Nome:</td>
-                        <td><input type="text" id="nomeP2" placeholder="Nome passeggero"/>
-                    </tr>
-                    <tr>
-                        <td>Cognome:</td>
-                        <td><input type="text" id="cognomeP2" placeholder="Cognome passeggero"/>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="card" id="p3" hidden = "true">
-                <table>
-                    <tr>
-                        <td>Nome:</td>
-                        <td><input type="text" id="nomeP3" placeholder="Nome passeggero"/>
-                    </tr>
-                    <tr>
-                        <td>Cognome:</td>
-                        <td><input type="text" id="cognomeP3" placeholder="Cognome passeggero"/>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="card" id="p4" hidden = "true">
-                <table>
-                    <tr>
-                        <td>Nome:</td>
-                        <td><input type="text" id="nomeP4" placeholder="Nome passeggero"/>
-                    </tr>
-                    <tr>
-                        <td>Cognome:</td>
-                        <td><input type="text" id="cognomeP4" placeholder="Cognome passeggero"/>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="card" id="p5" hidden = "true">
-                <table>
-                    <tr>
-                        <td>Nome:</td>
-                        <td><input type="text" id="nomeP5" placeholder="Nome passeggero"/>
-                    </tr>
-                    <tr>
-                        <td>Cognome:</td>
-                        <td><input type="text" id="cognomeP5" placeholder="Cognome passeggero"/>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="card" id="p6" hidden = "true">
-                <table>
-                    <tr>
-                        <td>Nome:</td>
-                        <td><input type="text" id="nomeP6" placeholder="Nome passeggero"/>
-                    </tr>
-                    <tr>
-                        <td>Cognome:</td>
-                        <td><input type="text" id="cognomeP6" placeholder="Cognome passeggero"/>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="card" id="p7" hidden = "true">
-                <table>
-                    <tr>
-                        <td>Nome:</td>
-                        <td><input type="text" id="nomeP7" placeholder="Nome passeggero"/>
-                    </tr>
-                    <tr>
-                        <td>Cognome:</td>
-                        <td><input type="text" id="cognomeP7" placeholder="Cognome passeggero"/>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="card" id="p8" hidden = "true">
-                <table>
-                    <tr>
-                        <td>Nome:</td>
-                        <td><input type="text" id="nomeP8" placeholder="Nome passeggero"/>
-                    </tr>
-                    <tr>
-                        <td>Cognome:</td>
-                        <td><input type="text" id="cognomeP8" placeholder="Cognome passeggero"/>
-                    </tr>
-                </table>
-            </div>
-        </div>
-		<button onclick="procedi('<%=ticket.getLuogoPartenza()%>', '<%=ticket.getLuogoArrivo()%>', '<%=ticket.getDataPartenza()%>', '<%=ticket.getDataArrivo()%>')">Paga</button>
-	
         <footer><jsp:include page="/WEB-INF/jsp/components/Footer.jsp"></jsp:include></footer>
         
         <script>

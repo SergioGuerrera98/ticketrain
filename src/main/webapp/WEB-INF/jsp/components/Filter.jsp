@@ -10,14 +10,20 @@
 
 <div id="filtro" class="card" style="max-width: 70%; height: 15%; margin-left: 15%; margin-right: 15%; padding: 20px">
         <div class="row">
+            <h5>Cerca tratta:</h5>
+        </div>
+        <div class="row">
             <div class="col">
+                <h7>Partenza da:</h7>
                 <input type="text" class="form-control" id="luogoPartenza" class="form-control" placeholder="Luogo Partenza" aria-label="Luogo Partenza" onfocus="cleanLabel()">
             </div>
             <div class="col">
+                <h7>Arrivo a:</h7>
                 <input type="text" class="form-control" id="luogoArrivo" class="form-control" placeholder="Destinazione" aria-label="Destinazione" onfocus="cleanLabel()">
             </div>
             <div class="col">
-                <input type="datetime-local" class="form-control" id="dataPartenza" class="form-control" placeholder="Data Partenza" aria-label="Data Partenza" onfocus="cleanLabel()">
+                <h7>Data di partenza:</h7>
+                <input type="datetime-local" class="form-control" id="dataPartenza" class="form-control" placeholder="Data Partenza" aria-label="Data Partenza" value="" onfocus="cleanLabel()">
             </div>
         </div>
 
@@ -28,7 +34,7 @@
         </div>
         <div class="row position-relative start-80">
             <div class="col">
-                <button type="button" onclick="sendRequest()" value="Ricerca tratte" >Ricerca Tratte </button>
+                <button type="button" class="btn btn-outline-success" onclick="sendRequest()" value="Ricerca tratte" >Ricerca Tratte </button>
             </div>
         </div>
 </div>
@@ -36,6 +42,15 @@
 <script>
     function cleanLabel() {
         document.getElementById("errorLabel").innerText = "";
+        document.getElementById("luogoPartenza").style = "";
+        document.getElementById("luogoArrivo").style = "";
+        document.getElementById("dataPartenza").style = "";
+    }
+
+    function allWrong() {
+        document.getElementById("luogoPartenza").style = "border-color : red";
+        document.getElementById("luogoArrivo").style = "border-color : red";
+        document.getElementById("dataPartenza").style = "border-color : red";
     }
 
     function sendRequest() {
@@ -45,8 +60,12 @@
 
         if (luogoPartenza == "" && luogoArrivo == "" && dataPartenza == "") {
                 let error = document.getElementById("errorLabel");
+                allWrong();
                 error.innerText="Devi inserire almeno un campo.";
         } else {
+            if (new Date(dataPartenza) < new Date()) {
+                dataPartenza = dateNow();
+            }
             const xhr = new XMLHttpRequest();
             xhr.open("GET", "<%=webApp%>/ticket/getByFilter" +
                                             "?luogoPartenza=" + luogoPartenza +
@@ -62,8 +81,22 @@
                                             "&dataPartenza=" + dataPartenza);
                 } else {
                     console.log("Error : " + xhr.status );
+                    let errore = xhr.responseText;
+
+                    if (xhr.responseText.search("Partenza") > -1) {
+                        document.getElementById("luogoPartenza").style = "border-color : red";
+                        errore = errore.substring(errore.indexOf("-")+1, 200000);
+                    }
+                    if (xhr.responseText.search("Arrivo") > -1) {
+                        document.getElementById("luogoArrivo").style = "border-color : red";
+                        errore = errore.substring(errore.indexOf("-")+1, 200000);
+                    }
+                    if (xhr.responseText.search("Data") > -1) {
+                        document.getElementById("dataPartenza").style = "border-color : red";
+                    }
+
                     let error = document.getElementById("errorLabel");
-                    error.innerText = xhr.responseText;
+                    error.innerText = errore;
                 }
             };
 
@@ -72,4 +105,28 @@
     }
 
     
+
+    window.addEventListener("load", function() {
+        var localDatetime = dateNow();
+        var datetimeField = document.getElementById("dataPartenza");
+        datetimeField.value = localDatetime;
+        datetimeField.min = localDateTime;
+    });
+
+    function dateNow() {
+        var now = new Date();
+        var utcString = now.toISOString().substring(0,19);
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        var day = now.getDate();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        var second = now.getSeconds();
+        return localDatetime = year + "-" +
+                        (month < 10 ? "0" + month.toString() : month) + "-" +
+                        (day < 10 ? "0" + day.toString() : day) + "T" +
+                        (hour < 10 ? "0" + hour.toString() : hour) + ":" +
+                        (minute < 10 ? "0" + minute.toString() : minute) +
+                        utcString.substring(16,19);
+    }
 </script>

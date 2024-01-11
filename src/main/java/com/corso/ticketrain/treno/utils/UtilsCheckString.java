@@ -14,8 +14,8 @@ public class UtilsCheckString {
 		CheckString levenshtein = new Levenshtein();
 	    CheckString wagnerFischer = new WagnerFischer();
 	    CheckString hunt = new HuntSzymanski();
-	    jaroWinkler.setCheckString(levenshtein).setCheckString(wagnerFischer);
-	    ComparatoreString comparatore = new ComparatoreString(jaroWinkler);
+	  
+	    ComparatoreString comparatore = new ComparatoreString(levenshtein);
 	    return comparatore;
 	}
 

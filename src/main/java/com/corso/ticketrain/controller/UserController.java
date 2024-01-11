@@ -103,5 +103,10 @@ public class UserController {
 			return "Home";
 		}
 	}
+	
+	@PostMapping("/foto")
+	public String addFoto() {
+		return "Account";
+	}
 
 }

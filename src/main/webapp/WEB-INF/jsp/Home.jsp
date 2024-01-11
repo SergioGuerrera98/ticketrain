@@ -2,7 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html data-bs-theme="dark">
+<%String tema = (session.getAttribute("tema") != null) ? (String) session.getAttribute("tema") : "dark";  %>
+<html id="htmlId" data-bs-theme="<%=tema%>">
     <%
         //Variabili java
         User user = (User) session.getAttribute("UserLoggato"); 
@@ -25,6 +26,7 @@
     <body>
         <header>
             <jsp:include page="/WEB-INF/jsp/components/Header.jsp"></jsp:include>
+          
         </header> 
 
 

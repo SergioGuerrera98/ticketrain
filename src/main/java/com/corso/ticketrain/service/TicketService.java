@@ -18,6 +18,7 @@ import com.corso.ticketrain.dao.interfacce.CittaDaoInterface;
 import com.corso.ticketrain.dao.interfacce.TicketDaoInterface;
 import com.corso.ticketrain.model.Citta;
 import com.corso.ticketrain.model.Ticket;
+import com.corso.ticketrain.service.exceptions.DataPrecedenteException;
 import com.corso.ticketrain.service.exceptions.PaeseNonTrovatoException;
 import com.corso.ticketrain.treno.model.Treno;
 import com.corso.ticketrain.treno.utils.UtilsCheckString;
@@ -32,7 +33,7 @@ public class TicketService implements IService{
 	@Autowired
 	private CittaDao cittaDao;
 
-	public boolean areFieldsValidForFilter(String luogoPartenza, String luogoArrivo, String dataPartenza) throws PaeseNonTrovatoException {
+	public boolean areFieldsValidForFilter(String luogoPartenza, String luogoArrivo, String dataPartenza) throws PaeseNonTrovatoException, DataPrecedenteException {
 		ComparatoreString comparatore = UtilsCheckString.Check();
 		List<Citta> listaCitta = cittaDao.retrieve();
 		List<String> stringhe= new ArrayList<>();
@@ -42,26 +43,31 @@ public class TicketService implements IService{
 		if(luogoPartenza != "") {
 			String standardPartenza = comparatore.check(luogoPartenza, stringhe);
 			if (standardPartenza.equals("Parola non Trovata")) {
-				throw new PaeseNonTrovatoException("La citta' inserita non e' presente", null);
+				throw new PaeseNonTrovatoException("Partenza-La citta' inserita non e' presente", null);
 			}
 			if (!standardPartenza.equals("Parola Trovata") && !standardPartenza.equals("Parola non Trovata")) {
-				throw new PaeseNonTrovatoException("Per la citta' di partenza, intendevi "+standardPartenza+"?", null);
+				throw new PaeseNonTrovatoException("Partenza-Per la citta' di partenza, intendevi "+standardPartenza+"?", null);
 			}
 		}
 		if(luogoArrivo != "") {
 			String standardArrivo = comparatore.check(luogoArrivo, stringhe);
 			if (standardArrivo.equals("Parola non Trovata")) {
-				throw new PaeseNonTrovatoException("La citta' inserita non e' presente", null);
+				throw new PaeseNonTrovatoException("Arrivo-La citta' inserita non e' presente", null);
 			}
 			if (!standardArrivo.equals("Parola Trovata") && !standardArrivo.equals("Parola non Trovata")) {
-				throw new PaeseNonTrovatoException("Per la citta' d'arrivo, intendevi "+standardArrivo+"?", null);
+				throw new PaeseNonTrovatoException("Arrivo-Per la citta' d'arrivo, intendevi "+standardArrivo+"?", null);
 			}
+		}
+		LocalDateTime dataPartenzaD = (dataPartenza != null && !dataPartenza.isBlank()) ? LocalDateTime.parse(dataPartenza) : null;
+		if (dataPartenza != null) {
+			if (dataPartenzaD.isBefore(LocalDateTime.now().minusMinutes(2)))
+				throw new DataPrecedenteException("Data-La data non può essere precedente alla corrente", null);
 		}
 
 		return true;
 	}
 
-	public List<Ticket> getTicketsFilter(String luogoPartenza, String luogoArrivo, String dataPartenza) throws PaeseNonTrovatoException {
+	public List<Ticket> getTicketsFilter(String luogoPartenza, String luogoArrivo, String dataPartenza) throws PaeseNonTrovatoException, DataPrecedenteException {
 
 		areFieldsValidForFilter(luogoPartenza, luogoArrivo, dataPartenza);
 

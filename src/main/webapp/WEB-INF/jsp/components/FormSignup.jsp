@@ -34,7 +34,7 @@
             </div>
             <br>
         <div class="d-grid gap-2">
-            <input class="btn btn-primary btn-lg" type="submit" value="Registrazione" />
+            <input class="btn btn-outline-success btn-lg" type="submit" value="Registrazione" />
         </div>
     </form>
 </div>

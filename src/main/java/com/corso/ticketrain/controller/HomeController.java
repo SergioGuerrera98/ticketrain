@@ -37,7 +37,7 @@ public class HomeController {
 			return "Home";
 		return "Login";
 	}
-	
+
 	@GetMapping("/signup")
 	public String signup(HttpSession session) {
 		session.removeAttribute("ticket");
@@ -57,4 +57,5 @@ public class HomeController {
 			return "Login";
 		return "redirect:/ticketUser/getByUsername";
 	}
+
 }
