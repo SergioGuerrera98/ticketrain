@@ -21,11 +21,10 @@
     <div class="container-fluid">
         <!-- TicketTrain -->
         <a class="navbar-brand" href="<%=webApp%>/home">
-        <%if (displayTema.equals("light")){ %>
+        <%if (displayTema == null || displayTema.equals("dark")){ %>
             <img id="logo" src="https://raw.githubusercontent.com/IlanZdd/resources/main/nameSiteDark.png" style="width: ; height: 40px">
-            <%} %>
-         <%if (displayTema.equals("dark")){ %>
-         <img src="https://raw.githubusercontent.com/IlanZdd/resources/main/nameSite.png" style="width: ; height: 40px">
+            <%} else{ %>
+         <img id="logo" src="https://raw.githubusercontent.com/IlanZdd/resources/main/nameSite.png" style="width: ; height: 40px">
          <%} %>
         </a>
         <button class="navbar-toggler" type="button"

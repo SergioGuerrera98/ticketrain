@@ -12,10 +12,12 @@
     <head>
     <%
     User user = (User) session.getAttribute("UserLoggato"); 
-    String errorLabel = (String) request.getAttribute("erroreLabel");
+    String errorTreno = (request.getAttribute("errorTreno") != null) ? (String) request.getAttribute("errorTreno") : ""; 
+    String errorTicket = (request.getAttribute("errorTicket") != null) ? (String) request.getAttribute("errorTicket") : ""; 
     List<Treno> treni = (List<Treno>) request.getAttribute("listaTreni");
     List<Citta> citta = (List<Citta>) request.getAttribute("listaCitta");
     List<Ticket> tickets = (List<Ticket>) request.getAttribute("listaTickets");
+    
     String webApp = request.getContextPath();
     %>	
     <meta charset="ISO-8859-1">
@@ -30,28 +32,38 @@
     </header>
     
 <div class="position-absolute top-50 start-50 translate-middle">
-	<form action="<%=webApp %>/admin/addTrain" method="post">
-		<label>Aggiungi un Treno:</label>
-		<input type="text" name="stringaTreno" placeholder="Treno">
-		<br>
-		<input type="submit" value="Aggiungi" />
-	</form>
-	<form action="<%=webApp %>/admin/deleteTrain" method="post">
-    <label for="treno">Seleziona un treno:</label>
-    <select name="treno" id="treno">
-        <% 
-         
-            for (Treno treno : treni) {
-        %>
-            <option value="<%= treno.getId() %>"><%= treno.getCodice() %></option>
-        <% } %>
-    </select>
-    <br>
-    <input type="submit" value="Rimuovi">
-</form>
-		<form action="<%=webApp %>/admin/addTicket" method="post">
-	<p>Crea un biglietto</p>	
-		    <label for="codice">Codice:</label>
+
+    <!-- Form per aggiungere un treno -->
+    <form action="<%=webApp %>/admin/addTrain" method="post" class="mb-4">
+        <h5>Aggiungi un Treno:</h5>
+        <div class="mb-3">
+            <label for="stringaTreno" class="form-label">Nome Treno:</label>
+            <input type="text" name="stringaTreno" id="stringaTreno" class="form-control" placeholder="Treno" required>
+        </div>
+        <button type="submit" class="btn btn-success">Aggiungi</button>
+        <%=errorTreno %>
+    </form>
+
+    <!-- Form per rimuovere un treno -->
+    <form action="<%=webApp %>/admin/deleteTrain" method="post" class="mb-4">
+        <h5>Rimuovi un Treno:</h5>
+        <div class="mb-3">
+            <label for="treno" class="form-label">Seleziona un treno:</label>
+            <select name="treno" id="treno" class="form-select" required>
+                <% 
+                    for (Treno treno : treni) {
+                %>
+                    <option value="<%= treno.getId() %>"><%= treno.getCodice() %></option>
+                <% } %>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-danger">Rimuovi</button>
+    </form>
+
+    <!-- Form per aggiungere un biglietto -->
+    <form action="<%=webApp %>/admin/addTicket" method="post" class="mb-4">
+        <h5>Crea un Biglietto:</h5>
+        <label for="codice">Codice:</label>
     <input type="text" name="codice" required><br>
 
     <label for="dataPartenza">Data Partenza:</label>
@@ -69,51 +81,26 @@
             <option value="<%= c.getNomeCitta() %>"><%= c.getNomeCitta() %></option>
             
         <% } %>
-    </select><br>
-
-    <label for="luogoArrivo">Luogo Arrivo:</label>
-    <select name="luogoArrivo">
-        <% 
-            
-            for (Citta c : citta) {
-        %>
-            <option value="<%= c.getNomeCitta() %>"><%= c.getNomeCitta() %></option>
-            
-        <% } %>
-    </select><br>
-
-    <label for="prezzo">Prezzo:</label>
-    <input type="number" name="prezzo" required><br>
-
-    <label for="treno_id">Treno:</label>
-    <select name="treno_id">
-        <% 
-            
-            for (Treno treno : treni) {
-        %>
-            <option value="<%= treno.getId() %>"><%= treno.getCodice() %></option>
-            
-        <% } %>
-    </select><br>
-
-    <br>
-
-    <br>
-    <input type="submit" value="Inserisci Viaggio">
-	</form>
-	<form action="<%=webApp %>/admin/deleteTicket" method="post">
-    <label for="treno">Seleziona un ticket:</label>
-    <select name="ticket" id="ticket">
-        <% 
-         
-            for (Ticket ticket : tickets) {
-        %>
-            <option value="<%= ticket.getId() %>"><%= ticket.getCodice() %></option>
-        <% } %>
     </select>
-    <br>
-    <input type="submit" value="Rimuovi">
-</form>
+    	<br>
+        <button type="submit" class="btn btn-success">Aggiungi</button>
+    </form>
+<%=errorTicket %>
+    <!-- Form per rimuovere un biglietto -->
+    <form action="<%=webApp %>/admin/deleteTicket" method="post">
+        <h5>Rimuovi un Ticket:</h5>
+        <div class="mb-3">
+            <label for="ticket" class="form-label">Seleziona un ticket:</label>
+            <select name="ticket" id="ticket" class="form-select" required>
+                <% 
+                    for (Ticket ticket : tickets) {
+                %>
+                    <option value="<%= ticket.getId() %>"><%= ticket.getCodice() %></option>
+                <% } %>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-danger">Rimuovi</button>
+    </form>
 </div>
 </body>
 </html>

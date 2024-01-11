@@ -17,6 +17,7 @@ import com.corso.ticketrain.model.Ticket;
 import com.corso.ticketrain.service.CittaService;
 import com.corso.ticketrain.service.TicketService;
 import com.corso.ticketrain.service.TrenoService;
+import com.corso.ticketrain.treno.exceptions.TrenoException;
 import com.corso.ticketrain.treno.factory.VagoneFactory;
 import com.corso.ticketrain.treno.model.Treno;
 
@@ -45,14 +46,19 @@ public class AdminController {
 	}
 	
 	@PostMapping("/addTrain")
-	public String addTrain(@RequestParam String stringaTreno, Model model) {
-		trenoService.addTrain(stringaTreno, new VagoneFactory());
+	public String addTrain(@RequestParam String stringaTreno, Model model) {	
 		List<Treno> treni = trenoService.retrieveAll();
 		List<Citta> citta = cittaService.retrieve();
 		List<Ticket> tickets = ticketService.retrieve();
 		model.addAttribute("listaTickets", tickets);
 		model.addAttribute("listaCitta", citta);
 		model.addAttribute("listaTreni", treni);
+		try {
+			trenoService.addTrain(stringaTreno, new VagoneFactory());
+		} catch (TrenoException e) {
+			model.addAttribute("errorTreno", e.getMessaggio());
+			return "Admin";
+		}
 		return "Admin";
 	}
 	

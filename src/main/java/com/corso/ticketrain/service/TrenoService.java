@@ -18,28 +18,20 @@ import com.corso.ticketrain.treno.model.*;
 @Transactional
 @Service
 public class TrenoService {
-	
+
 	@Autowired
 	private TrenoDaoInterface trenoDao;
 
-	/** nuovo treno da sigla */
-	public boolean addTrain(String sigla, VagoneFactory factory) {
-		try {
-			Treno treno = new TrenoBuilder(factory).costruisciTreno(sigla);
-			trenoDao.create(treno);
+	/** nuovo treno da sigla 
+	 * @throws TrenoException */
+	public void addTrain(String sigla, VagoneFactory factory) throws TrenoException {
 
-		} catch (TrenoException te) {
-			te.printStackTrace();
-			return false;
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+		Treno treno = new TrenoBuilder(factory).costruisciTreno(sigla);
+		trenoDao.create(treno);
 
-		return true;
+
 	}
-	
+
 	/** nuovo treno da sigla 
 	 * @throws TrenoException */
 	public Treno addTrain2(String sigla, VagoneFactory factory) throws TrenoException {
@@ -51,7 +43,7 @@ public class TrenoService {
 		} catch (TrenoException te) {
 			te.printStackTrace();
 			throw te;
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -64,7 +56,7 @@ public class TrenoService {
 	public boolean removeTrain(Treno treno) {
 		try {
 			Treno found = trenoDao.retrieveById(treno.getId());
-			
+
 			if (treno == found) {
 				trenoDao.delete(treno);
 			}
@@ -81,7 +73,7 @@ public class TrenoService {
 	public boolean removeTrain(int treno_id) {
 		try {
 			Treno found = trenoDao.retrieveById(treno_id);
-			
+
 			if (found != null) {
 				trenoDao.delete(found);
 			}
@@ -103,7 +95,7 @@ public class TrenoService {
 
 			treno.addVagone(vagone, index);
 			trenoDao.update(treno);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -121,7 +113,7 @@ public class TrenoService {
 
 			found.addVagone(vagone, index);
 			trenoDao.update(found);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -136,7 +128,7 @@ public class TrenoService {
 			Treno found = trenoDao.retrieveById(treno_id);
 			if (found == null)
 				throw new TrenoNotFoundException("Treno non esiste.", ""+treno_id);
-			
+
 			Vagone vagone = new VagoneFactory().costruisciVagone(vagone_sigla);
 			found.addVagone(vagone, index);
 			trenoDao.update(found);			
@@ -154,7 +146,7 @@ public class TrenoService {
 			Treno found = trenoDao.retrieveById(treno_id);
 			if (found == null)
 				throw new TrenoNotFoundException("Treno non esiste.", ""+treno_id);
-			
+
 			found.removeVagone(index);
 			trenoDao.update(found);			
 		} catch (Exception e) {
@@ -173,7 +165,7 @@ public class TrenoService {
 			found = trenoDao.retrieveById(treno_id);
 			if (found == null)
 				throw new TrenoNotFoundException("Treno non esiste.", ""+treno_id);
-				
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -181,7 +173,7 @@ public class TrenoService {
 
 		return found;
 	}
-	
+
 	public List<Treno> retrieveAll(){
 		try {
 			return trenoDao.retrieve();

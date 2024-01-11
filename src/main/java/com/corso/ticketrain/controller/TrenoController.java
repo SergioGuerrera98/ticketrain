@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.corso.ticketrain.service.TrenoService;
+import com.corso.ticketrain.treno.exceptions.TrenoException;
 import com.corso.ticketrain.treno.factory.VagoneFactory;
 import com.corso.ticketrain.treno.model.Treno;
 
@@ -26,7 +27,12 @@ public class TrenoController {
 	
 	@PostMapping("/addTreno")
 	public String add(@RequestBody String sigla) {
-		trenoService.addTrain(sigla, new VagoneFactory());
+		try {
+			trenoService.addTrain(sigla, new VagoneFactory());
+		} catch (TrenoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "treno aggiunto";
 	}
 	

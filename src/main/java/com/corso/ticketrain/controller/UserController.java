@@ -1,5 +1,7 @@
 package com.corso.ticketrain.controller;
 
+import java.io.File;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.corso.ticketrain.checkstring.ComparatoreString;
 import com.corso.ticketrain.model.Paese;
@@ -22,13 +26,18 @@ import com.corso.ticketrain.service.exceptions.PaeseNonTrovatoException;
 import com.corso.ticketrain.service.exceptions.UsernameEsisteException;
 import com.corso.ticketrain.service.exceptions.UsernameInesistenteException;
 import com.corso.ticketrain.service.exceptions.UsernameOPasswordSbagliatiException;
+import com.corso.ticketrain.treno.utils.BlobConverter;
 import com.corso.ticketrain.treno.utils.UtilsCheckString;
+import com.mysql.cj.jdbc.Blob;
+
+
 
 
 
 @Controller
 @RequestMapping("/user")
 @CrossOrigin
+
 public class UserController {
 
 	@Autowired
@@ -105,7 +114,8 @@ public class UserController {
 	}
 	
 	@PostMapping("/foto")
-	public String addFoto() {
+	public String addFoto(@RequestPart("file") MultipartFile file) {
+
 		return "Account";
 	}
 
