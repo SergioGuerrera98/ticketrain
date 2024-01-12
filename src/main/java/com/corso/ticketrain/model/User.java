@@ -1,6 +1,9 @@
 package com.corso.ticketrain.model;
 
 import javax.persistence.*;
+import javax.sql.rowset.serial.SerialBlob;
+
+import java.sql.Blob;
 import java.util.Objects;
 
 @Entity
@@ -18,6 +21,13 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name = "paese_id", nullable=false)
 	private Paese paese;
+	
+	
+	@Lob
+    @Column(name = "Foto")
+    private byte[] photo;
+	
+
 	
 	public User() {	}
 	
@@ -76,6 +86,17 @@ public class User {
 		this.paese = paese;
 	}
 	
+	
+	
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+	
+
 	public String toString() {
 		return "User[" +
 				"id: '" + id + "'" +

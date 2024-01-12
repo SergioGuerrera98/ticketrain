@@ -31,6 +31,25 @@ public class UserService implements IService{
 	@Autowired
 	private PaeseDao paeseDao;
 	
+	public void setAdminTrue(String username) {
+		try {
+			User user = userDao.findByUsername(username).get(0);
+			user.setAmministratore(true);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+
+	public void setFoto(String username, byte[] photo) {
+		try {
+			User user = userDao.findByUsername(username).get(0);
+			user.setPhoto(photo);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
 	
 	public User registrazione(String username, String password, String paese) throws PaeseNonTrovatoException, DatiNonValidiException, Exception{
 		try {
@@ -81,6 +100,15 @@ public class UserService implements IService{
 		} catch (Exception e) {
 			throw e;
 		}	
+	}
+	
+	public User findByUsername(String username) {
+		try {
+			User user = userDao.findByUsername(username).get(0);
+			return user;
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 	
 

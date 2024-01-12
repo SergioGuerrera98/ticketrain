@@ -3,6 +3,12 @@
 <%@page import="java.util.Map"%>
 <%@page import="com.corso.ticketrain.model.TicketUser"%>
 <%@page import="java.util.List"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page import="java.util.Base64" %>
+<%@ page import="java.nio.charset.StandardCharsets" %>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -26,7 +32,13 @@
             <jsp:include page="/WEB-INF/jsp/components/Header.jsp"></jsp:include>
         </header>
 
-
+<%if (user.getPhoto() != null){ %>
+		<h2>Foto dell'utente</h2>
+        <%-- Converti l'array di byte in una stringa Base64 --%>
+        <c:set var="base64Image" value="<%= new String(Base64.getEncoder().encode(user.getPhoto()), StandardCharsets.UTF_8) %>" />
+        <%-- Visualizza l'immagine --%>
+        <img src="data:image/jpeg;base64,${base64Image}" alt="Foto utente" style="border-radius: 50%; width: 100px; height: 100px;">
+<%} %>
         <!-- BANNER TODO -->
         <div class="" style="margin-left: auto; margin-right: auto; width: 50%">
             
@@ -41,8 +53,9 @@
                         Carica immagine
                     </i>
                     <br><br>
-                    <input type="file" id="photo" name="photo" accept=".jpg,.jpeg,.png">
-                <form class="" action="<%=webApp %>/user/foto" method="POST">
+                    
+                <form class="" action="<%=webApp %>/user/foto" method="POST" enctype="multipart/form-data">
+                <input type="file" id="file" name="file" accept="image/*" >
                     <br>
                     <div class="d-grid gap-2">
                         <input class="btn btn-outline-success btn-lg" type="submit" value="Carica immagine" />

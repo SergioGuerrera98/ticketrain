@@ -1,8 +1,12 @@
 package com.corso.ticketrain.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.sql.Blob;
 
 import javax.servlet.http.HttpSession;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.corso.ticketrain.checkstring.ComparatoreString;
 import com.corso.ticketrain.model.Paese;
@@ -28,8 +33,6 @@ import com.corso.ticketrain.service.exceptions.UsernameInesistenteException;
 import com.corso.ticketrain.service.exceptions.UsernameOPasswordSbagliatiException;
 import com.corso.ticketrain.treno.utils.BlobConverter;
 import com.corso.ticketrain.treno.utils.UtilsCheckString;
-import com.mysql.cj.jdbc.Blob;
-
 
 
 
@@ -113,10 +116,24 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("/foto")
-	public String addFoto(@RequestPart("file") MultipartFile file) {
+	
+	@PostMapping(value = "/foto", consumes = {"multipart/form-data"})
+	public String addFoto(@RequestParam("file") CommonsMultipartFile file,  HttpSession session) {
+		try {
+            byte[] bytes = file.getBytes();
+            User user = (User) session.getAttribute("UserLoggato");
+           // user.setPhotoBytes(bytes);
+            System.out.println(file);
+            System.out.println(bytes);
+            userService.setFoto(user.getUsername(), bytes);
 
-		return "Account";
+            //SerialBlob foto = user.getFoto();
+            //user.setPhoto(bytes);
+            return "Home" ;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Home";
+        }
 	}
 
 }
