@@ -92,6 +92,14 @@ public class Ticket {
 	public LocalDateTime getDataPartenza() {
 		return dataPartenza;
 	}
+	
+	public String getDataPartenzaStr() {
+		return getDataPartenza().getYear() + "/" +
+			padTwo(getDataPartenza().getDayOfMonth()) + "/" +
+			padTwo(getDataPartenza().getDayOfMonth()) + " - " +
+			padTwo(getDataPartenza().getHour()) + ":" +
+			padTwo(getDataPartenza().getMinute());
+	}
 
 	public Ticket setDataPartenza(LocalDateTime dataPartenza) {
 		this.dataPartenza = dataPartenza;
@@ -100,6 +108,22 @@ public class Ticket {
 
 	public LocalDateTime getDataArrivo() {
 		return dataArrivo;
+	}
+
+	public String getDataArrivoStr() {
+		return getDataArrivo().getYear() + "/" +
+			padTwo(getDataArrivo().getDayOfMonth()) + "/" +
+			padTwo(getDataArrivo().getDayOfMonth()) + " - " +
+			padTwo(getDataArrivo().getHour()) + ":" +
+			padTwo(getDataArrivo().getMinute());
+	}
+
+	private String padTwo(int i) {
+		String str = i+"";
+		if (str.length() < 2)
+			str = "0" + str;
+
+		return str;
 	}
 
 	public Ticket setDataArrivo(LocalDateTime dataArrivo) {

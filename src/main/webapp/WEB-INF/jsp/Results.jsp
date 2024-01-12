@@ -87,23 +87,8 @@
                             <tr>
                                 <td><%=ticket.getLuogoPartenza() %></td>
                                 <td><%=ticket.getLuogoArrivo() %></td>
-                                <td><%
-                                        LocalDateTime datePartenza = ticket.getDataPartenza();
-                                        out.print(datePartenza.getDayOfMonth() + "/");
-                                        out.print(datePartenza.getMonthValue() + "/");
-                                        out.print(datePartenza.getYear() + " - ");
-                                        
-                                        out.print(datePartenza.getHour() + ":");
-                                        out.print(datePartenza.getMinute()); %></td>
-                                <td><%
-                                        LocalDateTime dateArrivo = ticket.getDataArrivo();
-                                        out.print(dateArrivo.getDayOfMonth() + "/");
-                                        out.print(dateArrivo.getMonthValue() + "/");
-                                        out.print(dateArrivo.getYear() + " - ");
-                                        
-                                        out.print(dateArrivo.getHour() + ":");
-                                        out.print(dateArrivo.getMinute()); %></td>
-                            
+                                <td><%=ticket.getDataPartenzaStr()%></td>
+                                <td><%=ticket.getDataArrivoStr()%></td>
                                 <td><%=ticket.getPrezzo() %></td>
                                 <td><%=ticket.getClasse() %></td>
                                 <td>

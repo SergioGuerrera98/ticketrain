@@ -41,26 +41,11 @@
             <div class="accordion-body">
               <div class="col">
                 <div class="row">
-                  <p>Partenza da : <%=t.getLuogoPartenza() %>, ore : 
-                  <%
-                                        LocalDateTime datePartenza = t.getDataPartenza();
-                                        out.print(datePartenza.getDayOfMonth() + "/");
-                                        out.print(datePartenza.getMonthValue() + "/");
-                                        out.print(datePartenza.getYear() + " - ");
-                                        
-                                        out.print(datePartenza.getHour() + ":");
-                                        out.print(datePartenza.getMinute()); %></p>
+                  <p>Partenza da : <%=t.getLuogoPartenza() %>, ore : <%=t.getDataPartenzaStr()%></p>
                           
                 </div>
                 <div class="row">
-                  <p>Arrivo a : <%=t.getLuogoArrivo() %>, ore : <%
-                                        LocalDateTime dateArrivo = t.getDataArrivo();
-                                        out.print(dateArrivo.getDayOfMonth() + "/");
-                                        out.print(dateArrivo.getMonthValue() + "/");
-                                        out.print(dateArrivo.getYear() + " - ");
-                                        
-                                        out.print(dateArrivo.getHour() + ":");
-                                        out.print(dateArrivo.getMinute()); %></p>
+                  <p>Arrivo a : <%=t.getLuogoArrivo() %>, ore : <%=t.getDataArrivoStr()%></p>
                 </div>
                 <div class="row">
                   <p>Prezzo: <%=t.getPrezzo()%> euro</p>

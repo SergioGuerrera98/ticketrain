@@ -47,6 +47,24 @@
         document.getElementById("dataPartenza").style = "";
     }
 
+    function wrongLuogoPartenza(errore) {
+        let error = document.getElementById("errorLabel");
+
+        document.getElementById("luogoPartenza").style = "border-color : red";
+        error.innerText = errore;
+    }
+    function wrongLuogoArrivo(errore) {
+        let error = document.getElementById("errorLabel");
+
+        document.getElementById("luogoArrivo").style = "border-color : red";        
+        error.innerText = errore;
+    }
+    function wrongData() {
+        let error = document.getElementById("errorLabel");
+
+        document.getElementById("dataPartenza").style = "border-color : red";
+        error.innerText = errore;
+    }
     function allWrong() {
         document.getElementById("luogoPartenza").style = "border-color : red";
         document.getElementById("luogoArrivo").style = "border-color : red";
@@ -58,10 +76,14 @@
         let luogoArrivo = document.getElementById("luogoArrivo").value;
         let dataPartenza = document.getElementById("dataPartenza").value;
 
-        if (luogoPartenza == "" && luogoArrivo == "" && dataPartenza == "") {
-                let error = document.getElementById("errorLabel");
-                allWrong();
-                error.innerText="Devi inserire almeno un campo.";
+        //controlli richiesta:
+        //tutti campi vuoti
+        if (luogoPartenza == "" && luogoArrivo == "") {
+            let error = document.getElementById("errorLabel");
+            allWrong();
+            error.innerText="Devi inserire almeno un campo.";
+        } else if (new Date(dataPartenza) > new Date().setMonth(new Date(dataPartenza).getMonth()+6)) {
+            wrongData("Non sono previsti treni oltre i 6 mesi dalla data corrente.");
         } else {
             if (new Date(dataPartenza) < new Date()) {
                 dataPartenza = dateNow();
@@ -84,18 +106,15 @@
                     let errore = xhr.responseText;
 
                     if (xhr.responseText.search("Partenza") > -1) {
-                        document.getElementById("luogoPartenza").style = "border-color : red";
-                        errore = errore.substring(errore.indexOf("-")+1, 200000);
+                        wrongLuogoPartenza(errore.substring(errore.indexOf("-")+1, 200000));
                     }
                     if (xhr.responseText.search("Arrivo") > -1) {
-                        document.getElementById("luogoArrivo").style = "border-color : red";
-                        errore = errore.substring(errore.indexOf("-")+1, 200000);
+                        wrongLuogoArrivo(errore.substring(errore.indexOf("-")+1, 200000));
                     }
                     if (xhr.responseText.search("Data") > -1) {
-                        document.getElementById("dataPartenza").style = "border-color : red";
+                        wrongData("La data selezionata non è valida.");
                     }
 
-                    let error = document.getElementById("errorLabel");
                     error.innerText = errore;
                 }
             };
@@ -104,18 +123,8 @@
         }
     }
 
-    
-
-    window.addEventListener("load", function() {
-        var localDatetime = dateNow();
-        var datetimeField = document.getElementById("dataPartenza");
-        datetimeField.value = localDatetime;
-        datetimeField.min = localDateTime;
-    });
-
     function dateNow() {
         var now = new Date();
-        var utcString = now.toISOString().substring(0,19);
         var year = now.getFullYear();
         var month = now.getMonth() + 1;
         var day = now.getDate();
@@ -125,7 +134,15 @@
                         (month < 10 ? "0" + month.toString() : month) + "-" +
                         (day < 10 ? "0" + day.toString() : day) + "T" +
                         (hour < 10 ? "0" + hour.toString() : hour) + ":" +
-                        (minute < 10 ? "0" + minute.toString() : minute) +
-                        utcString.substring(16,19);
+                        (minute < 10 ? "0" + minute.toString() : minute);
     }
+
+    window.addEventListener("load", function() {
+        var localDatetime = dateNow();
+        var datetimeField = document.getElementById("dataPartenza");
+        datetimeField.value = localDatetime;
+        datetimeField.min = localDateTime;
+    });
+
+
 </script>

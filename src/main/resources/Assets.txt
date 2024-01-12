@@ -1,0 +1,19 @@
+Colori sito:
+    verde: 
+        #50ba81
+    viola: 
+        #874692
+
+Cambia tema : 
+    sole:
+
+    luna:
+
+logo:
+    Tema scuro:
+
+    Tema chiaro:
+        
+
+
+
