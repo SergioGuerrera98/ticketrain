@@ -16,34 +16,44 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @CrossOrigin
 public class HomeController {
 	private static Logger logger = LogManager.getLogger(HomeController.class);
-	final Level LOGGER = Level.forName("logger", 450);
 
 
 
 	@GetMapping({"/home", "/"})
 	public String home(HttpSession session) {
-		logger.log(LOGGER, "HomeController.home : entering method");
+		logger.info("HomeController.home : entering method");
 
 		session.removeAttribute("ticket");
 
-		logger.log(LOGGER, "HomeController.home : exiting method to: Home");
+		logger.info("HomeController.home : exiting method to: Home");
 		return "Home";
 	}
 
 
 	@GetMapping("/login")
 	public String login(HttpSession session, HttpServletRequest request) {
-		if (session.getAttribute("UserLoggato") != null)
+		logger.info("HomeController.login : entering method");
+
+		if (session.getAttribute("UserLoggato") != null) {
+			logger.info("HomeController.login : exiting method to: Home");
 			return "Home";
+		}
+		logger.info("HomeController.login : exiting method to: Login");
 		return "Login";
 	}
 
 	@GetMapping("/signup")
 	public String signup(HttpSession session) {
+		logger.info("HomeController.signup : entering method");
+
 		session.removeAttribute("ticket");
 		session.removeAttribute("previous");
-		if (session.getAttribute("UserLoggato") != null)
+
+		if (session.getAttribute("UserLoggato") != null) {
+			logger.info("HomeController.signup : exiting method to: Home");
 			return "Home";
+		}
+		logger.info("HomeController.signup : exiting method to: Signup");
 		return "Signup";
 	}
 
@@ -51,10 +61,15 @@ public class HomeController {
 
 	@GetMapping("/account")
 	public String toAccount(HttpSession session) {
+		logger.info("HomeController.signup : entering method");
+
 		session.removeAttribute("ticket");
 		session.removeAttribute("previous");
-		if (session.getAttribute("UserLoggato") == null)
+		if (session.getAttribute("UserLoggato") == null) {
+			logger.info("HomeController.signup : exiting method to: Login");
 			return "Login";
+		}
+		logger.info("HomeController.signup : exiting method to: redirect:/ticketUser/getByUsername");
 		return "redirect:/ticketUser/getByUsername";
 	}
 

@@ -82,7 +82,7 @@ public class Test {
 
 		List<Ticket> listaFiltrata;
 		try {
-			listaFiltrata = ((TicketService)ticketService).getTicketsFilter("Catania", "Torino", "2020-01-22T00:00:00");
+			listaFiltrata = ((TicketService)ticketService).getTicketsFilter("Catania", "Torino", null);
 			listaFiltrata = ((TicketService)ticketService).getTicketsFilter("Catania", null, null);//2007-12-03T10:15:30
 			System.out.println("Catania-torino-2022: " + listaFiltrata);
 			

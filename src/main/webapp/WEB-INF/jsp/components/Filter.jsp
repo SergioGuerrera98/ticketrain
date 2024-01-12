@@ -40,6 +40,8 @@
 </div>
 
 <script>
+    const dataPagina = new Date();
+
     function cleanLabel() {
         document.getElementById("errorLabel").innerText = "";
         document.getElementById("luogoPartenza").style = "";
@@ -59,16 +61,58 @@
         document.getElementById("luogoArrivo").style = "border-color : red";        
         error.innerText = errore;
     }
-    function wrongData() {
+    function wrongData(errore) {
         let error = document.getElementById("errorLabel");
 
         document.getElementById("dataPartenza").style = "border-color : red";
         error.innerText = errore;
     }
-    function allWrong() {
+    function allWrong(alsoDate) {
         document.getElementById("luogoPartenza").style = "border-color : red";
         document.getElementById("luogoArrivo").style = "border-color : red";
-        document.getElementById("dataPartenza").style = "border-color : red";
+        if (alsoDate == true)
+            document.getElementById("dataPartenza").style = "border-color : red";
+    }
+
+    function oneHourAgo(date) {
+        let yy = date.getFullYear();
+        let mm = date.getMonth() + 1;
+        let dd = date.getDate();
+
+        let hh = date.getHours() - 1;
+        let min = date.getMinutes();
+
+        if (hh < 0) {
+            hh = 0;
+            min = 0;
+        }
+        let localDatetime = yy + "-" +
+                        (mm < 10 ? "0" + mm.toString() : mm) + "-" +
+                        (dd < 10 ? "0" + dd.toString() : dd) + "T" +
+                        (hh < 10 ? "0" + hh.toString() : hh) + ":" +
+                        (min < 10 ? "0" + min.toString() : min);
+
+        return new Date(localDatetime);
+    }
+
+    function sixMonthsLater(date) {
+        let yy = date.getFullYear();
+        let mm = date.getMonth() + 1 + 6;
+        let dd = date.getDate();
+
+        let hh = date.getHours();
+        let min = date.getMinutes();
+
+        if (mm > 12) {
+            hh = mm - 12;
+        }
+        let localDatetime = yy + "-" +
+                        (mm < 10 ? "0" + mm.toString() : mm) + "-" +
+                        (dd < 10 ? "0" + dd.toString() : dd) + "T" +
+                        (hh < 10 ? "0" + hh.toString() : hh) + ":" +
+                        (min < 10 ? "0" + min.toString() : min);
+
+        return new Date(localDatetime);
     }
 
     function sendRequest() {
@@ -80,10 +124,18 @@
         //tutti campi vuoti
         if (luogoPartenza == "" && luogoArrivo == "") {
             let error = document.getElementById("errorLabel");
-            allWrong();
-            error.innerText="Devi inserire almeno un campo.";
-        } else if (new Date(dataPartenza) > new Date().setMonth(new Date(dataPartenza).getMonth()+6)) {
+            allWrong(false);
+            error.innerText="Devi inserire almeno un luogo di partenza e/o destinazione.";
+
+            //data oltre 6 mesi
+        } else if (new Date(dataPartenza) > sixMonthsLater(new Date())) {
             wrongData("Non sono previsti treni oltre i 6 mesi dalla data corrente.");
+
+            //data prima 1 h
+        } else if (new Date(dataPartenza) < oneHourAgo(new Date())) {
+            wrongData("Non sono possibili ricerche precedenti alla data corrente.");
+
+            //tutto corretto, invia
         } else {
             if (new Date(dataPartenza) < new Date()) {
                 dataPartenza = dateNow();
@@ -112,10 +164,8 @@
                         wrongLuogoArrivo(errore.substring(errore.indexOf("-")+1, 200000));
                     }
                     if (xhr.responseText.search("Data") > -1) {
-                        wrongData("La data selezionata non è valida.");
+                        wrongData("La data selezionata non ï¿½ valida.");
                     }
-
-                    error.innerText = errore;
                 }
             };
 
@@ -130,7 +180,7 @@
         var day = now.getDate();
         var hour = now.getHours();
         var minute = now.getMinutes();
-        return localDatetime = year + "-" +
+        return year + "-" +
                         (month < 10 ? "0" + month.toString() : month) + "-" +
                         (day < 10 ? "0" + day.toString() : day) + "T" +
                         (hour < 10 ? "0" + hour.toString() : hour) + ":" +
@@ -138,11 +188,12 @@
     }
 
     window.addEventListener("load", function() {
-        var localDatetime = dateNow();
-        var datetimeField = document.getElementById("dataPartenza");
+        let localDatetime = dateNow();
+        let datetimeField = document.getElementById("dataPartenza");
         datetimeField.value = localDatetime;
-        datetimeField.min = localDateTime;
+        datetimeField.min = localDatetime;
     });
+
 
 
 </script>

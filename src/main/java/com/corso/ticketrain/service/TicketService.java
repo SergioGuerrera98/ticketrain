@@ -3,6 +3,7 @@ package com.corso.ticketrain.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -10,6 +11,9 @@ import javax.transaction.Transactional;
 import com.corso.ticketrain.application.StringsUtils;
 import com.corso.ticketrain.checkstring.ComparatoreString;
 
+import com.corso.ticketrain.controller.HomeController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +30,7 @@ import com.corso.ticketrain.treno.utils.UtilsCheckString;
 @Transactional
 @Service
 public class TicketService implements IService{
+	private static Logger logger = LogManager.getLogger(TicketService.class);
 
 	@Autowired
 	private TicketDaoInterface ticketDao;	
@@ -33,54 +38,87 @@ public class TicketService implements IService{
 	@Autowired
 	private CittaDao cittaDao;
 
-	public boolean areFieldsValidForFilter(String luogoPartenza, String luogoArrivo, String dataPartenza) throws PaeseNonTrovatoException, DataPrecedenteException {
+	public boolean areFieldsValidForFilter(String luogoPartenza, String luogoArrivo, LocalDateTime dataPartenza) throws PaeseNonTrovatoException, DataPrecedenteException {
+		logger.info("TicketService.areFieldsValidForFilter : entering method with params[luogoPartenza = {}, luogoArrivo = {}, dataPartenza = {}].",
+				luogoPartenza, luogoArrivo, dataPartenza);
+
+		if (luogoPartenza == "" && luogoArrivo == "") {
+			logger.info("TicketService.areFieldsValidForFilter: exiting method with exception : {}", "Devi inserire almeno un luogo di partenza e/o destinazione.");
+			throw new IllegalArgumentException("Devi inserire almeno un luogo di partenza e/o destinazione.");
+		}
+
+		//check nomi città
 		ComparatoreString comparatore = UtilsCheckString.Check();
 		List<Citta> listaCitta = cittaDao.retrieve();
-		List<String> stringhe= new ArrayList<>();
+		List<String> stringhe = new ArrayList<>();
 		for (Citta citta : listaCitta) {
 			stringhe.add(citta.getNomeCitta());
 		}
-		if(luogoPartenza != "") {
+
+		if (!Objects.equals(luogoPartenza, "")) {
 			String standardPartenza = comparatore.check(luogoPartenza, stringhe);
 			if (standardPartenza.equals("Parola non Trovata")) {
+				logger.info("TicketService.areFieldsValidForFilter: exiting method with exception : {}",
+						"Partenza-La citta' inserita non e' presente");
 				throw new PaeseNonTrovatoException("Partenza-La citta' inserita non e' presente", null);
 			}
 			if (!standardPartenza.equals("Parola Trovata") && !standardPartenza.equals("Parola non Trovata")) {
+				logger.info("TicketService.areFieldsValidForFilter: exiting method with exception : {}",
+						"Partenza-Per la citta' di partenza, intendevi "+standardPartenza+"?");
 				throw new PaeseNonTrovatoException("Partenza-Per la citta' di partenza, intendevi "+standardPartenza+"?", null);
 			}
 		}
-		if(luogoArrivo != "") {
+
+		if( !Objects.equals(luogoArrivo, "")) {
 			String standardArrivo = comparatore.check(luogoArrivo, stringhe);
 			if (standardArrivo.equals("Parola non Trovata")) {
+				logger.info("TicketService.areFieldsValidForFilter: exiting method with exception : {}",
+						"Arrivo-La citta' inserita non e' presente");
 				throw new PaeseNonTrovatoException("Arrivo-La citta' inserita non e' presente", null);
 			}
 			if (!standardArrivo.equals("Parola Trovata") && !standardArrivo.equals("Parola non Trovata")) {
+				logger.info("TicketService.areFieldsValidForFilter: exiting method with exception : {}",
+						"Arrivo-Per la citta' d'arrivo, intendevi "+standardArrivo+"?");
 				throw new PaeseNonTrovatoException("Arrivo-Per la citta' d'arrivo, intendevi "+standardArrivo+"?", null);
 			}
 		}
-		LocalDateTime dataPartenzaD = (dataPartenza != null && !dataPartenza.isBlank()) ? LocalDateTime.parse(dataPartenza) : null;
+
+		//check data
 		if (dataPartenza != null) {
-			if (dataPartenzaD.isBefore(LocalDateTime.now().minusMinutes(2)))
-				throw new DataPrecedenteException("Data-La data non può essere precedente alla corrente", null);
+			if (dataPartenza.isBefore(LocalDateTime.now().minusMinutes(2))) {
+				logger.info("TicketService.areFieldsValidForFilter: exiting method with exception : {}",
+						"Data-La data non può essere precedente alla data corrente.");
+				throw new DataPrecedenteException("Data-La data non può essere precedente alla data corrente.", null);
+			}
+			if (dataPartenza.isAfter(LocalDateTime.now().plusMonths(6))) {
+				logger.info("TicketService.areFieldsValidForFilter: exiting method with exception : {}",
+						"Data-La data non può superiore a 6 mesi dalla data corrente.");
+				throw new DataPrecedenteException("Data-La data non può superiore a 6 mesi dalla data corrente.", null);
+			}
 		}
 
+		logger.info("TicketService.areFieldsValidForFilter: exiting method successfully");
 		return true;
 	}
 
-	public List<Ticket> getTicketsFilter(String luogoPartenza, String luogoArrivo, String dataPartenza) throws PaeseNonTrovatoException, DataPrecedenteException {
+	public List<Ticket> getTicketsFilter(String luogoPartenza, String luogoArrivo, LocalDateTime dataPartenza) throws PaeseNonTrovatoException, DataPrecedenteException {
+		logger.info("TicketService.getTicketsFilter : entering method with params[luogoPartenza = {}, luogoArrivo = {}, dataPartenza = {}].",
+				luogoPartenza, luogoArrivo, dataPartenza);
 
 		areFieldsValidForFilter(luogoPartenza, luogoArrivo, dataPartenza);
 
-		LocalDateTime dataPartenzaD = (dataPartenza != null && !dataPartenza.isBlank()) ? LocalDateTime.parse(dataPartenza) : null;
 		List<Ticket> list = new ArrayList<>();
 		try {
 			list = ticketDao.retrieveByFilter(StringsUtils.upFirst(luogoPartenza),
-					StringsUtils.upFirst(luogoArrivo), dataPartenzaD);
+					StringsUtils.upFirst(luogoArrivo), dataPartenza);
+
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.info("TicketService.getTicketsFilter : exiting method with exception [error = {}]", e.getMessage());
 			return null;
 		}
 
+		logger.info("TicketService.getTicketsFilter : exiting method with result[list = {}]", list);
 		return list;
 	}
 

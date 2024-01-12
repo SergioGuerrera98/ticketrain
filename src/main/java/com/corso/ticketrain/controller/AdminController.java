@@ -2,7 +2,10 @@ package com.corso.ticketrain.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.logging.Level;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -24,7 +27,8 @@ import com.corso.ticketrain.treno.model.Treno;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	
+	private static final Logger logger = LogManager.getLogger(AdminController.class);
+
 	@Autowired
 	private TrenoService trenoService;
 	@Autowired
@@ -36,17 +40,21 @@ public class AdminController {
 	
 	@GetMapping("/getTreni")
 	public String getAll(Model model){
+		logger.info("AdminController.getAll : entering method.");
+
 		List<Treno> treni = trenoService.retrieveAll();
 		List<Citta> citta = cittaService.retrieve();
 		List<Ticket> tickets = ticketService.retrieve();
 		model.addAttribute("listaTickets", tickets);
 		model.addAttribute("listaCitta", citta);
 		model.addAttribute("listaTreni", treni);
+
+		logger.info("AdminController.getAll : exiting method.");
 		return "Admin";
 	}
 	
 	@PostMapping("/addTrain")
-	public String addTrain(@RequestParam String stringaTreno, Model model) {	
+	public String addTrain(@RequestParam String stringaTreno, Model model) {
 		List<Treno> treni = trenoService.retrieveAll();
 		List<Citta> citta = cittaService.retrieve();
 		List<Ticket> tickets = ticketService.retrieve();

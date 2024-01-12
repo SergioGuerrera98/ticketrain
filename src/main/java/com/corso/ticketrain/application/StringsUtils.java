@@ -19,6 +19,6 @@ public class StringsUtils {
     }
 
     public static boolean isLetter(char c) {
-        return (c > 'A' && c < 'Z') || (c > 'a' && c < 'z');
+        return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
     }
 }
