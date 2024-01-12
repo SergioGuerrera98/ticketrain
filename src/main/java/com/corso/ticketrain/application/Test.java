@@ -69,10 +69,10 @@ public class Test {
 
 		Treno treno = trenoService.addTrain2("HPRPH", new VagoneFactory());
 		Vagone vagone = treno.getVagoni().get(2);
-		Ticket t = new Ticket("jhefj1", LocalDateTime.of(2019, 01, 22, 10, 30), LocalDateTime.of(2021, 01, 22, 10, 30), "Napoli", "Bari", 22.0f, treno, vagone);
-		Ticket t1 = new Ticket("jhefj2", LocalDateTime.of(2022, 01, 22, 10, 30), LocalDateTime.of(2021, 01, 22, 10, 30), "Catania", "Torino", 22.0f, treno, vagone);
-		Ticket t2 = new Ticket("jhefj3", LocalDateTime.of(2020, 01, 22, 10, 30), LocalDateTime.of(2021, 01, 22, 10, 30), "Napoli", "Torino", 22.0f, treno, vagone);
-		Ticket t3 = new Ticket("jhefj4", LocalDateTime.of(2020, 01, 22, 10, 30), LocalDateTime.of(2021, 01, 22, 10, 30), "Catania", "Bari", 22.0f, treno, vagone);
+		Ticket t = new Ticket("jhefj1", LocalDateTime.of(2019, 01, 22, 10, 30), LocalDateTime.of(2021, 01, 22, 10, 30), "Napoli", "Bari", 22.0f, treno, vagone, "Economy");
+		Ticket t1 = new Ticket("jhefj2", LocalDateTime.of(2022, 01, 22, 10, 30), LocalDateTime.of(2021, 01, 22, 10, 30), "Catania", "Torino", 22.0f, treno, vagone, "Economy");
+		Ticket t2 = new Ticket("jhefj3", LocalDateTime.of(2020, 01, 22, 10, 30), LocalDateTime.of(2021, 01, 22, 10, 30), "Napoli", "Torino", 22.0f, treno, vagone, "Economy");
+		Ticket t3 = new Ticket("jhefj4", LocalDateTime.of(2020, 01, 22, 10, 30), LocalDateTime.of(2021, 01, 22, 10, 30), "Catania", "Bari", 22.0f, treno, vagone, "Economy");
 		ticketService.insert(t);
 		ticketService.insert(t2);
 		ticketService.insert(t3);

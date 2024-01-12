@@ -1,11 +1,11 @@
 <div id="carousel-container" style="max-width: 70%; height: 15%; margin-left: 15%; margin-right: 15%; padding: 20px" > 
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel"  >
+        <div class="carousel-indicators" >
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Sconto30"  data-bs-interval="0.1"></button>
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Treno1" data-bs-interval="0.1"></button>
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Treno2"></button>
         </div>
-        <div class="carousel-inner">
+        <div class="carousel-inner shadow-lg" style="border-radius: 10px">
             <div class="carousel-item active"> 
             <img src="https://www.strettoweb.com/wp-content/uploads/2023/12/alta-velocita-ferroviaria-treno-binari-mare.jpg" style="height: 600px; width: 50%" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
@@ -21,7 +21,7 @@
             </div>
             </div>
             <div class="carousel-item">
-            <img src="https://cdn-goeuro.com/static_content/web/content/pics/alta%20velocita_italian_train.jpg" style="height: 600px; width: 50%" class="d-block w-100" alt="...">
+            <img src="https://cdn-goeuro.com/static_content/web/content/pics/alta%20velocita_italian_train.jpg" style="height: 600px; width: 50%; " class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h5 class="text-black">Affidabilità e puntualità garantite</h5 >
                 <p class="text-black">Rimborso parziale in caso di ritardo.</p>

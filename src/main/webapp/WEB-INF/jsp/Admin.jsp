@@ -65,6 +65,14 @@
         <h5>Crea un Biglietto:</h5>
         <label for="codice">Codice:</label>
     <input type="text" name="codice" required><br>
+        <label for="classe">Classe:</label>
+    <select name="classe" required>
+    	<option value="economy">Economy</option>
+        <option value="business">Business</option>
+        <option value="first-class">First Class</option>
+     </select><br>
+        <label for="prezzo">Prezzo:</label>
+    <input type="number" name="prezzo" required><br>
 
     <label for="dataPartenza">Data Partenza:</label>
     <input type="datetime-local" name="dataPartenza" required><br>
@@ -81,8 +89,26 @@
             <option value="<%= c.getNomeCitta() %>"><%= c.getNomeCitta() %></option>
             
         <% } %>
+    </select><br>
+    <label for="luogoArrivo">Luogo Arrivo:</label>
+    <select name="luogoArrivo">
+        <% 
+            
+            for (Citta c : citta) {
+        %>
+            <option value="<%= c.getNomeCitta() %>"><%= c.getNomeCitta() %></option>
+            
+        <% } %>
     </select>
     	<br>
+    	<label for="treno_id">Treno:</label>
+    	<select name="treno_id">
+    	<%
+    	for (Treno treno : treni) {
+    	%>
+    	<option value="<%=treno.getId()%>"><%=treno.getCodice() %></option>
+    	<%} %>
+    	</select>
         <button type="submit" class="btn btn-success">Aggiungi</button>
     </form>
 <%=errorTicket %>
@@ -95,7 +121,7 @@
                 <% 
                     for (Ticket ticket : tickets) {
                 %>
-                    <option value="<%= ticket.getId() %>"><%= ticket.getCodice() %></option>
+                    <option id="<%=ticket.getId()%>" value="<%=ticket.getId()%>"><%= ticket.getCodice() %></option>
                 <% } %>
             </select>
         </div>

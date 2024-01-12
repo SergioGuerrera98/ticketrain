@@ -32,13 +32,13 @@
             <jsp:include page="/WEB-INF/jsp/components/Header.jsp"></jsp:include>
         </header>
 
-<%if (user.getPhoto() != null){ %>
-		<h2>Foto dell'utente</h2>
-        <%-- Converti l'array di byte in una stringa Base64 --%>
-        <c:set var="base64Image" value="<%= new String(Base64.getEncoder().encode(user.getPhoto()), StandardCharsets.UTF_8) %>" />
-        <%-- Visualizza l'immagine --%>
-        <img src="data:image/jpeg;base64,${base64Image}" alt="Foto utente" style="border-radius: 50%; width: 100px; height: 100px;">
-<%} %>
+        <%if (user.getPhoto() != null){ %>
+            <h2>Foto dell'utente</h2>
+            <c:set var="base64Image" value="<%= new String(Base64.getEncoder().encode(user.getPhoto()), StandardCharsets.UTF_8) %>" />
+            <img src="data:image/jpeg;base64,${base64Image}" alt="Foto utente" style="border-radius: 50%; width: 100px; height: 100px;" />
+        <%} else {%>
+            <img src="https://raw.githubusercontent.com/IlanZdd/resources/main/addPhotoU.png" alt="Foto utente" style="border-radius: 50%; width: 100px; height: 100px;" />
+        <%}%>
         <!-- BANNER TODO -->
         <div class="" style="margin-left: auto; margin-right: auto; width: 50%">
             
@@ -65,7 +65,7 @@
         </div>
         <br>
         <a style="width: 18rem; margin-left: 35%" href="<%=request.getContextPath() + "/home"%>" class="btn btn-primary">
-                    <i class="bi bi-cart-plus">
+                    <i class="bi bi-outline-success bi-cart-plus">
                         Acquista un nuovo ticket
                     </i>
                 </a>

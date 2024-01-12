@@ -1,6 +1,7 @@
 <%@page import="com.corso.ticketrain.model.Ticket"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.corso.ticketrain.model.TicketUser"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@page import="java.util.List"%>
 <%@page import="com.corso.ticketrain.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -36,14 +37,30 @@
               </div>
             </button>
           </h2>
-          <div id="collapse<%=t.getCodice()%>" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div id="collapse<%=t.getCodice()%>" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
             <div class="accordion-body">
               <div class="col">
                 <div class="row">
-                  <p>Partenza da : <%=t.getLuogoPartenza() %>, ore : <%=t.getDataPartenza() %></p>
+                  <p>Partenza da : <%=t.getLuogoPartenza() %>, ore : 
+                  <%
+                                        LocalDateTime datePartenza = t.getDataPartenza();
+                                        out.print(datePartenza.getDayOfMonth() + "/");
+                                        out.print(datePartenza.getMonthValue() + "/");
+                                        out.print(datePartenza.getYear() + " - ");
+                                        
+                                        out.print(datePartenza.getHour() + ":");
+                                        out.print(datePartenza.getMinute()); %></p>
+                          
                 </div>
                 <div class="row">
-                  <p>Arrivo a : <%=t.getLuogoArrivo() %>, ore : <%=t.getDataArrivo() %></p>
+                  <p>Arrivo a : <%=t.getLuogoArrivo() %>, ore : <%
+                                        LocalDateTime dateArrivo = t.getDataArrivo();
+                                        out.print(dateArrivo.getDayOfMonth() + "/");
+                                        out.print(dateArrivo.getMonthValue() + "/");
+                                        out.print(dateArrivo.getYear() + " - ");
+                                        
+                                        out.print(dateArrivo.getHour() + ":");
+                                        out.print(dateArrivo.getMinute()); %></p>
                 </div>
                 <div class="row">
                   <p>Prezzo: <%=t.getPrezzo()%> euro</p>
@@ -72,3 +89,13 @@
     </div>
   </div>
 </div>
+
+<style>
+  .accordion-button:focus {
+    background-color: #28a745; 
+    color: #fff; 
+    border-color: #28a745; 
+    box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25);
+    z-index: 1;
+  }
+</style>

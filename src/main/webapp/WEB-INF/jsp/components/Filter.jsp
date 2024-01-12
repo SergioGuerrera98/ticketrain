@@ -8,7 +8,7 @@
         String webApp = request.getContextPath();
     %>
 
-<div id="filtro" class="card" style="max-width: 70%; height: 15%; margin-left: 15%; margin-right: 15%; padding: 20px">
+<div id="filtro" class="card shadow-lg p-3 mb-5 bg-body rounded" style="max-width: 70%; height: 15%; margin-left: 15%; margin-right: 15%; padding: 20px">
         <div class="row">
             <h5>Cerca tratta:</h5>
         </div>
@@ -34,7 +34,7 @@
         </div>
         <div class="row position-relative start-80">
             <div class="col">
-                <button type="button" class="btn btn-outline-success" onclick="sendRequest()" value="Ricerca tratte" >Ricerca Tratte </button>
+                <button type="button" class="btn btn-outline-success" onclick="sendRequest()" value="Ricerca tratte" style="margin-left: 78%">Ricerca Tratte </button>
             </div>
         </div>
 </div>
@@ -121,7 +121,6 @@
         var day = now.getDate();
         var hour = now.getHours();
         var minute = now.getMinutes();
-        var second = now.getSeconds();
         return localDatetime = year + "-" +
                         (month < 10 ? "0" + month.toString() : month) + "-" +
                         (day < 10 ? "0" + day.toString() : day) + "T" +

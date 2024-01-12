@@ -28,6 +28,8 @@ public class Ticket {
 	private String luogoArrivo;
 	@Column(name = "prezzo")
 	private Float prezzo;
+	@Column(name = "classe")
+	private String classe;
 	@ManyToOne
 	@JoinColumn(name = "treno_id") 
 	private Treno treno_id;
@@ -42,7 +44,7 @@ public class Ticket {
 	
 	
 	public Ticket(String codice, LocalDateTime dataPartenza, LocalDateTime dataArrivo, String luogoPartenza,
-			String luogoArrivo, Float prezzo, Treno treno_id) {
+			String luogoArrivo, Float prezzo, Treno treno_id, String classe) {
 		super();
 		this.codice = codice;
 		this.dataPartenza = dataPartenza;
@@ -51,12 +53,13 @@ public class Ticket {
 		this.luogoArrivo = luogoArrivo;
 		this.prezzo = prezzo;
 		this.treno_id = treno_id;
+		this.classe = classe;
 	}
 
 
 
 	public Ticket(String codice, LocalDateTime dataPartenza,
-					LocalDateTime dataArrivo, String luogoPartenza, String luogoArrivo, Float prezzo, Treno treno_id, Vagone vagone_id){
+					LocalDateTime dataArrivo, String luogoPartenza, String luogoArrivo, Float prezzo, Treno treno_id, Vagone vagone_id, String classe){
 						this.codice = codice;
 						this.dataPartenza = dataPartenza;
 						this.dataArrivo = dataArrivo;
@@ -65,6 +68,7 @@ public class Ticket {
 						this.prezzo = prezzo;
 						this.treno_id = treno_id;
 						this.vagone_id = vagone_id;
+						this.classe = classe;
 					}
 
 	public int getId() {
@@ -146,6 +150,14 @@ public class Ticket {
 	public Ticket setPrezzo(Float prezzo) {
 		this.prezzo = prezzo;
 		return this;
+	}
+
+	public String getClasse() {
+		return classe;
+	}
+
+	public void setClasse(String classe) {
+		this.classe = classe;
 	}
 
 	@Override

@@ -1,4 +1,8 @@
 <%@page import="com.corso.ticketrain.model.User"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page import="java.util.Base64" %>
+<%@ page import="java.nio.charset.StandardCharsets" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%
@@ -22,9 +26,9 @@
         <!-- TicketTrain -->
         <a class="navbar-brand" href="<%=webApp%>/home">
         <%if (displayTema == null || displayTema.equals("dark")){ %>
-            <img id="logo" src="https://raw.githubusercontent.com/IlanZdd/resources/main/nameSiteDark.png" style="width: ; height: 40px">
+            <img id="logo" src="https://raw.githubusercontent.com/IlanZdd/resources/main/logoBT.png" style="width: ; height: 40px">
             <%} else{ %>
-         <img id="logo" src="https://raw.githubusercontent.com/IlanZdd/resources/main/nameSite.png" style="width: ; height: 40px">
+         <img id="logo" src="https://raw.githubusercontent.com/IlanZdd/resources/main/logoLT.png" style="width: ; height: 40px">
          <%} %>
         </a>
         <button class="navbar-toggler" type="button"
@@ -47,7 +51,13 @@
                     <li class="nav-item">
                         <a  style="padding : 5px" class="nav-link" href="<%=webApp%>/account">
                             <label><%=user.getUsername() %></label>
-                         <img src="https://raw.githubusercontent.com/IlanZdd/resources/main/areaPersonale.png" style="width: 30px;"><!-- Area Personale (<%=user.getUsername() %>) -->
+                            <%if (user.getPhoto() == null) {%>
+                         <img src="https://raw.githubusercontent.com/IlanZdd/resources/main/areaPersonale.png" style="width: 30px;">
+                         <%} if (user.getPhoto() != null) {%>
+                         <c:set var="base64Image" value="<%= new String(Base64.getEncoder().encode(user.getPhoto()), StandardCharsets.UTF_8) %>" />
+        				<img src="data:image/jpeg;base64,${base64Image}" alt="Foto utente" style="border-radius: 50%; width: 50px; height: 50px;">
+                         <%} %>
+                         <!-- Area Personale (<%=user.getUsername() %>) -->
                         </a>
                     </li>
                     <li class="nav-item"><a  style="padding : 5px" class="nav-link" href="<%=webApp%>/user/logout">Logout</a></li>
@@ -75,6 +85,7 @@
             document.getElementById("htmlId").setAttribute('data-bs-theme','light');
             document.getElementById("imgTema").setAttribute('src','https://raw.githubusercontent.com/IlanZdd/resources/main/moon.png');
             document.getElementById("logo").setAttribute('src','https://raw.githubusercontent.com/IlanZdd/resources/main/logoLT.png');
+            
         } else {
             document.getElementById("htmlId").setAttribute('data-bs-theme','dark');
             document.getElementById("imgTema").setAttribute('src','https://raw.githubusercontent.com/IlanZdd/resources/main/sun.png');

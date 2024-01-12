@@ -28,5 +28,6 @@
             <div class="d-grid gap-2">
                 <input class="btn btn-outline-success btn-lg" type="submit" value="Login" />
             </div>
+            <%=errorLabel %>
         </form>
 </div>

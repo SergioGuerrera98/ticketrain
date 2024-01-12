@@ -81,16 +81,15 @@ public class AdminController {
 	}
 	
 	@PostMapping("/addTicket")
-	public String addTicket(@RequestParam String codice,
+	public String addTicket(@RequestParam String codice, String classe, Float prezzo,
 		    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime dataPartenza,
 		    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime dataArrivo,
 		    String luogoPartenza,
 		    String luogoArrivo,
-		    Float prezzo,
 		    int treno_id, Model model) {
 		try {
 			Treno t = trenoService.getTrenoById(treno_id);
-			Ticket ticket = new Ticket(codice, dataPartenza, dataArrivo, luogoPartenza, luogoArrivo, prezzo, t);
+			Ticket ticket = new Ticket(codice, dataPartenza, dataArrivo, luogoPartenza, luogoArrivo, prezzo, t, classe);
 			ticketService.create(ticket);
 			List<Treno> treni = trenoService.retrieveAll();
 			List<Citta> citta = cittaService.retrieve();
