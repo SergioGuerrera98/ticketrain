@@ -17,7 +17,8 @@
 <div class="accordion accordion-flush" id="accordionFlushExample">
   <div class="accordion-item">
     <div class="accordion" id="accordionExample">
-      <% for (Ticket t : mappaTicket.keySet()) {  %>
+      <% if (mappaTicket != null) {
+        for (Ticket t : mappaTicket.keySet()) {  %>
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=t.getCodice()%>" aria-expanded="false" aria-controls="collapse<%=t.getCodice()%>">
@@ -76,7 +77,7 @@
             </div>
           </div>
         </div>
-      <%}%>
+      <%}}%>
     </div>
   </div>
 </div>

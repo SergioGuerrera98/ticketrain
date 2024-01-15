@@ -41,4 +41,8 @@ public class PaeseService implements IService{
 		paeseDao.create(paese);
 	}
 
+	public Paese findByNome(String nomePaese) {
+		return paeseDao.findByNome(nomePaese);
+	}
+
 }

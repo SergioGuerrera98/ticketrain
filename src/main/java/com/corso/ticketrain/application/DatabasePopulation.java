@@ -95,13 +95,13 @@ public class DatabasePopulation {
         PaeseService paeseDao = factory.getBean(PaeseService.class);
         CittaService cittaDao = factory.getBean(CittaService.class);
 
-        Paese italia = new Paese("Italia");
-        Paese germania = new Paese("Germania");
-        Paese francia = new Paese("Francia");
+        for (Paese p : getPaesiCsv("./c.csv")) {
+            paeseDao.insert(p);
+        }
 
-        paeseDao.insert(italia);
-        paeseDao.insert(germania);
-        paeseDao.insert(francia);
+        Paese italia = paeseDao.findByNome("Italy");
+        Paese germania = paeseDao.findByNome("Germany");
+        Paese francia = paeseDao.findByNome("France");
 
         //ita
         List<Citta> citta = getCittaJson("./ic.json", italia);
@@ -139,6 +139,28 @@ public class DatabasePopulation {
         }
 
         return citta;
+    }
+    private static List<Paese> getPaesiCsv(String path) {
+        List<Paese> paesi = new ArrayList<>();
+
+        //ita
+        File f;
+        Scanner scanner = null;
+        try {
+            f = new File(path);
+            scanner = new Scanner(new FileReader(f));
+            scanner.nextLine();
+            while (scanner.hasNext()) {
+                String[] s = scanner.nextLine().split("\", \"");
+                paesi.add(new Paese( s[0].replaceAll("\"", ""), s[1].replaceAll("\"", "")));
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (scanner != null) scanner.close();
+        }
+
+        return paesi;
     }
     private static List<Citta> getCittaJson(String path, Paese paese) throws IOException {
         List<Citta> citta = new ArrayList<>();
@@ -253,9 +275,9 @@ public class DatabasePopulation {
             Ticket t = setTicket.get(friend.nextInt(setTicket.size()));
             User u = setUsers.get(friend.nextInt(setUsers.size()));
             System.out.println("User: " + u.getUsername() + ", Ticket : " + t.getCodice() + ":");
-            for (int j = 0; j < friend.nextInt(5); ++j) {//TODO CHECK < TOTALE POSTI
+            for (int j = 0; j < friend.nextInt(5); ++j) {
                 TicketUser tu = new TicketUser(u, t, names[friend.nextInt(names.length)],
-                        lastNames[friend.nextInt(lastNames.length)], ""+((Passeggeri) t.getVagone_id()).getClasse());
+                        lastNames[friend.nextInt(lastNames.length)], t.getClasse());
                 ticketUserDao.create(tu);
 
                 System.out.println("\tBought ticket: " + tu + ", nome: " + tu.getNome() + " " + tu.getCognome());

@@ -23,6 +23,7 @@
         Map<Ticket, List<TicketUser>> mappaTicket = (Map<Ticket, List<TicketUser>>) request.getAttribute("listaTickets");
     %>	
     <head>
+    <link href="https://tympanus.net/Tutorials/CustomFileInputs/css/component.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
         <meta charset="ISO-8859-1">
@@ -33,36 +34,48 @@
         <header>
             <jsp:include page="/WEB-INF/jsp/components/Header.jsp"></jsp:include>
         </header>
+
         <!-- BANNER TODO -->
+
         <div class="" style="margin-left: auto; margin-right: auto; width: 50%">
             
         <br><br>
-        <div class="card" style="width: 18rem; margin-left: 35%">
-            <div class="card-body">
-                <h3 class="card-title">Profilo Personale</h3>
-                <p>Username : <%=user.getUsername() %></p>
-                <p>Paese : <%=user.getPaese().getNomePaese() %></p>
-                 <p>Foto : </p>
-                        <%if (user.getPhoto() != null){ %>
-           
-            <c:set var="base64Image" value="<%= new String(Base64.getEncoder().encode(user.getPhoto()), StandardCharsets.UTF_8) %>" />
-            <img src="data:image/jpeg;base64,${base64Image}" alt="Foto utente" style="border-radius: 50%; width: 100px; height: 100px;" />
-        <%} else {%>
-            <img src="https://raw.githubusercontent.com/IlanZdd/resources/main/addPhotoU.png" alt="Foto utente" style="border-radius: 50%; width: 100px; height: 100px;" />
-        <%}%>
-                <p class="card-text"></p>
-                    <i class="bi bi-cart-plus">
-                        Carica immagine
-                    </i>
-                    <br><br>
-                    
-                <form class="" action="<%=webApp %>/user/foto" method="POST" enctype="multipart/form-data">
-                <input type="file" id="file" name="file" accept="image/*" >
-                    <br>
-                    <div class="d-grid gap-2">
-                        <input class="btn btn-green btn-lg" type="submit" value="Carica immagine" />
+        <div class="card shadow-lg p-3 mb-5 bg-body rounded col-md-auto">
+            <div class="card-body col-md-auto" style="padding : 10px">
+                <h3 class="card-title text-center">Profilo Personale</h3>
+                <div class="container text-center">
+
+                    <div class="col col-md-auto">
+                        <div class="row">
+                                <label for="usernameText" class="w-auto form-control-plaintext">Username: &nbsp;</label>
+                                <input type="text" readonly class="form-control-plaintext w-auto" id="usernameText" value="<%=user.getUsername() %>">
+                            </div>
+                            <div class="row">
+                                <label for="paeseText" class="w-auto form-control-plaintext">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;Paese: &nbsp;</label>
+                                <input type="text" readonly class="form-control-plaintext w-auto" id="paeseText" value="<%=user.getPaese().getNomePaese() %>">
+                                <img src="https://flagsapi.com/<%=user.getPaese().getAlpha2()%>/flat/32.png" id="flagPaese" style="width : 64px; height : 32px">
+                            </div>
+                        </div>
+                        <br>
+                    <div class="col col-md-auto">
+                        <p>Foto: </p>
+                            <%if (user.getPhoto() != null){ %>
+            
+                                <c:set var="base64Image" value="<%= new String(Base64.getEncoder().encode(user.getPhoto()), StandardCharsets.UTF_8) %>" />
+                                <img src="data:image/jpeg;base64,${base64Image}" alt="Foto utente" style="border-radius: 50%; width: 100px; height: 100px;" />
+                            <%} else {%>
+                                <img src="https://raw.githubusercontent.com/IlanZdd/resources/main/addPhotoU.png" alt="Foto utente" style="border-radius: 50%; width: 100px; height: 100px;" />
+                            <%}%>
+
+                            <br><br>
+                        
+                            <form class="" action="<%=webApp %>/user/foto" method="POST" enctype="multipart/form-data">
+                                <input type="file" id="file" name="file" class="inputfile inputfile-1" accept="image/*" >
+                                    <br>
+                                <input class="btn btn-green w-auto" type="submit" id="carica" value="Carica immagine" hidden="true"/>
+                            </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
         <br>
@@ -72,20 +85,35 @@
         </div>
             
         <div class="card" style="padding : 10px">
+        
             <h3>Ticket Acquistati 
-                <a style="width: 18rem; margin-left: 15%" 
+                </h3>
+                <a style="width: 18rem; " 
                     href="<%=request.getContextPath() + "/home"%>" class="btn css-button-arrow--blue">
                     <i class="bi bi-outline-success bi-cart-plus">
                         Acquista un nuovo ticket
                     </i>
-                </a></h3>
+                </a>
                 <br>
             <jsp:include page="/WEB-INF/jsp/components/BigliettiComprati.jsp"></jsp:include>
         </div>
 
         <footer><jsp:include page="/WEB-INF/jsp/components/Footer.jsp"></jsp:include></footer>
+
     </body>
+    <script>
+        document.getElementById("file").addEventListener('input', (evt) => {
+            if (document.getElementById("file").value != "") {
+                document.getElementById("carica").hidden = false;
+            } else {
+                document.getElementById("carica").hidden = true;
+            }
+        });
+
+
+    </script>
     <style>
+
             .btn-purple-outline{
                 --bs-btn-color:#874692  !important;
                 --bs-btn-border-color:#874692 !important;

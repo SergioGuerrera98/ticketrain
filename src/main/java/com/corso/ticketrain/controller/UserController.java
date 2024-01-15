@@ -146,10 +146,10 @@ public class UserController {
 
             //SerialBlob foto = user.getFoto();
             //user.setPhoto(bytes);
-            return "Home" ;
+            return "Account" ;
         } catch (Exception e) {
             e.printStackTrace();
-            return "Home";
+            return "Account";
         }
 	}
 

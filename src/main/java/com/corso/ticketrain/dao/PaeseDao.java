@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.corso.ticketrain.application.StringsUtils;
 import com.corso.ticketrain.model.Paese;
 import com.corso.ticketrain.model.User;
 
@@ -21,7 +22,7 @@ public class PaeseDao implements DaoInterface<Paese>{
 
 	@Override
 	public void create(Paese ref) {
-		ref.setNomePaese(ref.getNomePaese().toLowerCase());
+		ref.setNomePaese(StringsUtils.upFirst(ref.getNomePaese()));
 		manager.persist(ref);
 		
 	}
@@ -33,7 +34,7 @@ public class PaeseDao implements DaoInterface<Paese>{
 
 	@Override
 	public void update(Paese ref) {
-		ref.setNomePaese(ref.getNomePaese().toLowerCase());
+		ref.setNomePaese(StringsUtils.upFirst(ref.getNomePaese()));
 		manager.persist(ref);
 		
 	}

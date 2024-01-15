@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import com.corso.ticketrain.application.StringsUtils;
 import com.corso.ticketrain.model.Citta;
 
 
@@ -23,7 +24,7 @@ public class CittaDao implements DaoInterface<Citta>{
 
 	@Override
 	public void create(Citta ref) {
-		ref.setNomeCitta(ref.getNomeCitta().toLowerCase());
+		ref.setNomeCitta(StringsUtils.upFirst(ref.getNomeCitta()));
 		manager.persist(ref);
 		
 	}
@@ -35,7 +36,7 @@ public class CittaDao implements DaoInterface<Citta>{
 
 	@Override
 	public void update(Citta ref) {
-		ref.setNomeCitta(ref.getNomeCitta().toLowerCase());
+		ref.setNomeCitta(StringsUtils.upFirst(ref.getNomeCitta()));
 		manager.persist(ref);	
 		
 	}

@@ -54,7 +54,7 @@
                 <% 
                     for (Treno treno : treni) {
                 %>
-                    <option value="<%= treno.getId() %>"><%= treno.getCodice() %></option>
+                    <option value="<%= treno.getId() %>"><% out.print(treno.getId() + " - " + treno.getCodice()); %></option>
                 <% } %>
             </select>
         </div>
@@ -109,7 +109,7 @@
     	Treno trenoSelezionato = null;
     	for (Treno treno : treni) {
     	%>
-    	<option value="<%=treno.getId()%>"><%=treno.getCodice() %> <%trenoSelezionato = treno; %></option>
+    	<option value="<%=treno.getId()%>"><% out.print(treno.getId() + " - " + treno.getCodice()); %> <%trenoSelezionato = treno; %></option>
     	
     	<%} %>
     	</select>
@@ -120,7 +120,7 @@
     	<%
     	for (Vagone vagone : trenoSelezionato.getVagoni()){
     	%>
-    	<option value="<%=vagone.getId()%>"><%=vagone.getCarattere() %> </option>
+    	<option value="<%=vagone.getId()%>"><% out.print(vagone.getId() + "-" + vagone.getCarattere()); %> </option>
     	<%} %>
     	</select>
     	
