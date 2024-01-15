@@ -30,12 +30,21 @@
         </header> 
 
 
-        <%if (user==null) {%>
+        <%if (user==null) {
+            if (tema.equals("dark")){
+        %>  
             <div class="offcanvas offcanvas-end show text-bg-dark" tabindex="-1" id="offcanvasDark" aria-labelledby="offcanvasDarkLabel">
                 <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasDarkLabel">Accedi</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvasDark" aria-label="Close"></button>
             </div>
+            <%} else if (tema.equals("light")){%>
+            <div class="offcanvas offcanvas-end show text-bg-light" tabindex="-1" id="offcanvasLight" aria-labelledby="offcanvasLightLabel">
+                <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasLightLabel">Accedi</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvasLight" aria-label="Close"></button>
+                </div>
+              <%}  %>
                 <div class="offcanvas-body">
                     <div style="margin : 10px">
                         <p class="text-center">Effettua il login per acquistare dei Ticket:</p>
@@ -58,4 +67,6 @@
             <jsp:include page="/WEB-INF/jsp/components/Footer.jsp"></jsp:include>
         </footer>    
     </body>
+    
+
 </html>

@@ -39,6 +39,9 @@
                         <td>Arrivo a:&nbsp;&nbsp; <%=ticket.getLuogoArrivo()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td><%=ticket.getDataArrivoStr()%></td>
                     </tr>
+                    <tr>
+                        <td >Posti rimanenti:&nbsp;&nbsp; <%=(int)ticket.getVagone_id().getNumeroPosti()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    </tr>
                 </table>
             </div>
 
@@ -47,15 +50,16 @@
             <div id="postiCounter">
                 <div class="row">
                     <div class="col col-md-auto">
-                        <p>Numero posti: </p>
+                        <p>Numero biglietti: </p>
                     </div>
-                    <div class="col col-md-auto"><button id="postiMin" onclick="postiMinus()" inert="true">-</button>
+                    <div class="col col-md-auto">
+                        <button class="btn btn-green-outline" id="postiMin" onclick="postiMinus()" inert="true">-</button>
                     </div>
                     <div class="col col-md-auto">
                         <h4 id="postiSelezionati">1</h4>
                     </div>
                     <div class="col col-md-auto">
-                        <button id="postiPlu" onclick="postiPlus()">+</button>
+                        <button class="btn btn-green-outline" id="postiPlu" onclick="postiPlus()">+</button>
                     </div>
                 </div>
             </div>
@@ -69,12 +73,12 @@
                         <div class="card" id="p1" style="padding:10px">
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p class="text-end"> Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP1" placeholder="Nome passeggero"/>  </p> 
+                                    <p class="text-end"> Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP1" placeholder="Nome passeggero" style="border-color : #874692"/>  </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p class="text-end">  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP1" placeholder="Cognome passeggero"/>  </p> 
+                                    <p class="text-end">  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP1" placeholder="Cognome passeggero" style="border-color : #874692"/>  </p>
                                 </div>
                             </div>
                         </div>
@@ -85,12 +89,12 @@
                         <div class="card" id="p2" hidden = "true"  style="padding:10px">
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP2" placeholder="Nome passeggero"/>  </p>
+                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP2" placeholder="Nome passeggero" style="border-color : #874692"/>  </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p>  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP2" placeholder="Cognome passeggero"/>  </p> 
+                                    <p>  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP2" placeholder="Cognome passeggero" style="border-color : #874692"/>  </p> 
                                 </div>
                             </div>
                         </div>
@@ -106,12 +110,12 @@
                         <div class="card" id="p3" hidden = "true" style="padding:10px">
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP3" placeholder="Nome passeggero"/>  </p> 
+                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP3" placeholder="Nome passeggero" style="border-color : #874692"/>  </p> 
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p>  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP3" placeholder="Cognome passeggero"/>  </p>
+                                    <p>  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP3" placeholder="Cognome passeggero" style="border-color : #874692"/>  </p>
                                 </div>
                             </div>
                         </div>
@@ -122,12 +126,12 @@
                         <div class="card" id="p4" hidden = "true" style="padding:10px">
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP4" placeholder="Nome passeggero"/>  </p>
+                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP4" placeholder="Nome passeggero" style="border-color : #874692"/>  </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p>  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP4" placeholder="Cognome passeggero"/>  </p>
+                                    <p>  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP4" placeholder="Cognome passeggero" style="border-color : #874692"/>  </p>
                                 </div>
                             </div>
                         </div>
@@ -143,12 +147,12 @@
                         <div class="card" id="p5" hidden = "true" style="padding:10px">
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP5" placeholder="Nome passeggero"/>  </p>
+                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP5" placeholder="Nome passeggero" style="border-color : #874692"/>  </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p>  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP5" placeholder="Cognome passeggero"/>  </p>
+                                    <p>  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP5" placeholder="Cognome passeggero" style="border-color : #874692"/>  </p>
                                 </div>
                             </div>
                         </div>
@@ -159,12 +163,12 @@
                         <div class="card" id="p6" hidden = "true" style="padding:10px">
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP6" placeholder="Nome passeggero"/>  </p>
+                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP6" placeholder="Nome passeggero" style="border-color : #874692"/>  </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p>  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP6" placeholder="Cognome passeggero"/>  </p>
+                                    <p>  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP6" placeholder="Cognome passeggero" style="border-color : #874692"/>  </p>
                                 </div>
                             </div>
                         </div>
@@ -180,12 +184,12 @@
                         <div class="card" id="p7" hidden = "true" style="padding:10px">
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP7" placeholder="Nome passeggero"/>  </p>
+                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP7" placeholder="Nome passeggero" style="border-color : #874692"/>  </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p>  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP7" placeholder="Cognome passeggero"/>  </p>
+                                    <p>  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP7" placeholder="Cognome passeggero" style="border-color : #874692"/>  </p>
                                 </div>
                             </div>
                         </div>
@@ -196,12 +200,12 @@
                         <div class="card" id="p8" hidden = "true" style="padding:10px">
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP8" placeholder="Nome passeggero"/>  </p>
+                                    <p>  Nome:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <input type="text" onfocus="clearAll()" id="nomeP8" placeholder="Nome passeggero" style="border-color : #874692"/>  </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col col-md-auto">
-                                    <p>  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP8" placeholder="Cognome passeggero"/>  </p>
+                                    <p>  Cognome:   <input type="text" onfocus="clearAll()" id="cognomeP8" placeholder="Cognome passeggero" style="border-color : #874692"/>  </p>
                                 </div>
                             </div>
                         </div>
@@ -209,6 +213,7 @@
                     </div>
 
                 </div>
+            </div>
                 <br>
 
             <div style="padding : 5px">
@@ -218,7 +223,7 @@
             </div>
             <div class="row position-relative start-80">
                 <div class="col">
-                    <button class="btn btn-outline-success" onclick="procedi('<%=ticket.getLuogoPartenza()%>', '<%=ticket.getLuogoArrivo()%>', '<%=ticket.getDataPartenza()%>', '<%=ticket.getDataArrivo()%>')">Paga</button>
+                    <button class="btn btn-green-outline" onclick="procedi('<%=ticket.getLuogoPartenza()%>', '<%=ticket.getLuogoArrivo()%>', '<%=ticket.getDataPartenza()%>', '<%=ticket.getDataArrivo()%>', '<%=ticket.getClasse()%>')">Paga</button>
                 </div>
             </div>
         </div>
@@ -226,10 +231,10 @@
         
         <script>
             function clearAll () {
-                for (index = 1; index <= 8; ++i) {
+                for (index = 1; index <= 8; ++index) {
                     if (document.getElementById('p' + index).hidden == false) {
-                        document.getElementById('nomeP' + index).style = "";
-                        document.getElementById('cognomeP' + index).style = "";
+                        document.getElementById('nomeP' + index).style = "border-color: #874692";
+                        document.getElementById('cognomeP' + index).style = "border-color: #874692";
                     }
                 }
                 document.getElementById('errorLabel').innerText="";
@@ -247,6 +252,8 @@
                     else 
                         document.getElementById('postiPlu').inert = false;
                 }
+
+                clearAll();
             }
 
             function postiPlus () {
@@ -261,6 +268,8 @@
                     else 
                         document.getElementById('postiMin').inert = false;
                 }
+
+                clearAll();
             }
 
             function visibilitaCarta(vis, index) {
@@ -271,8 +280,9 @@
             }
         </script>
         <script>
-            function procedi(partenza, arrivo, oraPartenza, oraArrivo) {
-                for (index = 1; index <= 8; ++i) {
+            function procedi(partenza, arrivo, oraPartenza, oraArrivo, classe) {
+            	
+                for (index = 1; index <= 8; ++index) {
                     let flag = false;
                     if (document.getElementById('p' + index).hidden == false) {
                         let nomeP = document.getElementById('nomeP' + index);
@@ -298,6 +308,7 @@
                     message += "1 biglietto ";
                 
                 message += "per il treno:\n" +
+                                "Classe: " + classe + "\n" +
                                 "Partenza: " + partenza + "\n" +
                                 "Arrivo: " + arrivo + "\n" +
                                 "Ora di Partenza: " + oraPartenza + "\n" +
@@ -332,5 +343,37 @@
             }
 
         </script>
+        
     </body>
+        <style>
+
+            .btn-purple-outline{
+                --bs-btn-color:#874692  !important;
+                --bs-btn-border-color:#874692 !important;
+                --bs-btn-hover-color:#fff;
+                --bs-btn-hover-bg:#874692;
+                --bs-btn-hover-border-color:#874692;
+                --bs-btn-focus-shadow-rgb:25,135,84;
+                --bs-btn-active-color:#fff;
+                --bs-btn-active-bg:#874692;
+                --bs-btn-active-border-color:#874692;
+                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
+                --bs-btn-disabled-color:#874692;
+                --bs-btn-disabled-border-color:#874692;
+            }
+            .btn-green-outline{
+                --bs-btn-color:#50ba81  !important;
+                --bs-btn-border-color:#50ba81 !important;
+                --bs-btn-hover-color:#fff;
+                --bs-btn-hover-bg:#50ba81;
+                --bs-btn-hover-border-color:#50ba81;
+                --bs-btn-focus-shadow-rgb:25,135,84;
+                --bs-btn-active-color:#fff;
+                --bs-btn-active-bg:#50ba81;
+                --bs-btn-active-border-color:#50ba81;
+                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
+                --bs-btn-disabled-color:#50ba81;
+                --bs-btn-disabled-border-color:#50ba81;
+            }
+    </style>
 </html>

@@ -38,6 +38,18 @@ public class Locomotiva extends Vagone{
 	public void setPesoTrainabile(double pesoTrainabile) {
 		this.pesoTrainabile = pesoTrainabile;
 	}
+
+	@Override
+	public double getNumeroPosti() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setNumeroPosti(double d) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

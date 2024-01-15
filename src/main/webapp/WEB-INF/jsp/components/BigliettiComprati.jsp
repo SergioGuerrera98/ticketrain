@@ -50,6 +50,9 @@
                 <div class="row">
                   <p>Prezzo: <%=t.getPrezzo()%> euro</p>
                 </div>
+                <div class="row">
+                  <p>Classe: <%=t.getClasse()%> </p>
+                </div>
               </div>
               <h6> Biglietti acquistati: </h6>
                 <%  for (TicketUser tu : mappaTicket.get(t)) { %>
@@ -62,6 +65,9 @@
                         </div>
                         <div class="row">
                           <p class="fw-normal">Cognome: <%=tu.getCognome() %> </p>
+                        </div>
+                        <div class="row">
+                          <p class="fw-normal">Vagone: <%=tu.getTicket().getVagone_id().getId()%> Posto: <%=tu.getPosto()%> </p>
                         </div>
                       </div>
                     </div>

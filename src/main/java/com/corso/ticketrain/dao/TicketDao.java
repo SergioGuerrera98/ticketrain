@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
@@ -16,10 +17,12 @@ import org.springframework.stereotype.Repository;
 
 import com.corso.ticketrain.dao.interfacce.TicketDaoInterface;
 import com.corso.ticketrain.model.Ticket;
+import com.corso.ticketrain.treno.model.Passeggeri;
+import com.corso.ticketrain.treno.model.Vagone;
 
 
 @Repository
-public class TicketDao implements TicketDaoInterface{
+public class TicketDao implements DaoInterface<Ticket>{
 	
 	@PersistenceContext
 	private EntityManager manager;
@@ -73,7 +76,11 @@ public class TicketDao implements TicketDaoInterface{
 		if (date != null) {
 			predicates.add(builder.greaterThanOrEqualTo(root.get("dataPartenza"), date));
 		}
-
+		
+		Join<Ticket, Vagone> vagoneJoin = root.join("vagone_id");
+	    predicates.add(builder.greaterThan(builder.treat(vagoneJoin, Passeggeri.class).get("numeroPosti"), 0));
+		
+		
 		query.where(predicates.toArray(new Predicate[0]));
 
 		return manager.createQuery(query).getResultList();

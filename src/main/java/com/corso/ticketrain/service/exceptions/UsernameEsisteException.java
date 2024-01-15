@@ -1,9 +1,9 @@
 package com.corso.ticketrain.service.exceptions;
 
-public class UsernameEsisteException extends UsernameException {
+public class UsernameEsisteException extends Exception {
 
-    public UsernameEsisteException() {
-        super("Nome utente già esiste", "Scegliere un nome differente.");
+    public UsernameEsisteException(String message, Throwable cause) {
+    	super(message, cause);;
     }
 
 }

@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.corso.ticketrain.model.Citta;
 import com.corso.ticketrain.model.Ticket;
 import com.corso.ticketrain.service.CittaService;
+import com.corso.ticketrain.service.PasseggeriService;
 import com.corso.ticketrain.service.TicketService;
 import com.corso.ticketrain.service.TrenoService;
 import com.corso.ticketrain.treno.exceptions.TrenoException;
 import com.corso.ticketrain.treno.factory.VagoneFactory;
 import com.corso.ticketrain.treno.model.Treno;
+import com.corso.ticketrain.treno.model.Vagone;
 
 @Controller
 @RequestMapping("/admin")
@@ -35,6 +37,8 @@ public class AdminController {
 	private TicketService ticketService;
 	@Autowired 
 	private CittaService cittaService;
+	@Autowired 
+	private PasseggeriService passeggeriService;
 	
 	
 	
@@ -94,10 +98,11 @@ public class AdminController {
 		    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") LocalDateTime dataArrivo,
 		    String luogoPartenza,
 		    String luogoArrivo,
-		    int treno_id, Model model) {
+		    int treno_id, int vagone_id, Model model) {
 		try {
 			Treno t = trenoService.getTrenoById(treno_id);
-			Ticket ticket = new Ticket(codice, dataPartenza, dataArrivo, luogoPartenza, luogoArrivo, prezzo, t, classe);
+			Vagone v = passeggeriService.getVagoneById(vagone_id);
+			Ticket ticket = new Ticket(codice, dataPartenza, dataArrivo, luogoPartenza, luogoArrivo, prezzo, t, classe, v);
 			ticketService.create(ticket);
 			List<Treno> treni = trenoService.retrieveAll();
 			List<Citta> citta = cittaService.retrieve();

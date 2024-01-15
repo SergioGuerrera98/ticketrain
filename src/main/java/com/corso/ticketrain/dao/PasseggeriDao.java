@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.corso.ticketrain.treno.model.Passeggeri;
+import com.corso.ticketrain.treno.model.Treno;
+import com.corso.ticketrain.treno.model.Vagone;
 
 
 @Repository
@@ -38,6 +40,12 @@ public class PasseggeriDao implements DaoInterface<Passeggeri>{
 	public void delete(Passeggeri ref) {
 		manager.remove(ref);
 		
+	}
+
+	public Vagone retrieveById(int id) {
+		return manager.createQuery("SELECT p FROM Passeggeri p WHERE p.id = :id", Passeggeri.class)
+				.setParameter("id", id)
+				.getSingleResult();
 	}
 
 }

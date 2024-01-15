@@ -33,6 +33,10 @@ public class TicketUser {
 
 	@Column(name = "classe")
 	private String classe;
+	
+	@Column(name = "posto")
+	private String posto;
+
 
 	public TicketUser(User user, Ticket ticket, String nome, String cognome, String classe) {
 		super();
@@ -96,6 +100,17 @@ public class TicketUser {
 
 	public TicketUser setClasse(String classe) {
 		this.classe = classe;
+		return this;
+	}
+
+	
+	public String getPosto() {
+		return posto;
+		
+	}
+
+	public TicketUser setPosto(String posto) {
+		this.posto = posto;
 		return this;
 	}
 

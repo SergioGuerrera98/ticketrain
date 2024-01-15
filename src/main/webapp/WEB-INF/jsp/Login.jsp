@@ -23,7 +23,7 @@
 
             <div class="position-absolute top-50 start-50 translate-middle border
                         shadow-lg p-3 mb-5 bg-body-tertiary rounded" style="padding : 10px">
-            <h3 >Log-in</h3>
+            <h3>Log-in</h3>
             <p>Effettua l'accesso per acquistare biglietti o visitare l'area personale:</p>
                 <jsp:include page="/WEB-INF/jsp/components/FormLogin.jsp"></jsp:include>
             <p><a href="<%=webApp%>/signup">Non sei ancora registrato?</a></p>

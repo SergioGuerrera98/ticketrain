@@ -73,7 +73,7 @@ public class UserService implements IService{
 			}
 			List<User> utenti = userDao.findByUsername(username);
 			if (utenti.size()>0) {
-				throw new UsernameEsisteException();
+				throw new UsernameEsisteException("Username gia' esistente", null);
 			}
 			userDao.create(user);
 			return user;

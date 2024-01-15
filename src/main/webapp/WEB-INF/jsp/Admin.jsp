@@ -102,13 +102,27 @@
     </select>
     	<br>
     	<label for="treno_id">Treno:</label>
-    	<select name="treno_id">
+    	<select name="treno_id" id="trenoSelect" onchange="updateVagoni()">
+    	<option value="">Seleziona un treno</option>
     	<%
+    	Treno trenoSelezionato = null;
     	for (Treno treno : treni) {
     	%>
-    	<option value="<%=treno.getId()%>"><%=treno.getCodice() %></option>
+    	<option value="<%=treno.getId()%>"><%=treno.getCodice() %> <%trenoSelezionato = treno; %></option>
+    	
     	<%} %>
     	</select>
+    	
+    	<label for="vagone_id">Vagone:</label>
+    	<select name="vagone_id" id="vagoneSelect">
+    	<option value="">Seleziona un vagone</option>
+    	<%
+    	for (Vagone vagone : trenoSelezionato.getVagoni()){
+    	%>
+    	<option value="<%=vagone.getId()%>"><%=vagone.getCarattere() %> </option>
+    	<%} %>
+    	</select>
+    	
         <button type="submit" class="btn btn-success">Aggiungi</button>
     </form>
 <%=errorTicket %>
@@ -128,5 +142,32 @@
         <button type="submit" class="btn btn-danger">Rimuovi</button>
     </form>
 </div>
+
+<script>
+    function updateVagoni() {
+        var trenoSelect = document.getElementById('trenoSelect');
+        var vagoneSelect = document.getElementById('vagoneSelect');
+
+        var selectedTrenoId = trenoSelect.value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var vagoni = JSON.parse(xhr.responseText);
+
+                vagoneSelect.innerHTML = '';
+                for (var i = 0; i < vagoni.length; i++) {
+                    var option = document.createElement('option');
+                    option.value = vagoni[i].id;
+                    option.text = vagoni[i].carattere;
+                    vagoneSelect.appendChild(option);
+                }
+            }
+        };
+
+        xhr.open('GET', '<%=webApp%>/treno/vagoni?trenoId=' + selectedTrenoId, true);
+        xhr.send();
+    }
+</script>
 </body>
 </html>

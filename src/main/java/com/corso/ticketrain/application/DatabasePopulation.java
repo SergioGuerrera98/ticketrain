@@ -199,7 +199,7 @@ public class DatabasePopulation {
                     Ticket ticket = new Ticket(createRandomString(6),
                             partenza, partenza.plusHours(friend.nextInt(1, 5)).plusMinutes(friend.nextInt(60)),
                             setCitta.get(friend.nextInt(setCitta.size())).getNomeCitta(), setCitta.get(friend.nextInt(setCitta.size())).getNomeCitta(),
-                            (2 - p.getClasse()) * 11f, treno, p, "Economy");
+                            (2 - p.getClasse()) * 11f, treno, "Economy", p);
                     setTicket.add(ticket);
                     System.out.println("Added ticket: " + ticket);
                     ticketDao.create(ticket);

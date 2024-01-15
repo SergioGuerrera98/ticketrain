@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 import com.corso.ticketrain.treno.model.Passeggeri;
+import com.corso.ticketrain.treno.model.Vagone;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,6 +15,8 @@ import org.json.JSONTokener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.corso.ticketrain.dao.PasseggeriDao;
+import com.corso.ticketrain.dao.TicketDao;
 import com.corso.ticketrain.dao.TicketUserDao;
 import com.corso.ticketrain.model.Ticket;
 import com.corso.ticketrain.model.TicketUser;
@@ -27,6 +30,11 @@ public class TicketUserService implements IService{
 	
 	@Autowired
 	private TicketUserDao ticketUserDao;
+	
+	@Autowired
+	private PasseggeriDao passeggeriDao;
+	
+
 	
 	public void acquistaTicket(User user, Ticket ticket, String nome, String cognome, String classe) {
 		try {
@@ -66,11 +74,16 @@ public class TicketUserService implements IService{
 		List<TicketUser> list = new ArrayList<>();
 		try {
 			for (int i = 0; i < array.length(); ++i) {
+				Vagone vagone = passeggeriDao.retrieveById(ticket.getVagone_id().getId());
+		
+				String posto = String.valueOf((int)vagone.getNumeroPosti());
+				vagone.setNumeroPosti(vagone.getNumeroPosti() - 1);
 				JSONObject obj = (JSONObject) array.get(i);
 				list.add(new TicketUser()
 					.setTicket(ticket)
 					.setUser(user)
-					.setClasse(""+((Passeggeri)ticket.getVagone_id()).getClasse())
+					.setPosto(posto)
+					.setClasse(obj.optString("classe"))
 					.setNome(obj.optString("nome"))
 					.setCognome(obj.optString("cognome")));
 			}

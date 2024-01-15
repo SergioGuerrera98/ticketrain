@@ -44,7 +44,7 @@ public class Ticket {
 	
 	
 	public Ticket(String codice, LocalDateTime dataPartenza, LocalDateTime dataArrivo, String luogoPartenza,
-			String luogoArrivo, Float prezzo, Treno treno_id, String classe) {
+			String luogoArrivo, Float prezzo, Treno treno_id, String classe, Vagone vagone_id) {
 		super();
 		this.codice = codice;
 		this.dataPartenza = dataPartenza;
@@ -54,22 +54,24 @@ public class Ticket {
 		this.prezzo = prezzo;
 		this.treno_id = treno_id;
 		this.classe = classe;
+		this.vagone_id = vagone_id;
+	}
+
+	public Ticket(String codice, LocalDateTime dataPartenza, LocalDateTime dataArrivo, String luogoPartenza,
+			String luogoArrivo, Float prezzo, String classe, Treno treno_id, Vagone vagone_id) {
+		super();
+		this.codice = codice;
+		this.dataPartenza = dataPartenza;
+		this.dataArrivo = dataArrivo;
+		this.luogoPartenza = luogoPartenza;
+		this.luogoArrivo = luogoArrivo;
+		this.prezzo = prezzo;
+		this.classe = classe;
+		this.treno_id = treno_id;
+		this.vagone_id = vagone_id;
 	}
 
 
-
-	public Ticket(String codice, LocalDateTime dataPartenza,
-					LocalDateTime dataArrivo, String luogoPartenza, String luogoArrivo, Float prezzo, Treno treno_id, Vagone vagone_id, String classe){
-						this.codice = codice;
-						this.dataPartenza = dataPartenza;
-						this.dataArrivo = dataArrivo;
-						this.luogoArrivo = luogoArrivo;
-						this.luogoPartenza = luogoPartenza;
-						this.prezzo = prezzo;
-						this.treno_id = treno_id;
-						this.vagone_id = vagone_id;
-						this.classe = classe;
-					}
 
 	public int getId() {
 		return id;

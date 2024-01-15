@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.corso.ticketrain.dao.CittaDao;
+import com.corso.ticketrain.dao.TicketDao;
 import com.corso.ticketrain.dao.interfacce.CittaDaoInterface;
 import com.corso.ticketrain.dao.interfacce.TicketDaoInterface;
 import com.corso.ticketrain.model.Citta;
@@ -33,7 +34,7 @@ public class TicketService implements IService{
 	private static Logger logger = LogManager.getLogger(TicketService.class);
 
 	@Autowired
-	private TicketDaoInterface ticketDao;	
+	private TicketDao ticketDao;	
 
 	@Autowired
 	private CittaDao cittaDao;

@@ -38,6 +38,18 @@ public class Ristorante extends Vagone{
 	public void setMenu(String menu) {
 		this.menu = menu;
 	}
+
+	@Override
+	public double getNumeroPosti() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setNumeroPosti(double d) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

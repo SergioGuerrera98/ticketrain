@@ -64,4 +64,8 @@ public abstract class Vagone {
 	public void setCarattere(char carattere) {
 		this.carattere = carattere;
 	}	
+	
+	public abstract double getNumeroPosti();
+
+	public abstract void setNumeroPosti(double d);
 }
