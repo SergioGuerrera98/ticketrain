@@ -10,6 +10,7 @@
     %>
     <head>
         <title>Log-in</title>
+         <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/IlanZdd/resources/main/topolino.png">
         <meta charset="ISO-8859-1">
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +29,7 @@
                 <jsp:include page="/WEB-INF/jsp/components/FormLogin.jsp"></jsp:include>
             <p><a href="<%=webApp%>/signup">Non sei ancora registrato?</a></p>
             </div>
-            
+
 
     </body>
 </html>

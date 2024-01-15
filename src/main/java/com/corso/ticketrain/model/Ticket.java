@@ -8,6 +8,7 @@ import javax.persistence.*;
 import com.corso.ticketrain.treno.model.Treno;
 import com.corso.ticketrain.treno.model.Vagone;
 
+//@Grassottello
 @Entity
 @Table(name = "ticket")
 public class Ticket {

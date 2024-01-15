@@ -66,7 +66,7 @@ public class TicketRestController {
 		logger.info("TicketRestController.getByFilter : entering method with params[luogoPartenza = {}, luogoArrivo = {}, dataPartenza = {}].",
 				luogoPartenza, luogoArrivo, dataPartenza);
 
-				luogoPartenza = StringsUtils.upFirst(luogoPartenza);
+		luogoPartenza = StringsUtils.upFirst(luogoPartenza);
 		luogoArrivo = StringsUtils.upFirst(luogoArrivo);
 		LocalDateTime dataPartenzaD = (dataPartenza != null && !dataPartenza.isBlank()) ? LocalDateTime.parse(dataPartenza) : null;
 

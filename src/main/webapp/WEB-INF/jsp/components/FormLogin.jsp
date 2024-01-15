@@ -3,7 +3,7 @@
     pageEncoding="ISO-8859-1"%>
     <%
 
-    String errorLabel = (request.getAttribute("error") != null) ? (String) request.getAttribute("error") : ""; 
+    String errorLogin = (request.getAttribute("error") != null) ? (String) request.getAttribute("error") : ""; 
         String webApp = request.getContextPath();
     %>
 <div style="padding : 20px">
@@ -24,14 +24,37 @@
                 </div>
             </div>
             <br>
-            <p id="errorLabel" class="text-center text-danger"><%=errorLabel %></p>
+            <p id="errorLogin" class="text-center text-danger"><%=errorLogin %></p>
             <div class="d-grid gap-2 justify-content-md-center">
-                <input class="btn btn-outline-success btn-lg" type="submit" value="Login" />
+                <input class="btn btn-green btn-lg" type="submit" value="Login" />
             </div>
         </form>
+        
+
 </div>
+            
 <script>
     function clean() {
-        document.getElementById("errorLabel").innerText = "";
+        document.getElementById("errorLogin").innerText = "";
     }
 </script>
+<style>
+    .btn-green{
+        --bs-btn-color:#fff;
+        --bs-btn-bg:#50ba81; !important
+        --bs-btn-border-color:#50ba81; !important
+        --bs-btn-hover-color:#fff;
+        --bs-btn-hover-bg:#319e63;
+        font-weight: bold;
+        --bs-btn-hover-border-color:#146c43;
+        --bs-btn-focus-shadow-rgb:60,153,110;
+        --bs-btn-active-color:#fff;
+        --bs-btn-active-bg:#319e63;
+        --bs-btn-active-border-color:#1f8764;
+        --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color:#fff;
+        --bs-btn-disabled-bg:#50ba81; !important
+        --bs-btn-disabled-border-color:#50ba81 !important
+    }
+
+</style>

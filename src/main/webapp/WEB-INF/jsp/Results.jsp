@@ -17,6 +17,46 @@
     <head>
         <meta charset="ISO-8859-1">
         <title>Risultati</title>
+         <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/IlanZdd/resources/main/topolino.png">
+        
+        <style>
+            .btn-green{
+                --bs-btn-color:#fff;
+                --bs-btn-bg:#50ba81; !important
+                --bs-btn-border-color:#50ba81; !important
+                --bs-btn-hover-color:#fff;
+                --bs-btn-hover-bg:#319e63;
+                font-weight: bold;
+                --bs-btn-hover-border-color:#146c43;
+                --bs-btn-focus-shadow-rgb:60,153,110;
+                --bs-btn-active-color:#fff;
+                --bs-btn-active-bg:#319e63;
+                --bs-btn-active-border-color:#1f8764;
+                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
+                --bs-btn-disabled-color:#fff;
+                --bs-btn-disabled-bg:#50ba81; !important
+                --bs-btn-disabled-border-color:#50ba81 !important
+            }
+            .btn-purple{
+                --bs-btn-color:#fff;
+                --bs-btn-bg:#874692; !important
+                --bs-btn-border-color:#874692; !important
+                --bs-btn-hover-color:#fff;
+                --bs-btn-hover-bg:#8442a3;
+                font-weight: bold;
+                --bs-btn-hover-border-color:#672584;
+                --bs-btn-focus-shadow-rgb:60,153,110;
+                --bs-btn-active-color:#fff;
+                --bs-btn-active-bg:#8442a3;
+                --bs-btn-active-border-color:#3c105e;
+                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
+                --bs-btn-disabled-color:#fff;
+                --bs-btn-disabled-bg:#874692; !important
+                --bs-btn-disabled-border-color:#874692 !important
+            }
+
+        </style>
+
         <style>
             .btn-purple-outline{
                 --bs-btn-color:#874692  !important;
@@ -93,9 +133,9 @@
                                 <td><%=ticket.getClasse() %></td>
                                 <td>
                                     <% if (counter % 2 == 0) {%>
-                                    <button class="btn btn-green-outline" onclick="buyTicket(<%=ticket.getId()%>)">Procedi all'acquisto</button>
+                                    <button class="btn btn-green" onclick="buyTicket(<%=ticket.getId()%>)">Procedi all'acquisto</button>
                                     <%} else {%>
-                                    <button class="btn btn-purple-outline" onclick="buyTicket(<%=ticket.getId()%>)">Procedi all'acquisto</button>
+                                    <button class="btn btn-purple" onclick="buyTicket(<%=ticket.getId()%>)">Procedi all'acquisto</button>
                                     <%}%>
                                 </td>
                             </tr>

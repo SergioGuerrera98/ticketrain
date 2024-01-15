@@ -7,8 +7,7 @@
     pageEncoding="ISO-8859-1"%>
     <%
 
-        User user = (User) session.getAttribute("UserLoggato"); 
-        String errorLabel = (String) request.getAttribute("erroreLabel");
+        User user = (User) session.getAttribute("UserLoggato");
         String webApp = request.getContextPath();
         String displayTema = (String) session.getAttribute("tema");
         if (displayTema == null) displayTema = "dark";
@@ -39,40 +38,62 @@
         </button>
         <div class="collapse navbar-collapse position-absolute bottom-50 top-50 end-0"id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <!-- <li class="nav-item"> <a class="nav-link active" aria-current="page" href="<%=webApp%>/home">  Home  </a> </li> -->
                 <% if (user == null) { %> <!-- UTENTE NON LOGGATO -->
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=webApp%>/login" style="padding : 5px" >Accedi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<%=webApp%>/signup" style="padding : 5px" >Registrati</a>
-                    </li>
-                <% } if (user != null) { %> <!-- UTENTE LOGGATO -->
-                    <li class="nav-item">
-                        <a  style="padding : 5px" class="nav-link" href="<%=webApp%>/account">
-                            <label><%=user.getUsername() %></label>
-                            <%if (user.getPhoto() == null) {%>
-                         <img src="https://raw.githubusercontent.com/IlanZdd/resources/main/areaPersonale.png" style="width: 30px;">
-                         <%} if (user.getPhoto() != null) {%>
-                         <c:set var="base64Image" value="<%= new String(Base64.getEncoder().encode(user.getPhoto()), StandardCharsets.UTF_8) %>" />
-        				<img src="data:image/jpeg;base64,${base64Image}" alt="Foto utente" style="border-radius: 50%; width: 50px; height: 50px;">
-                         <%} %>
-                         <!-- Area Personale (<%=user.getUsername() %>) -->
+                        <a style="padding : 5px" class="nav-link" href="<%=webApp%>/login" >
+                            <label>Accedi</label>
+                        <img src="" style="width: 0px; height : 50px" />
                         </a>
                     </li>
-                    <li class="nav-item"><a  style="padding : 5px" class="nav-link" href="<%=webApp%>/user/logout">Logout</a></li>
+                    <li class="nav-item">
+                        <a style="padding : 5px" class="nav-link" href="<%=webApp%>/signup" >
+                            <label>Registrati</label>
+                        <img src="" style="width: 0px; height : 50px" />
+                        </a>
+                    </li>
+
+                <% } if (user != null) { %> <!-- UTENTE LOGGATO -->
+                    <li class="nav-item">
+                        <a style="padding : 5px" class="nav-link" href="<%=webApp%>/account">
+                            <label><%=user.getUsername() %></label>
+
+                            <%if (user.getPhoto() == null) {%>
+                                <img src="https://raw.githubusercontent.com/IlanZdd/resources/main/areaPersonale.png" style="width: 50px;" />
+                            
+                            <%} if (user.getPhoto() != null) {%>
+                                <c:set var="base64Image" value="<%= new String(Base64.getEncoder().encode(user.getPhoto()), StandardCharsets.UTF_8)%>" />
+                                <img src="data:image/jpeg;base64,${base64Image}" alt="Foto utente" style="border-radius: 50%; width: 50px; height: 50px;" />
+                            <%} %>
+                        </a>
+                    </li>
+                    <li>
+                        <img src="" style="width: 20px; height : 0px" />
+                    </li>
+                    <li class="nav-item ">
+                        <a style="padding : 5px" class="nav-link" href="<%=webApp%>/user/logout">
+                            <label >Logout</label>
+                                <img src="" style="width: 0px; height : 50px" />
+                        </a>
+                    </li>
                     <% if (user.isAmministratore()) { %>
-                        <li class="nav-item"><a  style="padding : 5px" class="nav-link" href="<%=webApp%>/user/admin">Pagina Amministratore</a></li>
+                        <li class="nav-item ">
+                            <a style="padding : 5px" class="nav-link" href="<%=webApp%>/user/admin">
+                                <label>Pagina Amministratore</label>
+                                <img src="" style="width: 0px; height : 50px" />
+                            </a>
+                        </li>
                     <%}
                 } %>
-                <li class="nav-item">
-                        <img id="imgTema" class="bottom-0 top-100" 
-                        <% if (displayTema == null || displayTema.equals("dark")) { %> 
-                            src="https://raw.githubusercontent.com/IlanZdd/resources/main/sun.png"
-                        <% } else { %>
-                            src="https://raw.githubusercontent.com/IlanZdd/resources/main/moon.png"
-                        <% } %>
-                            style="witdh : 32px; height : 32px; padding : 5px" onclick="cambiaTema()">   
+                    <li class="nav-item ">
+                        <img src="" style="width: 0px; height : 50px" />
+                            <img id="imgTema" 
+                            <% if (displayTema == null || displayTema.equals("dark")) { %> 
+                                src="https://raw.githubusercontent.com/IlanZdd/resources/main/sun.png"
+                            <% } else { %>
+                                src="https://raw.githubusercontent.com/IlanZdd/resources/main/moon.png"
+                            <% } %>
+                                style="witdh : 42px; height : 42px; padding : 5px" onclick="cambiaTema()">   
+                    </li>
                 </ul>
         </div>
     </div>

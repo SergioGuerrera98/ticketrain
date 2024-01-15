@@ -4,7 +4,6 @@ public class Levenshtein extends CheckString{
 	
 	@Override
 	public boolean check(String s1, String s2) {
-		System.out.println("algoritmo di Levenshtein");
 		int[][] dp = new int[s1.length() + 1][s2.length() + 1];
 
         for (int i = 0; i <= s1.length(); i++) {

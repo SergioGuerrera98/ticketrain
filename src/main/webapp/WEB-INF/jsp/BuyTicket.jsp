@@ -14,6 +14,7 @@
     %>
     <head>
     <title>Compra biglietti</title>
+     <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/IlanZdd/resources/main/topolino.png">
     <meta charset="ISO-8859-1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
@@ -40,7 +41,7 @@
                         <td><%=ticket.getDataArrivoStr()%></td>
                     </tr>
                     <tr>
-                        <td >Posti rimanenti:&nbsp;&nbsp; <%=(int)ticket.getVagone_id().getNumeroPosti()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td >Posti rimanenti:&nbsp;&nbsp;</td><td><p id="nPostiRimanenti"><%=(int)ticket.getVagone_id().getNumeroPosti()%></td>
                     </tr>
                 </table>
             </div>
@@ -257,13 +258,15 @@
             }
 
             function postiPlus () {
-                if (Number(document.getElementById('postiSelezionati').innerText) < 8){
+                let rimanenti = Number(document.getElementById('nPostiRimanenti').innerText);
+                let c = Number(document.getElementById('postiSelezionati').innerText);
+                
+                if (c < 8 &&  rimanenti > c){
                     console.log('Clicked plus');
-                    let c = Number(document.getElementById('postiSelezionati').innerText);
                     visibilitaCarta(true, c + 1);
                     document.getElementById('postiSelezionati').innerText = c + 1;
 
-                    if (c + 1 == 8)
+                    if (c + 1 == 8 || c + 1 == rimanenti)
                         document.getElementById('postiPlu').inert = true;
                     else 
                         document.getElementById('postiMin').inert = false;

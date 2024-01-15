@@ -4,7 +4,8 @@
     <%
 
         User user = (User) session.getAttribute("UserLoggato"); 
-        String errorLabel = (String) request.getAttribute("erroreLabel");
+        String errorLabel = (String) request.getAttribute("erroreFilter");
+       	if (errorLabel == null) errorLabel = "";
         String webApp = request.getContextPath();
     %>
 
@@ -29,12 +30,12 @@
 
         <div style="padding : 5px">
             <div>
-                <p id="errorLabel" class="text-danger"></p>
+                <p id="errorLabel" class="text-danger"><%=errorLabel%></p>
             </div>
         </div>
         <div class="row position-relative start-80">
             <div class="col">
-                <button type="button" class="btn btn-outline-success" onclick="sendRequest()" value="Ricerca tratte" style="margin-left: 78%">Ricerca Tratte </button>
+                <button type="button" class="btn btn-green" onclick="sendRequest()" value="Ricerca tratte" style="margin-left: 78%">Ricerca Tratte </button>
             </div>
         </div>
 </div>
@@ -50,22 +51,23 @@
     }
 
     function wrongLuogoPartenza(errore) {
-        let error = document.getElementById("errorLabel");
+        let errorePartenza = document.getElementById("errorLabel");
+        console.log("sgegtrsef : " + errore);
 
         document.getElementById("luogoPartenza").style = "border-color : red";
-        error.innerText = errore;
+        errorePartenza.innerText = errore;
     }
     function wrongLuogoArrivo(errore) {
-        let error = document.getElementById("errorLabel");
+        let erroreArrivo = document.getElementById("errorLabel");
 
         document.getElementById("luogoArrivo").style = "border-color : red";        
-        error.innerText = errore;
+        erroreArrivo.innerText = errore;
     }
     function wrongData(errore) {
-        let error = document.getElementById("errorLabel");
+        let erroreData = document.getElementById("errorLabel");
 
         document.getElementById("dataPartenza").style = "border-color : red";
-        error.innerText = errore;
+        erroreData.innerText = errore;
     }
     function allWrong(alsoDate) {
         document.getElementById("luogoPartenza").style = "border-color : red";
@@ -123,9 +125,9 @@
         //controlli richiesta:
         //tutti campi vuoti
         if (luogoPartenza == "" && luogoArrivo == "") {
-            let error = document.getElementById("errorLabel");
+            let erroreOvunque = document.getElementById("errorLabel");
             allWrong(false);
-            error.innerText="Devi inserire almeno un luogo di partenza e/o destinazione.";
+            erroreOvunque.innerText = "Devi inserire almeno un luogo di partenza e/o destinazione.";
 
             //data oltre 6 mesi
         } else if (new Date(dataPartenza) > sixMonthsLater(new Date())) {
@@ -154,7 +156,7 @@
                                             "&luogoArrivo=" + luogoArrivo +
                                             "&dataPartenza=" + dataPartenza);
                 } else {
-                    console.log("Error : " + xhr.status );
+                    console.log("Error : " + xhr.status + ", errore: " + xhr.responseText);
                     let errore = xhr.responseText;
 
                     if (xhr.responseText.search("Partenza") > -1) {
@@ -164,7 +166,7 @@
                         wrongLuogoArrivo(errore.substring(errore.indexOf("-")+1, 200000));
                     }
                     if (xhr.responseText.search("Data") > -1) {
-                        wrongData("La data selezionata non ï¿½ valida.");
+                        wrongData("La data selezionata non è valida.");
                     }
                 }
             };
@@ -192,8 +194,30 @@
         let datetimeField = document.getElementById("dataPartenza");
         datetimeField.value = localDatetime;
         datetimeField.min = localDatetime;
+        
     });
-
+	
+    
 
 
 </script>
+<style>
+    .btn-green{
+        --bs-btn-color:#fff;
+        --bs-btn-bg:#50ba81; !important
+        --bs-btn-border-color:#50ba81; !important
+        --bs-btn-hover-color:#fff;
+        --bs-btn-hover-bg:#319e63;
+        font-weight: bold;
+        --bs-btn-hover-border-color:#146c43;
+        --bs-btn-focus-shadow-rgb:60,153,110;
+        --bs-btn-active-color:#fff;
+        --bs-btn-active-bg:#319e63;
+        --bs-btn-active-border-color:#1f8764;
+        --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color:#fff;
+        --bs-btn-disabled-bg:#50ba81; !important
+        --bs-btn-disabled-border-color:#50ba81 !important
+    }
+
+</style>

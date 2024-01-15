@@ -3,6 +3,7 @@ package com.corso.ticketrain.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 
 import com.corso.ticketrain.application.StringsUtils;
@@ -54,14 +55,16 @@ public class TicketController {
 		try {
 			filteredTickets = ticketService.getTicketsFilter(luogoPartenza, luogoArrivo, dataPartenzaD);
 			 model.addAttribute("filteredTickets", filteredTickets);
+             if (filteredTickets == null || filteredTickets.isEmpty())
+                throw new NoResultException("Non sono disponibili tratte per questa ricerca.");
 
              logger.info("TicketController.getByFilter : exiting method with result [filteredTickets = {}].",
                      filteredTickets);
 
 		     return "Results"; // Ritorna il nome della vista JSP (senza estensione)
-		} catch (PaeseNonTrovatoException e) {
+		} catch (PaeseNonTrovatoException | NoResultException e) {
 			String error = e.getMessage();
-			model.addAttribute("error", error);
+			model.addAttribute("erroreFilter", error);
 
             logger.info("TicketController.getByFilter : exiting method with result [error = {}].", error);
 
