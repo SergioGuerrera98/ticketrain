@@ -37,7 +37,7 @@
                 <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasDarkLabel">Accedi</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvasDark" aria-label="Close"></button>
-            </div>
+                </div>
             <%} else if (tema.equals("light")){%>
             <div class="offcanvas offcanvas-end show text-bg-light" tabindex="-1" id="offcanvasLight" aria-labelledby="offcanvasLightLabel">
                 <div class="offcanvas-header">
@@ -57,10 +57,22 @@
                 </div>
             </div>
         <%} %>
-        <!-- Carosello -->
-        <jsp:include page="/WEB-INF/jsp/components/Carousel.jsp"></jsp:include>
 
+       <br>
+
+         <div class="row" style="absolute-position top-0" style="padding : 20px">        
+            <div class="col col-md-auto">
+                <img alt="Banner sito" style="height : 540px; padding: 20px; border-radius: 30px; margin-top: 20px;"
+                src="https://raw.githubusercontent.com/IlanZdd/resources/main/bannerV.png">
+            </div>
+        
+        <div class="col" style="max-width : 67%">       
+            <!-- Carosello -->
+            <jsp:include page="/WEB-INF/jsp/components/Carousel.jsp"></jsp:include>
+        </div>
+        </div>
         <!-- FILTRO -->
+        <br>
         <jsp:include page="/WEB-INF/jsp/components/Filter.jsp"></jsp:include>
 
         <footer>

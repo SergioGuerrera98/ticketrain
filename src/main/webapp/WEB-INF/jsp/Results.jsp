@@ -19,74 +19,7 @@
         <title>Risultati</title>
          <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/IlanZdd/resources/main/topolino.png">
         
-        <style>
-            .btn-green{
-                --bs-btn-color:#fff;
-                --bs-btn-bg:#50ba81; !important
-                --bs-btn-border-color:#50ba81; !important
-                --bs-btn-hover-color:#fff;
-                --bs-btn-hover-bg:#319e63;
-                font-weight: bold;
-                --bs-btn-hover-border-color:#146c43;
-                --bs-btn-focus-shadow-rgb:60,153,110;
-                --bs-btn-active-color:#fff;
-                --bs-btn-active-bg:#319e63;
-                --bs-btn-active-border-color:#1f8764;
-                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
-                --bs-btn-disabled-color:#fff;
-                --bs-btn-disabled-bg:#50ba81; !important
-                --bs-btn-disabled-border-color:#50ba81 !important
-            }
-            .btn-purple{
-                --bs-btn-color:#fff;
-                --bs-btn-bg:#874692; !important
-                --bs-btn-border-color:#874692; !important
-                --bs-btn-hover-color:#fff;
-                --bs-btn-hover-bg:#8442a3;
-                font-weight: bold;
-                --bs-btn-hover-border-color:#672584;
-                --bs-btn-focus-shadow-rgb:60,153,110;
-                --bs-btn-active-color:#fff;
-                --bs-btn-active-bg:#8442a3;
-                --bs-btn-active-border-color:#3c105e;
-                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
-                --bs-btn-disabled-color:#fff;
-                --bs-btn-disabled-bg:#874692; !important
-                --bs-btn-disabled-border-color:#874692 !important
-            }
 
-        </style>
-
-        <style>
-            .btn-purple-outline{
-                --bs-btn-color:#874692  !important;
-                --bs-btn-border-color:#874692 !important;
-                --bs-btn-hover-color:#fff;
-                --bs-btn-hover-bg:#874692;
-                --bs-btn-hover-border-color:#874692;
-                --bs-btn-focus-shadow-rgb:25,135,84;
-                --bs-btn-active-color:#fff;
-                --bs-btn-active-bg:#874692;
-                --bs-btn-active-border-color:#874692;
-                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
-                --bs-btn-disabled-color:#874692;
-                --bs-btn-disabled-border-color:#874692;
-            }
-            .btn-green-outline{
-                --bs-btn-color:#50ba81  !important;
-                --bs-btn-border-color:#50ba81 !important;
-                --bs-btn-hover-color:#fff;
-                --bs-btn-hover-bg:#50ba81;
-                --bs-btn-hover-border-color:#50ba81;
-                --bs-btn-focus-shadow-rgb:25,135,84;
-                --bs-btn-active-color:#fff;
-                --bs-btn-active-bg:#50ba81;
-                --bs-btn-active-border-color:#50ba81;
-                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
-                --bs-btn-disabled-color:#50ba81;
-                --bs-btn-disabled-border-color:#50ba81;
-            }
-        </style>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
@@ -120,7 +53,7 @@
                     </thead>
                     <tbody>
                         <%
-                        int counter = -1;
+                        int counter = 0;
                         for (Ticket ticket : listaFiltrata) {
                             counter++;
                         %>
@@ -172,5 +105,41 @@
 
             }
         </script>
-    </body>
+    </body>        <style>
+            .btn-green{
+                --bs-btn-color:#fff;
+                --bs-btn-bg:#50ba81; !important
+                --bs-btn-border-color:#50ba81; !important
+                --bs-btn-hover-color:#fff;
+                --bs-btn-hover-bg:#319e63;
+                font-weight: bold;
+                --bs-btn-hover-border-color:#146c43;
+                --bs-btn-focus-shadow-rgb:60,153,110;
+                --bs-btn-active-color:#fff;
+                --bs-btn-active-bg:#319e63;
+                --bs-btn-active-border-color:#1f8764;
+                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
+                --bs-btn-disabled-color:#fff;
+                --bs-btn-disabled-bg:#50ba81; !important
+                --bs-btn-disabled-border-color:#50ba81 !important
+            }
+            .btn-purple{
+                --bs-btn-color:#fff;
+                --bs-btn-bg:#874692; !important
+                --bs-btn-border-color:#874692; !important
+                --bs-btn-hover-color:#fff;
+                --bs-btn-hover-bg:#8442a3;
+                font-weight: bold;
+                --bs-btn-hover-border-color:#672584;
+                --bs-btn-focus-shadow-rgb:60,153,110;
+                --bs-btn-active-color:#fff;
+                --bs-btn-active-bg:#8442a3;
+                --bs-btn-active-border-color:#3c105e;
+                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
+                --bs-btn-disabled-color:#fff;
+                --bs-btn-disabled-bg:#874692; !important
+                --bs-btn-disabled-border-color:#874692 !important
+            }
+
+        </style>
 </html>

@@ -7,16 +7,21 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.transaction.Transactional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.corso.ticketrain.application.StringsUtils;
+import com.corso.ticketrain.controller.UserController;
 import com.corso.ticketrain.model.Citta;
 
 
 @Repository
 public class CittaDao implements DaoInterface<Citta>{
+	
+	private static final Logger logger = LogManager.getLogger(CittaDao.class);
 
 	@PersistenceContext
 	EntityManager manager;

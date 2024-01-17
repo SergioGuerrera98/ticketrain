@@ -142,8 +142,9 @@ public class UserController {
            // user.setPhotoBytes(bytes);
             System.out.println(file);
             System.out.println(bytes);
-            userService.setFoto(user.getUsername(), bytes);
+			User u = userService.setFoto(user.getUsername(), bytes);
 
+            session.setAttribute("UserLoggato", u);
             //SerialBlob foto = user.getFoto();
             //user.setPhoto(bytes);
             return "Account" ;

@@ -30,6 +30,7 @@
             <p><a href="<%=webApp%>/signup">Non sei ancora registrato?</a></p>
             </div>
 
+            <jsp:include page="/WEB-INF/jsp/components/Banner.jsp"></jsp:include>
 
     </body>
 </html>

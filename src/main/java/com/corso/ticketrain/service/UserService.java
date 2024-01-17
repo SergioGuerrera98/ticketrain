@@ -24,6 +24,7 @@ import com.corso.ticketrain.treno.utils.UtilsCheckString;
 @Transactional
 @Service
 public class UserService implements IService{
+	private static final Logger logger = LogManager.getLogger(UserService.class);
 	
 	@Autowired
     private UserDao userDao;
@@ -41,13 +42,17 @@ public class UserService implements IService{
 	}
 	
 
-	public void setFoto(String username, byte[] photo) {
+	public User setFoto(String username, byte[] photo) {
 		try {
 			User user = userDao.findByUsername(username).get(0);
 			user.setPhoto(photo);
+			userDao.update(user);
+
+			return user;
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		return null;
 	}
 	
 	

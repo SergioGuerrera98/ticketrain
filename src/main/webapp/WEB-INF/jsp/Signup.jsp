@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.Random"%>
 <!DOCTYPE html>
 <%String tema = (session.getAttribute("tema") != null) ? (String) session.getAttribute("tema") : "dark";  %>
 <html id="htmlId" data-bs-theme="<%=tema%>">
@@ -32,6 +33,7 @@
    		 </div>
 		
         
-    
+        <jsp:include page="/WEB-INF/jsp/components/Banner.jsp"></jsp:include>
+
     </body>
 </html>

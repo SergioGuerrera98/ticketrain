@@ -31,26 +31,32 @@
     <header>
         <jsp:include page="/WEB-INF/jsp/components/Header.jsp"></jsp:include>
     </header>
-    
-<div class="position-absolute top-50 start-50 translate-middle">
+   <br>
+<div class="card shadow-lg p-3 mb-5 bg-body rounded col-md-auto " style="margin-left: 25%; margin-right: 25%">
 
     <!-- Form per aggiungere un treno -->
+    <div class="card-body" style="margin-left: 50px">
+    <div class="mb-3 row">
+    <div class="col">
     <form action="<%=webApp %>/admin/addTrain" method="post" class="mb-4">
+    	
         <h5>Aggiungi un Treno:</h5>
-        <div class="mb-3">
+        <div class="mb-3 ">
             <label for="stringaTreno" class="form-label">Nome Treno:</label>
-            <input type="text" name="stringaTreno" id="stringaTreno" class="form-control" placeholder="Treno" required>
+            <input type="text" name="stringaTreno" id="stringaTreno" class="form-control " placeholder="Treno" required  style="width: 62%">
         </div>
-        <button type="submit" class="btn btn-success">Aggiungi</button>
+        <button type="submit" class="btn btn-green">Aggiungi</button>
         <%=errorTreno %>
     </form>
+    </div>
 
     <!-- Form per rimuovere un treno -->
+    <div class="col">
     <form action="<%=webApp %>/admin/deleteTrain" method="post" class="mb-4">
         <h5>Rimuovi un Treno:</h5>
         <div class="mb-3">
             <label for="treno" class="form-label">Seleziona un treno:</label>
-            <select name="treno" id="treno" class="form-select" required>
+            <select name="treno" id="treno" class="form-select" required style="width: 62%">
                 <% 
                     for (Treno treno : treni) {
                 %>
@@ -58,81 +64,112 @@
                 <% } %>
             </select>
         </div>
-        <button type="submit" class="btn btn-danger">Rimuovi</button>
+        <button type="submit" class="btn btn-purple">Rimuovi</button>
     </form>
-
+    </div>
+    </div>
+    </div>
+    </div>
+    <br>
+<div class="card shadow-lg p-3 mb-5 bg-body rounded col-md-auto" style="margin-left: 25%; margin-right: 25%">
+<div class="card-body" style="margin-left: 50px">
     <!-- Form per aggiungere un biglietto -->
     <form action="<%=webApp %>/admin/addTicket" method="post" class="mb-4">
         <h5>Crea un Biglietto:</h5>
-        <label for="codice">Codice:</label>
-    <input type="text" name="codice" required><br>
-        <label for="classe">Classe:</label>
-    <select name="classe" required>
-    	<option value="economy">Economy</option>
-        <option value="business">Business</option>
-        <option value="first-class">First Class</option>
-     </select><br>
-        <label for="prezzo">Prezzo:</label>
-    <input type="number" name="prezzo" required><br>
-
-    <label for="dataPartenza">Data Partenza:</label>
-    <input type="datetime-local" name="dataPartenza" required><br>
-
-    <label for="dataArrivo">Data Arrivo:</label>
-    <input type="datetime-local" name="dataArrivo" required><br>
-
-    <label for="luogoPartenza">Luogo Partenza:</label>
-    <select name="luogoPartenza">
-        <% 
-            
+    <div class="mb-3">
+        
+            <label cfor="codice" class="form-label">Codice:</label>
+            <input type="text" name="codice" class="form-control" style="width: 30%" required >
+      </div>
+      <div class="mb-3 row">
+      <div class="col">
+            <label for="classe">Classe:</label>
+            <select name="classe" class="form-control" style="width: 62%" required>
+                <option value="economy">Economy</option>
+                <option value="business">Business</option>
+                <option value="first-class">First Class</option>
+            </select>
+       </div> 
+       <div class="col">
+        
+            <label for="prezzo">Prezzo:</label>
+            <input type="number" name="prezzo" class="form-control" style="width: 62%" required>
+        </div>
+         </div> 
+        <div class="mb-3 row">
+             <div class="col">
+                    <label for="dataPartenza" class="form-label">Data Partenza:</label>
+                    <input type="datetime-local" name="dataPartenza" class="form-control" style="width: 62%" required>
+                </div>
+                <div class="col">
+                    <label for="dataArrivo" class="form-label">Data Arrivo:</label>
+                    <input type="datetime-local" name="dataArrivo" class="form-control" style="width: 62%" required>
+                </div>
+        </div>
+        <div class="mb-3 row">
+        	<div class="col">
+            <label for="luogoPartenza" class="form-label" >Luogo Partenza:</label>
+            <select name="luogoPartenza" class="form-select" style="width: 62%">
+            <option value="">Seleziona partenza</option>
+            <% 
             for (Citta c : citta) {
-        %>
-            <option value="<%= c.getNomeCitta() %>"><%= c.getNomeCitta() %></option>
-            
-        <% } %>
-    </select><br>
-    <label for="luogoArrivo">Luogo Arrivo:</label>
-    <select name="luogoArrivo">
-        <% 
-            
+            %>
+                <option value="<%= c.getNomeCitta() %>"><%= c.getNomeCitta() %></option>
+            <% } %>
+            </select>
+            </div>
+       
+        <div class="col">
+            <label for="luogoArrivo" class="form-label" >Luogo Arrivo:</label>
+            <select name="luogoArrivo" class="form-select" style="width: 62%">
+            <option value="">Seleziona arrivo</option>
+            <% 
             for (Citta c : citta) {
-        %>
-            <option value="<%= c.getNomeCitta() %>"><%= c.getNomeCitta() %></option>
+            %>
+                <option value="<%= c.getNomeCitta() %>"><%= c.getNomeCitta() %></option>
+            <% } %>
+            </select>
+        </div>
+        </div>
+
+        <div class="mb-3 row">
+        <div class="col">
+            <label for="treno_id" class="form-label" >Treno:</label>
+            <select name="treno_id" id="trenoSelect" class="form-select" onchange="updateVagoni()" style="width: 62%">
+            <option value="">Seleziona un treno</option>
+            <%
+            Treno trenoSelezionato = null;
+            for (Treno treno : treni) {
+            %>
+            <option value="<%=treno.getId()%>"><% out.print(treno.getId() + " - " + treno.getCodice()); %> <%trenoSelezionato = treno; %></option>
             
-        <% } %>
-    </select>
-    	<br>
-    	<label for="treno_id">Treno:</label>
-    	<select name="treno_id" id="trenoSelect" onchange="updateVagoni()">
-    	<option value="">Seleziona un treno</option>
-    	<%
-    	Treno trenoSelezionato = null;
-    	for (Treno treno : treni) {
-    	%>
-    	<option value="<%=treno.getId()%>"><% out.print(treno.getId() + " - " + treno.getCodice()); %> <%trenoSelezionato = treno; %></option>
+            <%} %>
+            </select>
+       </div>
+        <div class="col">
+            <label for="vagone_id" class="form-label" >Vagone:</label>
+            <select name="vagone_id" id="vagoneSelect" class="form-select" style="width: 62%">
+            <option value="">Seleziona un vagone</option>
+            <%
+            for (Vagone vagone : trenoSelezionato.getVagoni()){
+            %>
+            <option value="<%=vagone.getId()%>"><%= vagone.getId() %> - <%=vagone.getCarattere() %> </option>
+            <%} %>
+            </select>
+            </div>
+        </div>
+    
     	
-    	<%} %>
-    	</select>
-    	
-    	<label for="vagone_id">Vagone:</label>
-    	<select name="vagone_id" id="vagoneSelect">
-    	<option value="">Seleziona un vagone</option>
-    	<%
-    	for (Vagone vagone : trenoSelezionato.getVagoni()){
-    	%>
-    	<option value="<%=vagone.getId()%>"><% out.print(vagone.getId() + "-" + vagone.getCarattere()); %> </option>
-    	<%} %>
-    	</select>
-    	
-        <button type="submit" class="btn btn-success">Aggiungi</button>
+        <button type="submit" class="btn btn-green">Aggiungi</button>
     </form>
 <%=errorTicket %>
     <!-- Form per rimuovere un biglietto -->
     <form action="<%=webApp %>/admin/deleteTicket" method="post">
-        <h5>Rimuovi un Ticket:</h5>
+    <br>
+        <h5>Rimuovi un Biglietto:</h5>
         <div class="mb-3">
-            <label for="ticket" class="form-label">Seleziona un ticket:</label>
-            <select name="ticket" id="ticket" class="form-select" required>
+            <label for="ticket" class="form-label" class="form-control" style="width: 30%">Seleziona un ticket:</label>
+            <select name="ticket" id="ticket" class="form-select" class="form-control" style="width: 30%" required>
                 <% 
                     for (Ticket ticket : tickets) {
                 %>
@@ -140,8 +177,9 @@
                 <% } %>
             </select>
         </div>
-        <button type="submit" class="btn btn-danger">Rimuovi</button>
+        <button type="submit" class="btn btn-purple">Rimuovi</button>
     </form>
+</div>
 </div>
 
 <script>
@@ -160,7 +198,7 @@
                 for (var i = 0; i < vagoni.length; i++) {
                     var option = document.createElement('option');
                     option.value = vagoni[i].id;
-                    option.text = vagoni[i].carattere;
+                    option.text = vagoni[i].id + ' - ' + vagoni[i].carattere;
                     vagoneSelect.appendChild(option);
                 }
             }
@@ -170,5 +208,44 @@
         xhr.send();
     }
 </script>
+
 </body>
+        <style>
+            .btn-green{
+                --bs-btn-color:#fff;
+                --bs-btn-bg:#50ba81; !important
+                --bs-btn-border-color:#50ba81; !important
+                --bs-btn-hover-color:#fff;
+                --bs-btn-hover-bg:#319e63;
+                font-weight: bold;
+                --bs-btn-hover-border-color:#146c43;
+                --bs-btn-focus-shadow-rgb:60,153,110;
+                --bs-btn-active-color:#fff;
+                --bs-btn-active-bg:#319e63;
+                --bs-btn-active-border-color:#1f8764;
+                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
+                --bs-btn-disabled-color:#fff;
+                --bs-btn-disabled-bg:#50ba81; !important
+                --bs-btn-disabled-border-color:#50ba81 !important
+            }
+            .btn-purple{
+                --bs-btn-color:#fff;
+                --bs-btn-bg:#874692; !important
+                --bs-btn-border-color:#874692; !important
+                --bs-btn-hover-color:#fff;
+                --bs-btn-hover-bg:#8442a3;
+                font-weight: bold;
+                --bs-btn-hover-border-color:#672584;
+                --bs-btn-focus-shadow-rgb:60,153,110;
+                --bs-btn-active-color:#fff;
+                --bs-btn-active-bg:#8442a3;
+                --bs-btn-active-border-color:#3c105e;
+                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
+                --bs-btn-disabled-color:#fff;
+                --bs-btn-disabled-bg:#874692; !important
+                --bs-btn-disabled-border-color:#874692 !important
+            }
+
+        </style>
+
 </html>
