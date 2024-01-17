@@ -124,23 +124,34 @@ public class TicketService implements IService{
 	}
 
 	public void insert(Ticket t) {
+		logger.info("TicketService.insert : entering method with param [t = {}]", t);
 		ticketDao.create(t);
+		logger.info("TicketService.insert : exiting method ");
 
 	}
 
 	public List<Ticket> retrieve() {
-		return ticketDao.retrieve();
+		logger.info("TicketService.retrieve : entering method");
+		List<Ticket> tickets = ticketDao.retrieve();
+		logger.info("TicketService.retrieve : exiting method with result[tickets = {}]", tickets);
+		return tickets;
 	}
 
 	public void create(Ticket ticket) {
+		logger.info("TicketService.create : entering method with param [ticket = {}]", ticket);
 		ticketDao.create(ticket);
+		logger.info("TicketService.create : exiting method ");
 	}
 
 	public Ticket retrieveById(int id) {
-		return ticketDao.retrieveById(id);
+		logger.info("TicketService.retrieveById : entering method with param [id = {}]", id);
+		Ticket ticket = ticketDao.retrieveById(id);
+		logger.info("TicketService.retrieveById : exiting method with result[ticket = {}]", ticket);
+		return ticket;
 	}
 
 	public boolean removeTicket(int ticket_id) {
+		logger.info("TicketService.removeTicket : entering method with param [ticket_id = {}]", ticket_id);
 		try {
 			Ticket found = ticketDao.retrieveById(ticket_id);
 
@@ -150,9 +161,12 @@ public class TicketService implements IService{
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.info("TicketService.removeTicket : exiting method with result[boolean = {}, exception = {}]",
+					"false", e.getMessage());
 			return false;
 		}
 
+		logger.info("TicketService.removeTicket : exiting method with result[boolean = {}]", "true");
 		return true;
 	}
 }

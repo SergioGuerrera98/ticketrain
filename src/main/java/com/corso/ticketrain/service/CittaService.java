@@ -5,6 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
+import com.corso.ticketrain.controller.HomeController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +16,8 @@ import com.corso.ticketrain.model.Citta;
 
 @Transactional
 @Service
-public class CittaService implements IService{
+public class CittaService implements IService {
+	private static Logger logger = LogManager.getLogger(CittaService.class);
 	
 	@Autowired
 	CittaDao cittaDao;
@@ -26,15 +30,30 @@ public class CittaService implements IService{
 	}
 	
 	public List<Citta> getCittaByPaeseId(int paeseId){
-		return cittaDao.retrieveByPaese(paeseId);
+		logger.info("CittaService.getCittaByPaeseId : entering method with param [paeseId = {}]", paeseId);
+
+		List<Citta> cittaList = cittaDao.retrieveByPaese(paeseId);
+
+		logger.info("CittaService.getCittaByPaeseId : exiting method with result [cittaList = {}]", cittaList);
+		return cittaList;
+
 	}
 
 	public List<Citta> retrieve() {
-		return cittaDao.retrieve();
+		logger.info("CittaService.retrieve : entering method");
+
+		List<Citta> cittaList = cittaDao.retrieve();
+
+		logger.info("CittaService.retrieve : exiting method with result [cittaList = {}]", cittaList);
+		return cittaList;
 	}
 	
 	public void insert(Citta citta) {
+		logger.info("CittaService.insert : entering method with param [insert = {}]", citta);
+
 		cittaDao.create(citta);
+
+		logger.info("CittaService.insert : exiting method");
 	}
 
 }

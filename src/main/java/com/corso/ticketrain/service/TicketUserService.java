@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 import com.corso.ticketrain.treno.model.Passeggeri;
 import com.corso.ticketrain.treno.model.Vagone;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -27,6 +29,7 @@ import com.google.gson.reflect.TypeToken;
 @Transactional
 @Service
 public class TicketUserService implements IService{
+	private static Logger logger = LogManager.getLogger(TicketUserService.class);
 	
 	@Autowired
 	private TicketUserDao ticketUserDao;
@@ -37,23 +40,35 @@ public class TicketUserService implements IService{
 
 	
 	public void acquistaTicket(User user, Ticket ticket, String nome, String cognome, String classe) {
+		logger.info("TicketUserService.acquistaTicket : entering method with params[user = {}, ticket = {}, nome = {}, cognome = {}, classe = {}].",
+				user, ticket, nome, cognome, classe);
+
 		try {
 			TicketUser ticketUser = new TicketUser(user, ticket, nome, cognome, classe);
 			ticketUserDao.create(ticketUser);
 		} catch (Exception e) {
-			
+			logger.info("TicketUserService.acquistaTicket: exiting method with exception : {}",
+					e.getMessage());
 		}
+		logger.info("TicketUserService.acquistaTicket: exiting method");
 	}
 
 	public List<TicketUser> retrieve() {
-		return ticketUserDao.retrieve();
+		logger.info("TicketUserService.retrieve : entering method ");
+		List<TicketUser> ticketUserList = ticketUserDao.retrieve();
+		logger.info("TicketUserService.retrieve : exiting method with result[ticketUserList = {}]", ticketUserList);
+		return ticketUserList;
 	}
 
 	public List<TicketUser> retrieveByUsername(String username) {
-		return ticketUserDao.retrieveByUsername(username);
+		logger.info("TicketUserService.retrieveByUsername : entering method with param[username = {}]", username);
+		List<TicketUser> ticketUserList = ticketUserDao.retrieveByUsername(username);
+		logger.info("TicketUserService.retrieveByUsername : exiting method with result[ticketUserList = {}]", ticketUserList);
+		return ticketUserList;
 	}
 
 	public Map<Ticket, List<TicketUser>> retrieveByUsernameFilteredByTicket(String username) {
+		logger.info("TicketUserService.retrieveByUsernameFilteredByTicket : entering method with param[username = {}]", username);
 		List<TicketUser> list = ticketUserDao.retrieveByUsername(username);
 		Map<Ticket, List<TicketUser>> map = new HashMap<>();
 		for (TicketUser tu : list) {
@@ -61,15 +76,20 @@ public class TicketUserService implements IService{
 				map.put(tu.getTicket(), new ArrayList<>());
 			map.get(tu.getTicket()).add(tu);
 		}
+		logger.info("TicketUserService.retrieveByUsernameFilteredByTicket : exiting method with result[map = {}]", map);
 
 		return map;
 	}
 
 	public void create(TicketUser ticket) {
+		logger.info("TicketUserService.create : entering method with param[ticket = {}]", ticket);
 		ticketUserDao.create(ticket);
+		logger.info("TicketUserService.create : exiting method");
 	}
 
 	public void acquistaTicketMultipli(User user, Ticket ticket, String body) {
+		logger.info("TicketUserService.acquistaTicketMultipli : entering method with param[user = {}, ticket = {}, body = {}]",
+				user, ticket, body);
 		JSONArray array = new JSONArray(new JSONTokener(body));
 		List<TicketUser> list = new ArrayList<>();
 		try {
@@ -88,21 +108,15 @@ public class TicketUserService implements IService{
 					.setCognome(obj.optString("cognome")));
 			}
 		} catch (Exception e) {
-			System.out.println("Failed to read json : " + list.toArray().toString());
+			logger.info("TicketUserService.create : exiting method with exception [e = {}]", e.getMessage());
 		}
-		/*
-		Gson gson = new Gson();
-		List<TicketUser> list = gson.fromJson(body, new TypeToken<List<TicketUser>>() {}.getType());
-		for (TicketUser tu : list) {
-			tu.setTicket(ticket);
-			tu.setUser(user);
-			tu.setClasse(""+((Passeggeri)ticket.getVagone_id()).getClasse());
-		}
-		*/
+
 		try {
 			ticketUserDao.createAll(list);
 		} catch (Exception e) {
-			System.out.println("Failed to create tickets.");
+			logger.info("TicketUserService.create : exiting method with exception [e = {}]", e.getMessage());
 		}
+		logger.info("TicketUserService.create : exiting method ");
+
 	}
 }
