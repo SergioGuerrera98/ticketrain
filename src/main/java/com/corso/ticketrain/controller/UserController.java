@@ -120,7 +120,18 @@ public class UserController {
 			User user = userService.registrazione(username, password, paese);
 			session.setAttribute("UserLoggato", user);
 			logger.info("UserController.add : exiting method with with result [redirect = {}]", "Home");
-			return "Home";
+			
+			if (session.getAttribute("previous") == null) {
+
+				logger.info("UserController.loginPage : exiting method with result [redirect = {}]", "Home");
+				return "Home";
+			} else {
+				String redirect = (String) session.getAttribute("previous");
+				session.removeAttribute("previous");
+
+				logger.info("UserController.loginPage : exiting method with result [redirect = {}]", redirect);
+				return redirect;
+			}
 		} catch (PaeseNonTrovatoException | DatiNonValidiException | UsernameEsisteException e) {
 			String error = e.getMessage();
 			model.addAttribute("error", error);

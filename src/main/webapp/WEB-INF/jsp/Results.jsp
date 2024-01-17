@@ -33,75 +33,87 @@
             <br>
             <jsp:include page="/WEB-INF/jsp/components/Filter.jsp"></jsp:include>
             <br>
-            <div style="margin: 20px;">
-<h3>Ordina per: </h3>   
-<div class="d-flex justify-content-start">
-    <div>
-        <form action="<%=webApp %>/ticket/filtroPrezzo" method="GET">
-            <button class="btn btn-green">Prezzo</button>
-        </form>
-    </div>
-    <div style="margin-left: 10px">
-        <form action="<%=webApp %>/ticket/filtroPartenza" method="GET">
-            <button class="btn btn-green">Partenza</button>
-        </form>
-    </div>
-    <div style="margin-left: 10px">
-        <form action="<%=webApp %>/ticket/filtroArrivo" method="GET">
-            <button class="btn btn-green">Arrivo</button>
-        </form>
-    </div>
-</div>
-<br>
-                <h3>Risultati: </h3>
-                <%
-            if (!listaFiltrata.isEmpty()) {
-            %>
-                <table class="table table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Partenza</th>
-                            <th>Arrivo</th>
-                            <th>Ora di Partenza</th>
-                            <th>Ora di Arrivo</th>
-                            <th>Prezzo</th>
-                            <th>Classe</th>
-                            <th>Azione</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <%
-                        int counter = 0;
-                        for (Ticket ticket : listaFiltrata) {
-                            counter++;
-                            double prezzoD = (ticket.getPrezzo()*100) / 100.00;
-                            int prezzo = (int) prezzoD;
-                        %>
-                            <tr>
-                                <td><%=ticket.getLuogoPartenza() %></td>
-                                <td><%=ticket.getLuogoArrivo() %></td>
-                                <td><%=ticket.getDataPartenzaStr()%></td>
-                                <td><%=ticket.getDataArrivoStr()%></td>
-                                <td><%=prezzo%></td>
-                                <td><%=ticket.getClasse() %></td>
-                                <td>
-                                    <% if (counter % 2 == 0) {%>
-                                    <button class="btn btn-green" onclick="buyTicket(<%=ticket.getId()%>)">Procedi all'acquisto</button>
-                                    <%} else {%>
-                                    <button class="btn btn-purple" onclick="buyTicket(<%=ticket.getId()%>)">Procedi all'acquisto</button>
-                                    <%}%>
-                                </td>
-                            </tr>
-                        <%
-                        }
-                        %>
-                    </tbody>
-                </table>
-            <%
-            }
-            %>
-                <p class="errorLabel"> <%=errorLabel%> </p>
+            <div style="margin-left : 5%; margin-right : 5%">
+                <div class="row">
+                    <div class="col col-md-auto" >
+                        <div class="d-flex justify-content-start">
+                            <h3>Risultati: </h3>
+                        </div>
+                    </div>
+                    <div class="col col-md-auto" style="margin-left: 75%">
+                        <div class="d-flex justify-content-end">
+                        <h3>Ordina per: </h3>   
+                            <div style="margin-left: 10px">
+                                <form action="<%=webApp %>/ticket/filtroPrezzo" method="GET">
+                                    <button class="btn btn-purple">Prezzo</button>
+                                </form>
+                            </div>
+                            <div style="margin-left: 10px">
+                                <form action="<%=webApp %>/ticket/filtroPartenza" method="GET">
+                                    <button class="btn btn-purple">Partenza</button>
+                                </form>
+                            </div>
+                            <div style="margin-left: 10px">
+                                <form action="<%=webApp %>/ticket/filtroArrivo" method="GET">
+                                    <button class="btn btn-purple">Arrivo</button>
+                                </form>
+                            </div>
+                        </div>
+                    <div>
+                </div>
             </div>
+            </div>
+            </div>
+            <br>
+            <div style="margin-left : 5%; margin-right : 5%">
+                    <%
+                if (!listaFiltrata.isEmpty()) {
+                %>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Partenza</th>
+                                <th>Arrivo</th>
+                                <th>Ora di Partenza</th>
+                                <th>Ora di Arrivo</th>
+                                <th>Prezzo</th>
+                                <th>Classe</th>
+                                <th>Azione</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                            int counter = -1;
+                            for (Ticket ticket : listaFiltrata) {
+                                counter++;
+                                double prezzoD = (ticket.getPrezzo()*100) / 100.00;
+                                int prezzo = (int) prezzoD;
+                            %>
+                                <tr>
+                                    <td><%=ticket.getLuogoPartenza() %></td>
+                                    <td><%=ticket.getLuogoArrivo() %></td>
+                                    <td><%=ticket.getDataPartenzaStr()%></td>
+                                    <td><%=ticket.getDataArrivoStr()%></td>
+                                    <td><%=prezzo%></td>
+                                    <td><%=ticket.getClasse() %></td>
+                                    <td>
+                                        <% if (counter % 2 == 0) {%>
+                                        <button class="btn btn-green" onclick="buyTicket(<%=ticket.getId()%>)">Procedi all'acquisto</button>
+                                        <%} else {%>
+                                        <button class="btn btn-purple" onclick="buyTicket(<%=ticket.getId()%>)">Procedi all'acquisto</button>
+                                        <%}%>
+                                    </td>
+                                </tr>
+                            <%
+                            }
+                            %>
+                        </tbody>
+                    </table>
+                <%
+                }
+                %>
+            </div>
+                <p class="errorLabel"> <%=errorLabel%> </p>
 
         <footer><jsp:include page="/WEB-INF/jsp/components/Footer.jsp"></jsp:include></footer>
 
@@ -125,7 +137,8 @@
 
             }
         </script>
-    </body>        <style>
+    </body>        
+    <style>
             .btn-green{
                 --bs-btn-color:#fff;
                 --bs-btn-bg:#50ba81; !important

@@ -54,13 +54,13 @@
                         <p>Numero biglietti: </p>
                     </div>
                     <div class="col col-md-auto">
-                        <button class="btn btn-green-outline" id="postiMin" onclick="postiMinus()" inert="true">-</button>
+                        <button class="btn btn-green" id="postiMin" onclick="postiMinus()" inert="true">-</button>
                     </div>
                     <div class="col col-md-auto">
                         <h4 id="postiSelezionati">1</h4>
                     </div>
                     <div class="col col-md-auto">
-                        <button class="btn btn-green-outline" id="postiPlu" onclick="postiPlus()">+</button>
+                        <button class="btn btn-green" id="postiPlu" onclick="postiPlus()">+</button>
                     </div>
                 </div>
             </div>
@@ -224,7 +224,7 @@
             </div>
             <div class="row position-relative start-80">
                 <div class="col">
-                    <button class="btn btn-green-outline" onclick="procedi('<%=ticket.getLuogoPartenza()%>', '<%=ticket.getLuogoArrivo()%>', '<%=ticket.getDataPartenza()%>', '<%=ticket.getDataArrivo()%>', '<%=ticket.getClasse()%>')">Paga</button>
+                    <button class="btn btn-green" onclick="procedi('<%=ticket.getLuogoPartenza()%>', '<%=ticket.getLuogoArrivo()%>', '<%=ticket.getDataPartenza()%>', '<%=ticket.getDataArrivo()%>', '<%=ticket.getClasse()%>')">Paga</button>
                 </div>
             </div>
         </div>
@@ -283,100 +283,113 @@
             }
         </script>
         <script>
-            function procedi(partenza, arrivo, oraPartenza, oraArrivo, classe) {
-            	
+            function checkEmptyFields() {
                 for (index = 1; index <= 8; ++index) {
                     let flag = false;
                     if (document.getElementById('p' + index).hidden == false) {
                         let nomeP = document.getElementById('nomeP' + index);
                         if (nomeP.value == null || nomeP.value == "") {
                             nomeP.style = "border-color : red;";
+                            flag = true;
                         }
                         let cognomeP = document.getElementById('cognomeP' + index);
                         if (cognomeP.value == null || cognomeP.value == "") {
                             cognomeP.style = "border-color : red;";
+                            flag = true;
                         }
                     }
                     if (flag == true) {
-                        document.getElementById('errorLabel').innerText="Uno o più campi devono essere completati per proseguire.";
-                        return;
+                        document.getElementById('errorLabel').innerText = "Uno o più campi devono essere completati per proseguire.";
+                        return false;
                     }
                 }
-                let c = Number(document.getElementById('postiSelezionati').innerText);
+                return true;
+            }
 
-                let message = "Vuoi confermare l\'acquisto di ";
-                if (c > 1)
-                    message += c + " biglietti ";
-                else
-                    message += "1 biglietto ";
-                
-                message += "per il treno:\n" +
-                                "Classe: " + classe + "\n" +
-                                "Partenza: " + partenza + "\n" +
-                                "Arrivo: " + arrivo + "\n" +
-                                "Ora di Partenza: " + oraPartenza + "\n" +
-                                "Ora di Arrivo: " + oraArrivo;
-                
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', '<%=webApp%>/ticket/confirm');
-                xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
-                
-                let jsonBody = "[";
+            function procedi(partenza, arrivo, oraPartenza, oraArrivo, classe) {
+            	if (checkEmptyFields()) {
+                    let c = Number(document.getElementById('postiSelezionati').innerText);
 
-                for (index = 1; index <= 8; ++index){
-                    if (document.getElementById('p' + index).hidden == false) {
-                        jsonBody += '{ \"nome\" : \"' + document.getElementById('nomeP' + index).value + '\",';
-                        jsonBody += ' \"cognome\" : \"' + document.getElementById('cognomeP' + index).value + '\"},';
+                    let message = "Vuoi confermare l\'acquisto di ";
+                    if (c > 1)
+                        message += c + " biglietti ";
+                    else
+                        message += "1 biglietto ";
+                    
+                    message += "per il treno:\n" +
+                                    "Classe: " + classe + "\n" +
+                                    "Partenza: " + partenza + "\n" +
+                                    "Arrivo: " + arrivo + "\n" +
+                                    "Ora di Partenza: " + oraPartenza + "\n" +
+                                    "Ora di Arrivo: " + oraArrivo;
+                    
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', '<%=webApp%>/ticket/confirm');
+                    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+                    
+                    let jsonBody = "[";
+
+                    for (index = 1; index <= 8; ++index){
+                        if (document.getElementById('p' + index).hidden == false) {
+                            jsonBody += '{ \"nome\" : \"' + document.getElementById('nomeP' + index).value + '\",';
+                            jsonBody += ' \"cognome\" : \"' + document.getElementById('cognomeP' + index).value + '\"},';
+                        }
                     }
-                }
 
-                jsonBody = jsonBody.slice(0, -1) + "]";
+                    jsonBody = jsonBody.slice(0, -1) + "]";
 
-                xhr.onload = () => {
-                    if (xhr.status < 400) {
-                        window.location.replace( "<%=webApp%>" + xhr.responseText);
-                    } else {
-                        console.log('Error : ' + xhr.status );
+                    xhr.onload = () => {
+                        if (xhr.status < 400) {
+                            window.location.replace( "<%=webApp%>" + xhr.responseText);
+                        } else {
+                            console.log('Error : ' + xhr.status );
+                        }
+                    };
+
+                    if (confirm(message)) {
+                        xhr.send(jsonBody);
                     }
-                };
-
-                if (confirm(message)) {
-                    xhr.send(jsonBody);
                 }
             }
 
         </script>
         
-    </body>
-        <style>
+    </body>  
+    <style>
+            .btn-green{
+                --bs-btn-color:#fff;
+                --bs-btn-bg:#50ba81; !important
+                --bs-btn-border-color:#50ba81; !important
+                --bs-btn-hover-color:#fff;
+                --bs-btn-hover-bg:#319e63;
+                font-weight: bold;
+                --bs-btn-hover-border-color:#146c43;
+                --bs-btn-focus-shadow-rgb:60,153,110;
+                --bs-btn-active-color:#fff;
+                --bs-btn-active-bg:#319e63;
+                --bs-btn-active-border-color:#1f8764;
+                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
+                --bs-btn-disabled-color:#fff;
+                --bs-btn-disabled-bg:#50ba81; !important
+                --bs-btn-disabled-border-color:#50ba81 !important
+            }
+            .btn-purple{
+                --bs-btn-color:#fff;
+                --bs-btn-bg:#874692; !important
+                --bs-btn-border-color:#874692; !important
+                --bs-btn-hover-color:#fff;
+                --bs-btn-hover-bg:#8442a3;
+                font-weight: bold;
+                --bs-btn-hover-border-color:#672584;
+                --bs-btn-focus-shadow-rgb:60,153,110;
+                --bs-btn-active-color:#fff;
+                --bs-btn-active-bg:#8442a3;
+                --bs-btn-active-border-color:#3c105e;
+                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
+                --bs-btn-disabled-color:#fff;
+                --bs-btn-disabled-bg:#874692; !important
+                --bs-btn-disabled-border-color:#874692 !important
+            }
 
-            .btn-purple-outline{
-                --bs-btn-color:#874692  !important;
-                --bs-btn-border-color:#874692 !important;
-                --bs-btn-hover-color:#fff;
-                --bs-btn-hover-bg:#874692;
-                --bs-btn-hover-border-color:#874692;
-                --bs-btn-focus-shadow-rgb:25,135,84;
-                --bs-btn-active-color:#fff;
-                --bs-btn-active-bg:#874692;
-                --bs-btn-active-border-color:#874692;
-                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
-                --bs-btn-disabled-color:#874692;
-                --bs-btn-disabled-border-color:#874692;
-            }
-            .btn-green-outline{
-                --bs-btn-color:#50ba81  !important;
-                --bs-btn-border-color:#50ba81 !important;
-                --bs-btn-hover-color:#fff;
-                --bs-btn-hover-bg:#50ba81;
-                --bs-btn-hover-border-color:#50ba81;
-                --bs-btn-focus-shadow-rgb:25,135,84;
-                --bs-btn-active-color:#fff;
-                --bs-btn-active-bg:#50ba81;
-                --bs-btn-active-border-color:#50ba81;
-                --bs-btn-active-shadow:inset 0 3px 5px rgba(0, 0, 0, 0.125);
-                --bs-btn-disabled-color:#50ba81;
-                --bs-btn-disabled-border-color:#50ba81;
-            }
-    </style>
+        </style>
 </html>

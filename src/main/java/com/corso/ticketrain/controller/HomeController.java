@@ -24,6 +24,7 @@ public class HomeController {
 		logger.info("HomeController.home : entering method");
 
 		session.removeAttribute("ticket");
+		session.removeAttribute("previous");
 
 		logger.info("HomeController.home : exiting method to: Home");
 		return "Home";
@@ -45,9 +46,6 @@ public class HomeController {
 	@GetMapping("/signup")
 	public String signup(HttpSession session) {
 		logger.info("HomeController.signup : entering method");
-
-		session.removeAttribute("ticket");
-		session.removeAttribute("previous");
 
 		if (session.getAttribute("UserLoggato") != null) {
 			logger.info("HomeController.signup : exiting method to: Home");
