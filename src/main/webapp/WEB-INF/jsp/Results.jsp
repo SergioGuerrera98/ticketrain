@@ -11,7 +11,7 @@
     String webApp = request.getContextPath();
     String formAction = webApp + "/ticket/getByFilter";
     String errorLabel = (request.getAttribute("error") != null) ? (String) request.getAttribute("error") : ""; 
-    List<Ticket> listaFiltrata = (List<Ticket>) request.getAttribute("filteredTickets");
+    List<Ticket> listaFiltrata = (List<Ticket>) session.getAttribute("filteredTickets");
     User user = (User) session.getAttribute("UserLoggato"); 
 %>
     <head>
@@ -34,8 +34,26 @@
             <jsp:include page="/WEB-INF/jsp/components/Filter.jsp"></jsp:include>
             <br>
             <div style="margin: 20px;">
-
-                <h3>Risultati per : </h3>
+<h3>Ordina per: </h3>   
+<div class="d-flex justify-content-start">
+    <div>
+        <form action="<%=webApp %>/ticket/filtroPrezzo" method="GET">
+            <button class="btn btn-green">Prezzo</button>
+        </form>
+    </div>
+    <div style="margin-left: 10px">
+        <form action="<%=webApp %>/ticket/filtroPartenza" method="GET">
+            <button class="btn btn-green">Partenza</button>
+        </form>
+    </div>
+    <div style="margin-left: 10px">
+        <form action="<%=webApp %>/ticket/filtroArrivo" method="GET">
+            <button class="btn btn-green">Arrivo</button>
+        </form>
+    </div>
+</div>
+<br>
+                <h3>Risultati: </h3>
                 <%
             if (!listaFiltrata.isEmpty()) {
             %>

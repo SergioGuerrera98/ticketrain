@@ -1,6 +1,8 @@
 package com.corso.ticketrain.controller;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -42,7 +44,7 @@ public class TicketController {
     }
 
 	@GetMapping("/getResults")
-    public String getByFilter(String luogoPartenza, String luogoArrivo, String dataPartenza, Model model) throws DataPrecedenteException {
+    public String getByFilter(String luogoPartenza, String luogoArrivo, String dataPartenza, Model model, HttpSession session) throws DataPrecedenteException {
         logger.info("TicketController.getByFilter : entering method with params[luogoPartenza = {}, luogoArrivo = {}, dataPartenza = {}].",
                 luogoPartenza, luogoArrivo, dataPartenza);
 
@@ -54,7 +56,7 @@ public class TicketController {
 
 		try {
 			filteredTickets = ticketService.getTicketsFilter(luogoPartenza, luogoArrivo, dataPartenzaD);
-			 model.addAttribute("filteredTickets", filteredTickets);
+			 session.setAttribute("filteredTickets", filteredTickets);
              if (filteredTickets == null || filteredTickets.isEmpty())
                 throw new NoResultException("Non sono disponibili tratte per questa ricerca.");
 
@@ -75,6 +77,30 @@ public class TicketController {
     @GetMapping("/buy")
     public String toBuy() {
          return "BuyTicket";
+    }
+    
+    @GetMapping("/filtroPrezzo")
+    public String filtroPrezzo(HttpSession session) {
+    	List<Ticket> filteredTickets = (List<Ticket>) session.getAttribute("filteredTickets");
+    	Collections.sort(filteredTickets, Comparator.comparing(Ticket::getPrezzo));
+    	session.setAttribute("filteredTickets", filteredTickets);
+    	return "Results";
+    }
+    
+    @GetMapping("/filtroPartenza")
+    public String filtroPartenza(HttpSession session) {
+    	List<Ticket> filteredTickets = (List<Ticket>) session.getAttribute("filteredTickets");
+    	Collections.sort(filteredTickets, Comparator.comparing(Ticket::getDataPartenza));
+    	session.setAttribute("filteredTickets", filteredTickets);
+    	return "Results";
+    }
+    
+    @GetMapping("/filtroArrivo")
+    public String filtroArrivo(HttpSession session) {
+    	List<Ticket> filteredTickets = (List<Ticket>) session.getAttribute("filteredTickets");
+    	Collections.sort(filteredTickets, Comparator.comparing(Ticket::getDataArrivo));
+    	session.setAttribute("filteredTickets", filteredTickets);
+    	return "Results";
     }
 
     /*
