@@ -2,6 +2,8 @@ package com.corso.ticketrain.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -113,6 +115,8 @@ public class TicketService implements IService{
 			list = ticketDao.retrieveByFilter(StringsUtils.upFirst(luogoPartenza),
 					StringsUtils.upFirst(luogoArrivo), dataPartenza);
 
+			Collections.sort(list, ticketOrder());
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.info("TicketService.getTicketsFilter : exiting method with exception [error = {}]", e.getMessage());
@@ -121,6 +125,23 @@ public class TicketService implements IService{
 
 		logger.info("TicketService.getTicketsFilter : exiting method with result[list = {}]", list);
 		return list;
+	}
+
+	private Comparator<Ticket> ticketOrder() {
+		Comparator<Ticket> c = (o1, o2) -> {
+			if (o1.getDataPartenza().isEqual(o2.getDataArrivo())) {
+				if (o1.getLuogoPartenza().equalsIgnoreCase(o2.getLuogoPartenza())) {
+					if (o1.getLuogoArrivo().equalsIgnoreCase(o2.getLuogoArrivo()))
+						return o1.getPrezzo().compareTo(o2.getPrezzo());
+					else
+						return o1.getLuogoArrivo().compareTo(o2.getLuogoArrivo());
+				} else
+					return o1.getLuogoPartenza().compareTo(o2.getLuogoPartenza());
+			} else
+				return o1.getDataPartenza().compareTo(o2.getDataArrivo());
+			};
+		
+		return c;
 	}
 
 	public void insert(Ticket t) {

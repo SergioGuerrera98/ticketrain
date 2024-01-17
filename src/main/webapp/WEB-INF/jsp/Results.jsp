@@ -56,13 +56,15 @@
                         int counter = 0;
                         for (Ticket ticket : listaFiltrata) {
                             counter++;
+                            double prezzoD = (ticket.getPrezzo()*100) / 100.00;
+                            int prezzo = (int) prezzoD;
                         %>
                             <tr>
                                 <td><%=ticket.getLuogoPartenza() %></td>
                                 <td><%=ticket.getLuogoArrivo() %></td>
                                 <td><%=ticket.getDataPartenzaStr()%></td>
                                 <td><%=ticket.getDataArrivoStr()%></td>
-                                <td><%=ticket.getPrezzo() %></td>
+                                <td><%=prezzo%></td>
                                 <td><%=ticket.getClasse() %></td>
                                 <td>
                                     <% if (counter % 2 == 0) {%>

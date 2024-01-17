@@ -50,7 +50,7 @@ public class UserController {
 
 	@PostMapping("/login")
 	public String loginPage(@RequestParam String username, String password, HttpSession session, Model model) throws UsernameInesistenteException, UsernameOPasswordSbagliatiException {
-		logger.info("UserController.loginPage : entering method with param [username = {}, password = {}]", username, password);
+		logger.info("UserController.loginPage : entering method with param [username = {}]", username);
 
 		try {
 			User user = userService.login(username, password);
@@ -113,8 +113,8 @@ public class UserController {
 
 	@PostMapping("/registrazione")
 	public String add(@RequestParam String username, String password, String paese, HttpSession session, Model model) {
-		logger.info("UserController.add : entering method with param [username = {}, password = {}, paese = {}]",
-				username, password, paese);
+		logger.info("UserController.add : entering method with param [username = {}, paese = {}]",
+				username, paese);
 
 		try {
 			User user = userService.registrazione(username, password, paese);
@@ -125,7 +125,7 @@ public class UserController {
 			String error = e.getMessage();
 			model.addAttribute("error", error);
 			logger.info("UserController.add : exiting method with with result [error = {}, redirect = {}]",
-					error, "Home");
+					error, "Signup");
 			return "Signup";
 		} catch (Exception e) {
 			logger.info("UserController.add : exiting method with with result [redirect = {}]", "Home");

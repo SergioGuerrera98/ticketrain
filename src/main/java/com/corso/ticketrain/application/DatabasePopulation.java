@@ -61,7 +61,7 @@ public class DatabasePopulation {
 
         TrenoDaoInterface trenoDao = (TrenoDaoInterface) factory.getBean("trenoDao");
 
-        if (true) //TRUE: legge da json e crea le città nel db; false: recupera da db
+        if (false) //TRUE: legge da json e crea le città nel db; false: recupera da db
             createCities(factory);
         else {
             PaeseService paeseDao = factory.getBean(PaeseService.class);
@@ -69,7 +69,7 @@ public class DatabasePopulation {
 
             setCitta = cittaDao.retrieve();
         }
-        if (true) //TRUE: crea nuovi treni nel db; false: recupera da db
+        if (false) //TRUE: crea nuovi treni nel db; false: recupera da db
             makeTrains(factory);
         else {
             //TrenoDaoInterface trenoDao = (TrenoDaoInterface) factory.getBean("trenoDao");
@@ -81,13 +81,13 @@ public class DatabasePopulation {
             TicketService ticketDao = factory.getBean(TicketService.class);
             setTicket = ticketDao.retrieve();
         }
-        if (true)   //TRUE: crea nuovi user nel db; false: recupera da db
+        if (false)   //TRUE: crea nuovi user nel db; false: recupera da db
             makeUsers(factory);
         else {
             UserService userDao = factory.getBean(UserService.class);
             setUsers = userDao.retrieve();
         }
-        if (true)  //TRUE: creauser comprano nuovi ticket e sono aggiunti nel db; false: non fa niente
+        if (false)  //TRUE: creauser comprano nuovi ticket e sono aggiunti nel db; false: non fa niente
             makeUserTicket(factory);
     }
 
@@ -220,8 +220,8 @@ public class DatabasePopulation {
                     LocalDateTime partenza = LocalDateTime.of(now.getYear(), now.getMonth().getValue(), now.getDayOfMonth(), friend.nextInt(18) + 6, friend.nextInt(12) * 5, 0).plusDays(friend.nextInt(15));
                     Ticket ticket = new Ticket(createRandomString(6),
                             partenza, partenza.plusHours(friend.nextInt(1, 5)).plusMinutes(friend.nextInt(60)),
-                            setCitta.get(friend.nextInt(setCitta.size())).getNomeCitta(), setCitta.get(friend.nextInt(setCitta.size())).getNomeCitta(),
-                            (2 - p.getClasse()) * 11f, treno, "Economy", p);
+                            setCitta.get(friend.nextInt(Math.min(setCitta.size(), 1))).getNomeCitta(), setCitta.get(friend.nextInt(setCitta.size()/5)).getNomeCitta(),
+                            (friend.nextFloat(10, 50)), treno, "Economy", p);
                     setTicket.add(ticket);
                     System.out.println("Added ticket: " + ticket);
                     ticketDao.create(ticket);

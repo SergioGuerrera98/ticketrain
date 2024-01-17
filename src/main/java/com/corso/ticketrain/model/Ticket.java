@@ -98,7 +98,7 @@ public class Ticket {
 	
 	public String getDataPartenzaStr() {
 		return getDataPartenza().getYear() + "/" +
-			padTwo(getDataPartenza().getDayOfMonth()) + "/" +
+			padTwo(getDataPartenza().getMonth().getValue()) + "/" +
 			padTwo(getDataPartenza().getDayOfMonth()) + " - " +
 			padTwo(getDataPartenza().getHour()) + ":" +
 			padTwo(getDataPartenza().getMinute());
@@ -115,7 +115,7 @@ public class Ticket {
 
 	public String getDataArrivoStr() {
 		return getDataArrivo().getYear() + "/" +
-			padTwo(getDataArrivo().getDayOfMonth()) + "/" +
+			padTwo(getDataArrivo().getMonth().getValue()) + "/" +
 			padTwo(getDataArrivo().getDayOfMonth()) + " - " +
 			padTwo(getDataArrivo().getHour()) + ":" +
 			padTwo(getDataArrivo().getMinute());

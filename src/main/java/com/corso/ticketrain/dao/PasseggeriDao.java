@@ -4,12 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Repository;
 
 import com.corso.ticketrain.treno.model.Passeggeri;
-import com.corso.ticketrain.treno.model.Treno;
 import com.corso.ticketrain.treno.model.Vagone;
 
 

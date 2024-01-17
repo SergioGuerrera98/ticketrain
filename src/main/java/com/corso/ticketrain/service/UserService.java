@@ -82,27 +82,19 @@ public class UserService implements IService{
 			}
 			String standard = comparatore.check(paese, stringhe);
 			if (standard.equals("Parola non Trovata")) {
-				logger.info("UserService.registrazione : exiting method with exception [e = {}]",
-						"Il paese inserito non e' presente");
 				throw new PaeseNonTrovatoException("Il paese inserito non e' presente", null);
 			}
 			if (!standard.equals("Parola Trovata") && !standard.equals("Parola non Trovata")) {
 				String message = "Forse intendevi " + standard + "?";
-				logger.info("UserService.registrazione : exiting method with exception [e = {}]",
-						message);
 				throw new PaeseNonTrovatoException(message, null);
 			}
 			Paese p = paeseDao.findByNome(paese);
 			User user = new User(username, password, false, p);
 			if (username == null || username.isBlank() || password == null || password.isBlank()) {
-				logger.info("UserService.registrazione : exiting method with exception [e = {}]",
-						"Completa tutti i campi");
 				 throw new DatiNonValidiException("Completa tutti i campi", null);
 			}
 			List<User> utenti = userDao.findByUsername(username);
 			if (utenti.size()>0) {
-				logger.info("UserService.registrazione : exiting method with exception [e = {}]",
-						"Username gia' esistente");
 				throw new UsernameEsisteException("Username gia' esistente", null);
 			}
 			userDao.create(user);
