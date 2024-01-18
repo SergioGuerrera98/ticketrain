@@ -3,6 +3,8 @@
 <%@page import="com.corso.ticketrain.model.TicketUser"%>
 <%@page import="java.time.LocalDateTime"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.NumberFormat"%>
 <%@page import="com.corso.ticketrain.model.User"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -49,7 +51,10 @@
                   <p>Arrivo a : <%=t.getLuogoArrivo() %>, ore : <%=t.getDataArrivoStr()%></p>
                 </div>
                 <div class="row">
-                  <p>Prezzo: <%=t.getPrezzo()%> euro</p>
+                  <p>Prezzo: <% double money = t.getPrezzo() * mappaTicket.get(t).size();
+                                NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.ITALY);
+                                String moneyString = formatter.format(money);
+                                out.print(moneyString.substring(0, moneyString.length()-2)); %> euro</p>
                 </div>
                 <div class="row">
                   <p>Classe: <%=t.getClasse()%> </p>
@@ -57,22 +62,18 @@
               </div>
               <h6> Biglietti acquistati: </h6>
                 <%  for (TicketUser tu : mappaTicket.get(t)) { %>
-                  <div class="col">
-                    <div class="row" style="padding: 40px"></div>
-                    <div class="row">
                       <div class="col">
                         <div class="row">
-                          <p class="fw-normal">Nome: <%=tu.getNome() %> </p>
+                          <label class="fw-normal">&nbsp;&nbsp;&nbsp;&nbsp;Nome: <%=tu.getNome() %> </label>
                         </div>
                         <div class="row">
-                          <p class="fw-normal">Cognome: <%=tu.getCognome() %> </p>
+                          <label class="fw-normal">&nbsp;&nbsp;&nbsp;&nbsp;Cognome: <%=tu.getCognome() %> </label>
                         </div>
                         <div class="row">
-                          <p class="fw-normal">Vagone: <%=tu.getTicket().getVagone_id().getId()%> Posto: <%=tu.getPosto()%> </p>
+                          <label class="fw-normal">&nbsp;&nbsp;&nbsp;&nbsp;Vagone: <%=tu.getTicket().getVagone_id().getId()%> Posto: <%=tu.getPosto()%> </label>
                         </div>
+                        <br>
                       </div>
-                    </div>
-                  </div>
                 <%}%>
             </div>
           </div>

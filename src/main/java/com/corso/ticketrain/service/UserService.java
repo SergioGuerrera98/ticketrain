@@ -115,8 +115,8 @@ public class UserService implements IService{
 			List<User> utenti = userDao.findByUsername(username);
 			if(utenti.size()<1) {
 				logger.info("UserService.login : exiting method with exception [e = {}]",
-						"L'username inserito e' inesistente");
-				throw new UsernameInesistenteException("L'username inserito e' inesistente", null);
+						"Username o Password errati");
+				throw new UsernameOPasswordSbagliatiException("Username o Password errati", null);
 			}
 			List<User> utente = userDao.findByUsernameAndPassword(username, password);
 			if(utente.size()<1) {

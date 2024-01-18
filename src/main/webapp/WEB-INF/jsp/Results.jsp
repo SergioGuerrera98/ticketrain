@@ -2,6 +2,8 @@
 <%@page import="com.corso.ticketrain.model.Ticket"%>
 <%@page import="java.util.List"%>
 <%@page import="java.time.LocalDateTime"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.NumberFormat"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -86,15 +88,17 @@
                             int counter = -1;
                             for (Ticket ticket : listaFiltrata) {
                                 counter++;
-                                double prezzoD = (ticket.getPrezzo()*100) / 100.00;
-                                int prezzo = (int) prezzoD;
+                                double prezzo = ((int)(ticket.getPrezzo()*100)) / 100.00;
                             %>
                                 <tr>
                                     <td><%=ticket.getLuogoPartenza() %></td>
                                     <td><%=ticket.getLuogoArrivo() %></td>
                                     <td><%=ticket.getDataPartenzaStr()%></td>
                                     <td><%=ticket.getDataArrivoStr()%></td>
-                                    <td><%=prezzo%></td>
+                                    <td><% double money = ticket.getPrezzo();
+                                            NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.ITALY);
+                                            String moneyString = formatter.format(money);
+                                            out.print(moneyString.substring(0, moneyString.length()-2)); %> </td>
                                     <td><%=ticket.getClasse() %></td>
                                     <td>
                                         <% if (counter % 2 == 0) {%>

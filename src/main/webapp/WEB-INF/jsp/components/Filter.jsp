@@ -194,6 +194,7 @@
         let datetimeField = document.getElementById("dataPartenza");
         datetimeField.value = localDatetime;
         datetimeField.min = localDatetime;
+        datetimeField.max = sixMonthsLater(localDateTime);
         
     });
 	

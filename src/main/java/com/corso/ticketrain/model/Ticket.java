@@ -173,6 +173,10 @@ public class Ticket {
 	public Float getPrezzo() {
 		return prezzo;
 	}
+	public String getPrezzoCent() {
+		String p = Float.toString(getPrezzo());
+		return p.substring(p.indexOf(".")) + ".00";
+	}
 
 	public Ticket setPrezzo(Float prezzo) {
 		this.prezzo = prezzo;

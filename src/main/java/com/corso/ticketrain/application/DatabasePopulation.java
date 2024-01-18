@@ -76,7 +76,7 @@ public class DatabasePopulation {
             setTreno = trenoDao.retrieve();
         }
         if (true)  //TRUE: crea nuovi ticket nel db; false: recupera da db
-            makeTickets(factory);
+            makeTicketsCoherent(factory);
         else {
             TicketService ticketDao = factory.getBean(TicketService.class);
             setTicket = ticketDao.retrieve();
@@ -206,6 +206,43 @@ public class DatabasePopulation {
         }
 
         setTreno = set;
+    }
+
+
+    private static void makeTicketsCoherent(AnnotationConfigApplicationContext factory) {
+        LocalDateTime now = LocalDateTime.now();
+        setTicket = new ArrayList<>();
+        Random friend = new Random();
+        TicketService ticketDao = factory.getBean(TicketService.class);
+        List<String> nomiCitta = List.of("Messina", "Palermo", "Milan", "Turin", "Rome", "Florence", "Genoa", "Bologna",
+            "Trieste", "Padova", "Brescia", "Taranto", "Livorno", "Rimini");
+        List<Citta> c = setCitta.stream().filter(citta -> nomiCitta.contains(citta.getNomeCitta())).toList();
+
+        List<String> classi = new ArrayList<>(); 
+        for (Treno treno : setTreno) {
+
+            for (Vagone vagone : treno.getVagoni()) {
+                    LocalDateTime partenza = LocalDateTime.of(now.getYear(), now.getMonth().getValue(), now.getDayOfMonth(), friend.nextInt(16) + 6, friend.nextInt(12) * 5, 0)
+                    .plusDays(friend.nextInt(90)).plusHours(0);
+                    LocalDateTime arrivo = partenza.plusHours(friend.nextInt(1, 12)).plusMinutes(friend.nextInt(12) * 5);
+                    String cPartenza = c.get(friend.nextInt(c.size())).getNomeCitta();
+                    String cArrivo = c.get(friend.nextInt(c.size())).getNomeCitta();
+                if (vagone instanceof Passeggeri passeggeri) {
+                    float prezzo = (friend.nextFloat(10)*5 + 5);
+                    String classe = (prezzo > 30) ? "Business" : "Economy";
+                    if (classi.contains(classe)) 
+                        continue;
+                    else classi.add(classe);
+                    Ticket ticket = new Ticket(cPartenza.substring(0,2) + cArrivo.substring(0,2)+friend.nextInt(100),
+                            partenza, arrivo,
+                            cPartenza, cArrivo,
+                            prezzo, treno, classe, passeggeri);
+                    setTicket.add(ticket);
+                    System.out.println("Added ticket: " + ticket);
+                    ticketDao.create(ticket);
+                }
+            }
+        }
     }
 
     private static void makeTickets(AnnotationConfigApplicationContext factory) {

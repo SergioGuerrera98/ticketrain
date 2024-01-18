@@ -43,10 +43,10 @@
         <h5>Aggiungi un Treno:</h5>
         <div class="mb-3 ">
             <label for="stringaTreno" class="form-label">Nome Treno:</label>
-            <input type="text" name="stringaTreno" id="stringaTreno" class="form-control " placeholder="Treno" required  style="width: 62%">
+            <input type="text" name="stringaTreno" id="stringaTreno" class="form-control" placeholder="Treno" required pattern="[HPR]{1,15}" style="width: 62%">
         </div>
         <button type="submit" class="btn btn-green">Aggiungi</button>
-        <%=errorTreno %>
+        <div class="text-danger"> <%=errorTreno %></div>
     </form>
     </div>
 

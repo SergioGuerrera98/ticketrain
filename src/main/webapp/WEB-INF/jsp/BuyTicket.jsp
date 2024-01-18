@@ -11,6 +11,7 @@
         String errorLabel = (request.getAttribute("error") != null) ? (String) request.getAttribute("error") : ""; 
         Ticket ticket = (Ticket) session.getAttribute("ticket");
         User user = (User) session.getAttribute("UserLoggato");
+        double prezzo =  ( (int)(ticket.getPrezzo()*100) ) / 100.00;
     %>
     <head>
     <title>Compra biglietti</title>
@@ -39,6 +40,10 @@
                     <tr>
                         <td>Arrivo a:&nbsp;&nbsp; <%=ticket.getLuogoArrivo()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td><%=ticket.getDataArrivoStr()%></td>
+                    </tr>
+                    <tr>
+                        <td>Prezzo :&nbsp;&nbsp; </td>
+                        <td><p id="prezzoP"><%=prezzo%></p></td>
                     </tr>
                     <tr>
                         <td >Posti rimanenti:&nbsp;&nbsp;</td><td><p id="nPostiRimanenti"><%=(int)ticket.getVagone_id().getNumeroPosti()%></td>
@@ -247,6 +252,7 @@
 
                     visibilitaCarta(false, c);
                     document.getElementById('postiSelezionati').innerText = c - 1;
+                    document.getElementById('prezzoP').innerText = Number((c - 1) * <%=prezzo%>).toFixed(2);
 
                     if (c - 1 == 1)
                         document.getElementById('postiMin').inert = true;
@@ -265,6 +271,7 @@
                     console.log('Clicked plus');
                     visibilitaCarta(true, c + 1);
                     document.getElementById('postiSelezionati').innerText = c + 1;
+                    document.getElementById('prezzoP').innerText = Number((c + 1) * <%=prezzo%>).toFixed(2);
 
                     if (c + 1 == 8 || c + 1 == rimanenti)
                         document.getElementById('postiPlu').inert = true;
@@ -318,6 +325,7 @@
                     
                     message += "per il treno:\n" +
                                     "Classe: " + classe + "\n" +
+                                    "Totale: " + Number(c * <%=prezzo%>).toFixed(2) + "\n" +
                                     "Partenza: " + partenza + "\n" +
                                     "Arrivo: " + arrivo + "\n" +
                                     "Ora di Partenza: " + oraPartenza + "\n" +
